@@ -39,7 +39,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Arrays\Matrix.cs" />
+    <Compile Include="Arrays\Tensor.cs" />
+    <Compile Include="Arrays\Vector.cs" />
+    <Compile Include="Core\Expression.cs" />
+    <Compile Include="Core\Math.cs" />
+    <Compile Include="Logic\Proposition.cs" />
+    <Compile Include="Operands\Constant.cs" />
+    <Compile Include="Operands\Operand.cs" />
+    <Compile Include="Operands\Value.cs" />
+    <Compile Include="Operands\Variable.cs" />
+    <Compile Include="Operations\AbsoluteValue.cs" />
+    <Compile Include="Operations\Arithmetic\ArithmeticOperation.cs" />
+    <Compile Include="Operations\Arithmetic\Difference.cs" />
+    <Compile Include="Operations\Arithmetic\Exponentiation.cs" />
+    <Compile Include="Operations\Arithmetic\Logarithm.cs" />
+    <Compile Include="Operations\Arithmetic\Product.cs" />
+    <Compile Include="Operations\Arithmetic\Quotient.cs" />
+    <Compile Include="Operations\Arithmetic\Sum.cs" />
+    <Compile Include="Operations\Arity\BinaryOperation.cs" />
+    <Compile Include="Operations\Arity\TrinaryOperation.cs" />
+    <Compile Include="Operations\Arity\UnaryOperation.cs" />
+    <Compile Include="Operations\Operation.cs" />
+    <Compile Include="Operations\Trigonometric\TrigonometricOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Operations\Calculus\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Arrays\Arrays.cd" />
+    <None Include="Core\Core.cd" />
+    <None Include="Functions\Functions.cd" />
+    <None Include="Logic\Logic.cd" />
+    <None Include="Operands\Operands.cd" />
+    <None Include="Operations\Operations.cd" />
+    <None Include="Sets\Sets.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
