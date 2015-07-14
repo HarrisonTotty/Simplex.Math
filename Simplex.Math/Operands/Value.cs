@@ -11,6 +11,11 @@ namespace Simplex.Math.Operands
     /// </summary>
     public class Value : Constant
     {
-        
+
+        public double Val
+        {
+            get;
+            set;
+        }
     }
 }

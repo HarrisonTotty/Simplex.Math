@@ -12,5 +12,26 @@ namespace Simplex.Math.Operands
     public class Variable : Operand
     {
 
+        public int Name
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
+        public int Description
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
     }
 }

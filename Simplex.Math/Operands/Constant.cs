@@ -9,7 +9,7 @@ namespace Simplex.Math.Operands
     /// <summary>
     /// Represents a mathematical constant which may or may not hold a value.
     /// </summary>
-    public class Constant
+    public class Constant : Operand
     {
 
     }

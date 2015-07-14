@@ -17,6 +17,25 @@ namespace Simplex.Math.Core
     /// </remarks>
     public abstract class Expression
     {
+        /// <summary>
+        /// Obtains the string representation of this mathematical expression.
+        /// </summary>
+        /// <remarks>
+        /// Note that this converts the expression to a "nice" string, not a C# equivalent.
+        /// For example:
+        /// (((2 * y) + x) + 4)
+        /// Will be returned as:
+        /// 2y + x + 4
+        /// </remarks>
+        public override abstract string ToString();
 
+        /// <summary>
+        /// Converts the string representation of an expression into an expression.
+        /// </summary>
+        /// <param name="Input">The string to parse</param>
+        public static Expression Parse(string Input)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
