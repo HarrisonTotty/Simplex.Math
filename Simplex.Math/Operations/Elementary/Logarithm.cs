@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Simplex.Math.Operations.Arithmetic
+namespace Simplex.Math.Operations.Elementary
 {
-    public class Product
+    public class Logarithm : ElementaryOperation
     {
+
     }
 }

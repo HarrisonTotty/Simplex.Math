@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Simplex.Math.Operations.Arithmetic
+namespace Simplex.Math.Operations.Special
 {
-    public class Exponentiation
+    public class Factorial
     {
+
     }
 }

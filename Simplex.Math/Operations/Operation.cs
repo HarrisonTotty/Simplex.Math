@@ -10,7 +10,7 @@ namespace Simplex.Math.Operations
     /// <summary>
     /// Represents a mathematical operation of a particular arity (EX: Addition)
     /// </summary>
-    public abstract class Operation
+    public abstract class Operation : Expression
     {
 
     }

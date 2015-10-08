@@ -9,7 +9,7 @@ namespace Simplex.Math.Operations
     /// <summary>
     /// Represents a mathematical operation that contains a single operand
     /// </summary>
-    public abstract class UnaryOperation
+    public abstract class UnaryOperation : Operation
     {
 
     }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Simplex.Math.Operations
+namespace Simplex.Math.Operations.Elementary
 {
-    public class AbsoluteValue
+    class NaturalLogarithm : Logarithm
     {
 
     }

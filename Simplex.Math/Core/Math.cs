@@ -225,5 +225,46 @@ namespace Simplex.Math.Core
         {
             throw new System.NotImplementedException();
         }
+
+        /// <summary>
+        /// Simplifies a given mathematical expression by canceling like terms and re-writing it into expanded form.
+        /// </summary>
+        /// <remarks>
+        /// Example: (3x + y) + (2x + 4)  ->  5x + y + 4
+        /// </remarks>
+        public static void Simplify()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        /// <summary>
+        /// Re-forms a given expression into an expanded form.
+        /// </summary>
+        /// <remarks>
+        /// Example: 3(x + y)  ->  3x + 3y
+        /// </remarks>
+        public static void Expand()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        /// <summary>
+        /// Solves a given mathematical expression for a particular variable or constant.
+        /// </summary>
+        public static void Solve()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        /// <summary>
+        /// Re-forms a given expression into a contracted form.
+        /// </summary>
+        /// <remarks>
+        /// Example: 3x + 3y  ->  3(x + y)
+        /// </remarks>
+        public static void Contract()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Simplex.Math.Operations.Arithmetic
+namespace Simplex.Math.Operations.Analytical
 {
-    public class Logarithm
+    public class BesselFunction : AnalyticalOperation
     {
     }
 }

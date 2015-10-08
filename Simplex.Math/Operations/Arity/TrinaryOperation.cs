@@ -9,7 +9,7 @@ namespace Simplex.Math.Operations
     /// <summary>
     /// Represents a mathematical operation that contains three operands
     /// </summary>
-    public abstract class TrinaryOperation
+    public abstract class TrinaryOperation : Operation
     {
 
     }

@@ -9,7 +9,7 @@ namespace Simplex.Math.Operations
     /// <summary>
     /// Represents a mathematical operation that contains two operands
     /// </summary>
-    public abstract class BinaryOperation
+    public abstract class BinaryOperation : Operation
     {
 
     }

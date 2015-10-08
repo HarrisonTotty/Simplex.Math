@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace Simplex.Math.Operations.Arithmetic
+namespace Simplex.Math.Classification
 {
-    public class Quotient
+    public class TrigonometricExpression : ClosedFormExpression
     {
     }
 }
