@@ -1,65 +1,65 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Simplex.Math.Operations.Elementary.ElementaryOperation">
-    <Position X="6.25" Y="0.5" Width="1.5" />
+    <Position X="7.75" Y="0.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Operations\Elementary\ElementaryOperation.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Simplex.Math.Operations.Elementary.Exponentiation">
-    <Position X="9.75" Y="2.25" Width="1.5" />
+    <Position X="11.75" Y="2.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEgAAAAAAQAA=</HashCode>
       <FileName>Operations\Elementary\Exponentiation.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Simplex.Math.Operations.Elementary.Logarithm" Collapsed="true">
-    <Position X="12" Y="2.25" Width="1.5" />
+  <Class Name="Simplex.Math.Operations.Elementary.Logarithm">
+    <Position X="14.5" Y="2.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAiAAAAAAAAAAAAAQAA=</HashCode>
       <FileName>Operations\Elementary\Logarithm.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Simplex.Math.Operations.Elementary.NaturalLogarithm" Collapsed="true">
-    <Position X="12" Y="3.75" Width="1.5" />
+  <Class Name="Simplex.Math.Operations.Elementary.NaturalLogarithm">
+    <Position X="14.5" Y="5.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Operations\Elementary\NaturalLogarithm.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Simplex.Math.Operations.Elementary.ArithmeticOperation">
-    <Position X="4" Y="2" Width="1.5" />
+    <Position X="5" Y="2.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Operations\Elementary\Arithmetic\ArithmeticOperation.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Simplex.Math.Operations.Elementary.Difference">
-    <Position X="0.75" Y="3.75" Width="1.5" />
+    <Position X="0.75" Y="4.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAACAACAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAACAACAAAAAgAAAAAAAIAAAAAAAAA=</HashCode>
       <FileName>Operations\Elementary\Arithmetic\Difference.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Simplex.Math.Operations.Elementary.Product">
-    <Position X="5.25" Y="3.75" Width="1.5" />
+    <Position X="6.25" Y="4.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAACAABAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAACAABAAAAAgAAAAAAAIAAAAAAAAA=</HashCode>
       <FileName>Operations\Elementary\Arithmetic\Product.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Simplex.Math.Operations.Elementary.Quotient">
-    <Position X="7.5" Y="3.75" Width="1.5" />
+    <Position X="9" Y="4.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAQgAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAQgAAAAAAAAAAAAAAgAAAAAAIAAAAAAAAAA=</HashCode>
       <FileName>Operations\Elementary\Arithmetic\Quotient.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Simplex.Math.Operations.Elementary.Sum">
-    <Position X="3" Y="3.75" Width="1.5" />
+    <Position X="3.5" Y="4.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAIAAAAAAAAAAAAACAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <HashCode>AAIAAAAAAAAAAAAACAAAAAAAAkAAAAAAAIAAAAAAAAA=</HashCode>
       <FileName>Operations\Elementary\Arithmetic\Sum.cs</FileName>
     </TypeIdentifier>
   </Class>

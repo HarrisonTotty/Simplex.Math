@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Scope.cs" />
     <Compile Include="Exceptions\CalculationException.cs" />
     <Compile Include="Exceptions\ClassificationException.cs" />
     <Compile Include="Classification\ClassifiedExpression.cs" />
@@ -63,13 +64,24 @@
     <Compile Include="Classification\DescreteValue.cs" />
     <Compile Include="Classification\GenericConstant.cs" />
     <Compile Include="Classification\Indeterminate.cs" />
-    <Compile Include="ImaginaryUnit.cs" />
+    <Compile Include="Exceptions\ExpressionParsingException.cs" />
+    <Compile Include="Core\GeneralFormType.cs" />
+    <Compile Include="Logic\MapMatrix.cs" />
+    <Compile Include="Logic\OneWayMapMatrix.cs" />
+    <Compile Include="Operands\ImaginaryUnit.cs" />
     <Compile Include="Logic\Proposition.cs" />
     <Compile Include="Classification\NonFactorialArithmeticExpression.cs" />
     <Compile Include="Operands\Constant.cs" />
     <Compile Include="Operands\Operand.cs" />
     <Compile Include="Operands\Value.cs" />
     <Compile Include="Operands\Variable.cs" />
+    <Compile Include="Operations\Hyperbolic\HyperbolicCosecant.cs" />
+    <Compile Include="Operations\Hyperbolic\HyperbolicCosine.cs" />
+    <Compile Include="Operations\Hyperbolic\HyperbolicCotangent.cs" />
+    <Compile Include="Operations\Hyperbolic\HyperbolicOperation.cs" />
+    <Compile Include="Operations\Hyperbolic\HyperbolicSecant.cs" />
+    <Compile Include="Operations\Hyperbolic\HyperbolicSine.cs" />
+    <Compile Include="Operations\Hyperbolic\HyperbolicTangent.cs" />
     <Compile Include="Operations\Special\AbsoluteValue.cs" />
     <Compile Include="Operations\Analytical\AnalyticalOperation.cs" />
     <Compile Include="Operations\Analytical\BesselFunction.cs" />
@@ -87,7 +99,27 @@
     <Compile Include="Operations\Elementary\NaturalLogarithm.cs" />
     <Compile Include="Operations\Analytical\GammaFunction.cs" />
     <Compile Include="Operations\Operation.cs" />
+    <Compile Include="Operations\Special\Ceiling.cs" />
     <Compile Include="Operations\Special\Factorial.cs" />
+    <Compile Include="Operations\Special\Floor.cs" />
+    <Compile Include="Operations\Special\Maximum.cs" />
+    <Compile Include="Operations\Special\Mean.cs" />
+    <Compile Include="Operations\Special\Median.cs" />
+    <Compile Include="Operations\Special\Minimum.cs" />
+    <Compile Include="Operations\Special\Mode.cs" />
+    <Compile Include="Operations\Special\Round.cs" />
+    <Compile Include="Operations\Trigonometric\ArcCosecant.cs" />
+    <Compile Include="Operations\Trigonometric\ArcCosine.cs" />
+    <Compile Include="Operations\Trigonometric\ArcCotangent.cs" />
+    <Compile Include="Operations\Trigonometric\ArcSecant.cs" />
+    <Compile Include="Operations\Trigonometric\ArcSine.cs" />
+    <Compile Include="Operations\Trigonometric\ArcTangent.cs" />
+    <Compile Include="Operations\Trigonometric\Cosecant.cs" />
+    <Compile Include="Operations\Trigonometric\Cosine.cs" />
+    <Compile Include="Operations\Trigonometric\Cotangent.cs" />
+    <Compile Include="Operations\Trigonometric\Secant.cs" />
+    <Compile Include="Operations\Trigonometric\Sine.cs" />
+    <Compile Include="Operations\Trigonometric\Tangent.cs" />
     <Compile Include="Operations\Trigonometric\TrigonometricOperation.cs" />
     <Compile Include="Classification\Polynomial.cs" />
     <Compile Include="Classification\PolynomialTerm.cs" />
@@ -99,10 +131,12 @@
     <Compile Include="Exceptions\SimplexMathException.cs" />
     <Compile Include="Exceptions\SimplificationException.cs" />
     <Compile Include="Classification\ValuedConstant.cs" />
+    <Compile Include="Logic\Rule.cs" />
+    <Compile Include="Core\SubstitutionType.cs" />
+    <Compile Include="Logic\Transform.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Operations\Calculus\" />
-    <Folder Include="Operations\Hyperbolic\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Arrays\Arrays.cd" />

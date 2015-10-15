@@ -103,5 +103,26 @@ namespace Simplex.Math.Operands
         {
             this.InnerValue = 0;
         }
+
+        /// <summary>
+        /// Obtains the string representation of this mathematical expression with specific formatting options.
+        /// </summary>
+        /// <param name="Format">The general format to use for the output</param>
+        /// <param name="VariableFormat">The format to use for variables in the output</param>
+        /// <param name="ConstantFormat">The format to use for constants and values in the output</param>
+        public override string ToString(ExpressionStringFormat Format, ExpressionStringVariableFormat VariableFormat, ExpressionStringConstantFormat ConstantFormat)
+        {
+            //Check for common fractions:
+            if (this.InnerValue == (1 / 2)) return "(1/2)";
+            if (this.InnerValue == (1 / 3)) return "(1/3)";
+            if (this.InnerValue == (2 / 3)) return "(2/3)";
+            if (this.InnerValue == (1 / 4)) return "(1/4)";
+            if (this.InnerValue == (3 / 4)) return "(3/4)";
+            if (this.InnerValue == (1 / 5)) return "(1/5)";
+            if (this.InnerValue == (2 / 5)) return "(2/5)";
+            if (this.InnerValue == (3 / 5)) return "(3/5)";
+            if (this.InnerValue == (4 / 5)) return "(4/5)";
+            return this.InnerValue.ToString();
+        }
     }
 }

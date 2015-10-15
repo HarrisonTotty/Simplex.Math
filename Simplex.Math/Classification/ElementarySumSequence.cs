@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Simplex.Math.Core;
 using Simplex.Math.Operands;
+using Simplex.Math.Operations.Elementary;
 
 namespace Simplex.Math.Classification
 {
@@ -25,7 +26,7 @@ namespace Simplex.Math.Classification
         /// <summary>
         /// The list of terms contained within this sequence as tuples of the expression and whether it is positive.
         /// </summary>
-        public List<IntrinsicIrreducible> Terms
+        public List<IntrinsicIrreducible> SumTerms
         {
             get
             {
@@ -37,34 +38,38 @@ namespace Simplex.Math.Classification
             }
         }
 
+        /// <summary>
+        /// Performs the simplification of an elementary sum sequence
+        /// </summary>
+        /// <param name="Input">The sum sequence to simplify</param>
         public static Expression Simplify(ElementarySumSequence Input)
         {
             //We start by creating a new list of terms for our result (which will hold the same number of items at most)
-            List<Expression> NewTerms = new List<Expression>(Input.Terms.Count);
+            List<Expression> NewTerms = new List<Expression>(Input.SumTerms.Count);
 
             //Add the first item to the list
-            if (Input.Terms[0].IsNegated) NewTerms.Add(-Input.Terms[0].UnderlyingExpression);
-            else NewTerms.Add(Input.Terms[0].UnderlyingExpression);
+            if (Input.SumTerms[0].IsNegated) NewTerms.Add(-Input.SumTerms[0].UnderlyingExpression);
+            else NewTerms.Add(Input.SumTerms[0].UnderlyingExpression);
 
             //Now we add one item to the list at a time. We will compute the addition between items that are similar.
-            for (int i = 1; i < Input.Terms.Count; i++)
+            for (int i = 1; i < Input.SumTerms.Count; i++)
             {
                 //For each item in our new list
                 bool foundmatch = false;
                 for (int j = 0; j < NewTerms.Count; j++)
                 {
                     //See if we have a match if we are a variable:
-                    if (Input.Terms[i].UnderlyingExpression is Variable)
+                    if (Input.SumTerms[i].UnderlyingExpression is Variable)
                     {
-                        if (NewTerms[j].ContainsExpression(Input.Terms[i].UnderlyingExpression as Variable))
+                        if (NewTerms[j].ContainsExpression(Input.SumTerms[i].UnderlyingExpression as Variable))
                         {
-                            if (Input.Terms[i].IsNegated)
+                            if (Input.SumTerms[i].IsNegated)
                             {
-                                NewTerms[j] -= Input.Terms[i].UnderlyingExpression;
+                                NewTerms[j] -= Input.SumTerms[i].UnderlyingExpression;
                             }
                             else
                             {
-                                NewTerms[j] += Input.Terms[i].UnderlyingExpression;
+                                NewTerms[j] += Input.SumTerms[i].UnderlyingExpression;
                             }
                             foundmatch = true;
                             break;
@@ -73,17 +78,17 @@ namespace Simplex.Math.Classification
                     }
 
                     //See if we have a match if we are a constant:
-                    if (Input.Terms[i].UnderlyingExpression is Constant)
+                    if (Input.SumTerms[i].UnderlyingExpression is Constant)
                     {
-                        if (NewTerms[j].ContainsExpression(Input.Terms[i].UnderlyingExpression as Constant))
+                        if (NewTerms[j].ContainsExpression(Input.SumTerms[i].UnderlyingExpression as Constant))
                         {
-                            if (Input.Terms[i].IsNegated)
+                            if (Input.SumTerms[i].IsNegated)
                             {
-                                NewTerms[j] -= Input.Terms[i].UnderlyingExpression;
+                                NewTerms[j] -= Input.SumTerms[i].UnderlyingExpression;
                             }
                             else
                             {
-                                NewTerms[j] += Input.Terms[i].UnderlyingExpression;
+                                NewTerms[j] += Input.SumTerms[i].UnderlyingExpression;
                             }
                             foundmatch = true;
                             break;
@@ -92,17 +97,17 @@ namespace Simplex.Math.Classification
                     }
 
                     //See if we have a match if we are a value:
-                    if (Input.Terms[i].UnderlyingExpression is Value)
+                    if (Input.SumTerms[i].UnderlyingExpression is Value)
                     {
                         if (NewTerms[j] is Value)
                         {
-                            if (Input.Terms[i].IsNegated)
+                            if (Input.SumTerms[i].IsNegated)
                             {
-                                NewTerms[j] -= Input.Terms[i].UnderlyingExpression;
+                                NewTerms[j] -= Input.SumTerms[i].UnderlyingExpression;
                             }
                             else
                             {
-                                NewTerms[j] += Input.Terms[i].UnderlyingExpression;
+                                NewTerms[j] += Input.SumTerms[i].UnderlyingExpression;
                             }
                             foundmatch = true;
                             break;
@@ -114,8 +119,8 @@ namespace Simplex.Math.Classification
                 //If we couldn't find a match, just add it to the list.
                 if (!foundmatch)
                 {
-                    if (Input.Terms[i].IsNegated) NewTerms.Add(-Input.Terms[i].UnderlyingExpression);
-                    else NewTerms.Add(Input.Terms[i].UnderlyingExpression);
+                    if (Input.SumTerms[i].IsNegated) NewTerms.Add(-Input.SumTerms[i].UnderlyingExpression);
+                    else NewTerms.Add(Input.SumTerms[i].UnderlyingExpression);
                 }
             }
 
@@ -129,6 +134,25 @@ namespace Simplex.Math.Classification
 
             //Return our answer
             return Output;
+        }
+
+        /// <summary>
+        /// Creates a new elementary sum sequence from a sequence of expressions.
+        /// </summary>
+        /// <param name="Expressions">The sequence of expressions to sum together</param>
+        public static ElementarySumSequence Create(params Operand[] Expressions)
+        {
+            Expression UnderlyingExpression = Expressions[0];
+
+            if (Expressions.Length > 1)
+            {
+                for (int i = 1; i < Expressions.Length; i++)
+                {
+                    UnderlyingExpression = new Sum(UnderlyingExpression, Expressions[i]);
+                }
+            }
+
+            return new ElementarySumSequence(UnderlyingExpression);
         }
     }
 }

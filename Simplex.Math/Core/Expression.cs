@@ -20,6 +20,60 @@ namespace Simplex.Math.Core
     /// </remarks>
     public abstract class Expression
     {
+        /// <summary>
+        /// Creates a new blank expression object with no children.
+        /// </summary>
+        public Expression()
+        {
+            this.ChildExpressions = null;
+
+
+            this.Scope = Scope.Global;
+        }
+
+        /// <summary>
+        /// Creates a new blank expression object with no children within a particular scope.
+        /// </summary>
+        /// <param name="Scope">The scope this expression exists in</param>
+        public Expression(Scope Scope)
+        {
+            this.ChildExpressions = null;
+
+
+            this.Scope = Scope;
+        }
+
+        /// <summary>
+        /// Creates a new blank expression object with a particular number of child expressions.
+        /// </summary>
+        public Expression(int NumberChildren)
+        {
+            if (NumberChildren < 0) throw new Exceptions.SimplexMathException("Cannot create generic expression - Invalid number of children");
+            else if (NumberChildren == 0) this.ChildExpressions = null;
+            else this.ChildExpressions = Enumerable.Repeat<Expression>(null, NumberChildren).ToList<Expression>();
+
+            this.Scope = Scope.Global;
+        }
+
+        /// <summary>
+        /// Relative child expressions to this parent expression (if any).
+        /// For example "new Sum(x, y)" contains the child expressions "x" and "y".
+        /// </summary>
+        public List<Expression> ChildExpressions
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// The scope in which this mathematical expression resides.
+        /// </summary>
+        public Scope Scope
+        {
+            get;
+            private set;
+        }
+
         //The following operators are overloaded between a math expression and a number
         public static Expression operator +(Expression I1, double I2) { return Sum.Add(I1, new Value(I2)); }
         public static Expression operator -(Expression I1, double I2) { return Difference.Subtract(I1, new Value(I2)); }
@@ -199,6 +253,19 @@ namespace Simplex.Math.Core
         /// <param name="Comparison">The expression to search for</param>
         public virtual bool ContainsExpression(Expression Comparison)
         {
+            //If we ARE the comparison, return true
+            if (this == Comparison) return true;
+
+            //If we have children, check them
+            if (this.HasChildren())
+            {
+                foreach (Expression Child in this.ChildExpressions)
+                {
+                    if (Child.ContainsExpression(Comparison)) return true;
+                }
+            }
+
+            //Otherwise we couldn't find it
             return false;
         }
 
@@ -239,7 +306,7 @@ namespace Simplex.Math.Core
         /// <param name="Comparison">The expression to compare to</param>
         public virtual bool IsSimilarTo(Expression Comparison)
         {
-            return false;
+            return (this.ToGenericForm() == Comparison.ToGenericForm());
         }
 
         /// <summary>
@@ -285,7 +352,134 @@ namespace Simplex.Math.Core
         /// </remarks>
         public virtual Expression ToGenericForm()
         {
+            return this.ToGenericForm(GeneralFormType.Default);
+        }
+
+        /// <summary>
+        /// Converts this expression into its generic form.
+        /// All coefficients are replaced with the generic constant "C" with a few exceptions.
+        /// Exponents are untouched.
+        /// </summary>
+        /// <remarks>
+        /// EXAMPLE CONVERSIONS:
+        /// 3x^2 + 4y - (3/2)x  ->  Cx^2 + Cy - Cx
+        /// 12x^2 + 8y - 6x     ->  Cx^2 + Cy - Cx
+        /// </remarks>
+        public virtual Expression ToGenericForm(GeneralFormType FormType)
+        {
             throw new Exceptions.SimplificationException("Unable to convert expression to generic form");
+        }
+
+        /// <summary>
+        /// Returns an expression where a particular part of the expression is replaced with another expression.
+        /// </summary>
+        /// <param name="OldExpression">The old expression to replace</param>
+        /// <param name="NewExpression">The expression to replace the old expression with</param>
+        public virtual Expression Substitute(Expression OldExpression, Expression NewExpression)
+        {
+            return Substitute(OldExpression, NewExpression, SubstitutionType.Default);
+        }
+
+        /// <summary>
+        /// Returns an expression where a particular part of the expression is replaced with another expression.
+        /// </summary>
+        /// <param name="OldExpression">The old expression to replace</param>
+        /// <param name="NewExpression">The expression to replace the old expression with</param>
+        /// <param name="SubstitutionType">Assumptions and rules to apply to the substitution</param>
+        public virtual Expression Substitute(Expression OldExpression, Expression NewExpression, SubstitutionType SubstitutionType)
+        {
+            //If we equal the "old expression", return the new expression
+            if (SubstitutionType == SubstitutionType.Default) if (this == OldExpression) return NewExpression;
+            if (SubstitutionType == SubstitutionType.Similar) if (this.IsSimilarTo(OldExpression)) return NewExpression;
+            if (SubstitutionType == SubstitutionType.Identical) if (this.IsIdenticalTo(OldExpression)) return NewExpression;
+
+            //If we have any children, try to substitute them
+            if (this.HasChildren())
+            {
+                //Make a copy of this expression
+                Expression MeCopied = this.Copy();
+                
+                //Iterate through the childern and try to perform the substitution on each one.
+                for (int i = 0; i < this.ChildExpressions.Count; i++)
+                {
+                    MeCopied.ChildExpressions[i] = this.ChildExpressions[i].Substitute(OldExpression, NewExpression, SubstitutionType);
+                }
+
+                //Return the modified copy
+                return MeCopied;
+            }
+
+            //Otherwise we don't know what to do (and thus return ourselves)
+            return this;
+        }
+
+        /// <summary>
+        /// Returns whether this expression has associated with it any child expressions.
+        /// </summary>
+        public bool HasChildren()
+        {
+            if (this.ChildExpressions == null) return false;
+            return (this.ChildExpressions.Count > 0);
+        }
+
+        /// <summary>
+        /// Copies this expression.
+        /// </summary>
+        public virtual Expression Copy()
+        {
+            return this;
+        }
+
+        /// <summary>
+        /// Extracts an expression (or expressions) that match a particular qualifying proposition
+        /// </summary>
+        /// <param name="QualifyingProposition">The proposition this expression (or a child of this expression) must match in order to qualify for extraction</param>
+        public List<Expression> Extract(Logic.Proposition QualifyingProposition)
+        {
+            //Create a new list to hold our results
+            List<Expression> ReturnList = new List<Expression>();
+
+            //If this passes the proposition, add it to the list
+            if (QualifyingProposition.Evaluate(this)) ReturnList.Add(this);
+
+            //Recursivly ask our children
+            if (this.HasChildren())
+            {
+                foreach (Expression Child in this.ChildExpressions)
+                {
+                    ReturnList.AddRange(Child.Extract(QualifyingProposition));
+                }
+            }
+
+            //Trim our list
+            ReturnList.Capacity = ReturnList.Count;
+            
+            //Return the found expressions
+            return ReturnList;
+        }
+
+        /// <summary>
+        /// Creates a map between this expression and another expression within the scope of this expression.
+        /// </summary>
+        /// <remarks>
+        /// Remember that we map in both directions!
+        /// </remarks>
+        /// <param name="ExpressionToMap">The expression to map this expression to</param>
+        public void Map(Expression ExpressionToMap)
+        {
+            this.Scope.ExpressionMappings[this] = ExpressionToMap;
+        }
+
+        /// <summary>
+        /// Removes the map between this expression and another expression within the scope of this expression.
+        /// </summary>
+        /// <remarks>
+        /// Remember that we map in both directions!
+        /// </remarks>
+        /// <param name="ExpressionToMap">The expression to map this expression to</param>
+        public void UnMap(Expression ExpressionToMap)
+        {
+            if (this.Scope.ExpressionMappings.ContainsMap(this)) this.Scope.ExpressionMappings.RemoveMap(this, ExpressionToMap);
         }
     }
 }

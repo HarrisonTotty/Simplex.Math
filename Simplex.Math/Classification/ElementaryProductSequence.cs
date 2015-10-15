@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Simplex.Math.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,15 +16,15 @@ namespace Simplex.Math.Classification
     /// </remarks>
     public class ElementaryProductSequence : NonFactorialArithmeticExpression
     {
-        public ElementaryProductSequence()
+        public ElementaryProductSequence(Expression UnderlyingExpression) : base(UnderlyingExpression)
         {
-            throw new System.NotImplementedException();
+
         }
 
         /// <summary>
         /// The list of terms contained within this sequence as tuples of the expression and whether it is positive.
         /// </summary>
-        public List<Tuple<IntrinsicIrreducible, bool>> Terms
+        public List<IntrinsicIrreducible> ProductTerms
         {
             get
             {

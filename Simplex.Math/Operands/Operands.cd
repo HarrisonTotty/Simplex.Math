@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Simplex.Math.Operands.Operand">
-    <Position X="7.25" Y="0.5" Width="2.75" />
+    <Position X="9" Y="0.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Operands\Operand.cs</FileName>
@@ -10,29 +10,29 @@
   <Class Name="Simplex.Math.Operands.Constant">
     <Position X="3.75" Y="2.5" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAAACAAAAAAggAIAEACAAAQAAEAAAAACAAAgABAACAA=</HashCode>
+      <HashCode>AAAACAAAAAAggAIEEACAAAQAAEAIAAACAAAgABAACAA=</HashCode>
       <FileName>Operands\Constant.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Simplex.Math.Operands.Value">
     <Position X="7.25" Y="2.5" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAgDAAgAABEAAAAAAAAAAABAAByA=</HashCode>
+      <HashCode>AAACAAAAAAAAAAAEAgDAAgAABEAAAAAAAAAAABAAByA=</HashCode>
       <FileName>Operands\Value.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Simplex.Math.Operands.Variable">
     <Position X="10.75" Y="2.5" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>QQAAAAAAAAAggAAAAAAAAAQAAEAAAAAAAAAAABAACAA=</HashCode>
+      <HashCode>QQAACAAAAAAggAAEAAAAAAQAAEAAAAAAAABgARAACAA=</HashCode>
       <FileName>Operands\Variable.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Simplex.Math.Operands.ImaginaryUnit">
-    <Position X="11" Y="0.75" Width="1.5" />
+    <Position X="14.25" Y="2.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ImaginaryUnit.cs</FileName>
+      <FileName>Operands\ImaginaryUnit.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

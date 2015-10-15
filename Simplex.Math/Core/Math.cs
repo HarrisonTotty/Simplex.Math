@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Simplex.Math.Operands;
+using Simplex.Math.Operations.Elementary;
+using Simplex.Math.Operations.Trigonometric;
+using Simplex.Math.Operations.Special;
 
 namespace Simplex.Math.Core
 {
@@ -15,11 +19,12 @@ namespace Simplex.Math.Core
     public static class Math
     {
         /// <summary>
-        /// Returns the absolute value of a given expression.
+        /// Computes the absolute value of a particular input expression.
         /// </summary>
-        public static void Abs()
+        /// <param name="Input">The input expression to compute the absolute value of</param>
+        public static Expression Abs(Expression Input)
         {
-            throw new System.NotImplementedException();
+            return AbsoluteValue.Abs(Input);
         }
 
         /// <summary>
@@ -148,9 +153,11 @@ namespace Simplex.Math.Core
         /// <remarks>
         /// This method can be used for regular integer powers as well as whole expressions as powers.
         /// </remarks>
-        public static void Pow()
+        /// <param name="Base">The expression to use as the base of the resulting power</param>
+        /// <param name="Exponent">The expression to use as the exponent of the resulting power</param>
+        public static Expression Pow(Expression Base, Expression Exponent)
         {
-            throw new System.NotImplementedException();
+            return Base ^ Exponent;
         }
 
         /// <summary>
@@ -159,9 +166,10 @@ namespace Simplex.Math.Core
         /// <remarks>
         /// This raises "e" to a particular expression.
         /// </remarks>
-        public static void Exp()
+        /// <param name="Input">The input expression</param>
+        public static Expression Exp(Expression Input)
         {
-            throw new System.NotImplementedException();
+            return Constant.e ^ Input;
         }
 
         /// <summary>
@@ -265,6 +273,25 @@ namespace Simplex.Math.Core
         public static void Contract()
         {
             throw new System.NotImplementedException();
+        }
+
+        /// <summary>
+        /// Computes the natural logarithm of an input expression.
+        /// </summary>
+        /// <param name="LogExpression">The expression to take the log of</param>
+        public static Expression Log(Expression LogExpression)
+        {
+            return NaturalLogarithm.Log(LogExpression);
+        }
+
+        /// <summary>
+        /// Computes the logarithm of an input expression with respect to a particular base
+        /// </summary>
+        /// <param name="Base">The base expression of this logarithm</param>
+        /// <param name="LogExpression">The expression to take the log of</param>
+        public static Expression Log(Expression Base, Expression LogExpression)
+        {
+            return Logarithm.Log(Base, LogExpression);
         }
     }
 }

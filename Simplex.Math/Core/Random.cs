@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Simplex.Math.Operands;
+using Simplex.Math.Operations;
 
 namespace Simplex.Math.Core
 {
@@ -60,10 +62,11 @@ namespace Simplex.Math.Core
         }
 
         /// <summary>
-        /// Generates a random polynomial in standard form with the specified minimum and maximum degree.
+        /// Generates a single-variable random polynomial in standard form with the specified minimum and maximum degree.
         /// </summary>
         /// <param name="MinDegree">The minimum degree for the resulting polynomial</param>
         /// <param name="MaxDegree">The maximum degree for the resulting polynomial</param>
+        /// <param name="Variable">The variable to utilize in the creation of this polynomial</param>
         /// <remarks>
         /// Setting the maximum degree to 3 (for example) and the minimum to 0 (for example) DOES NOT guarentee that a component for all degrees 
         /// from zero to three will be generated. For example, the resulting polynomials could be:
@@ -72,7 +75,7 @@ namespace Simplex.Math.Core
         /// 2x^2 + 4                OR
         /// 9x^3 + x^2 - 2x + 6
         /// </remarks>
-        public static void Polynomial(int MinDegree, int MaxDegree)
+        public static void Polynomial(int MinDegree, int MaxDegree, Variable Variable)
         {
             throw new System.NotImplementedException();
         }

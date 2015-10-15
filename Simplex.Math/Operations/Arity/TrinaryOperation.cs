@@ -11,6 +11,13 @@ namespace Simplex.Math.Operations
     /// </summary>
     public abstract class TrinaryOperation : Operation
     {
+        /// <summary>
+        /// Creates a new trinary operation
+        /// </summary>
+        /// <param name="IsIdempotent">Whether this mathematical operation is idempotent</param>
+        public TrinaryOperation(bool IsIdempotent) : base(3, IsIdempotent)
+        {
 
+        }
     }
 }

@@ -24,6 +24,22 @@ namespace Simplex.Math.Operands
         public static readonly Constant pi = new Constant("π", "Pi", "The ratio of a circle's circumference to its diameter", "", 3.1415926535897932384626433832795028842);
 
         /// <summary>
+        /// Represents the mathematical constant associated with infinity.
+        /// </summary>
+        public static readonly Constant Infinity = new Constant("∞", "Infinity", "The mathematical constant associated with infinity", "", double.PositiveInfinity);
+
+        /// <summary>
+        /// The generic notion of a constant labled as "C".
+        /// </summary>
+        public static readonly Constant C = new Constant("C", "Generic Constant", "The generic notion of a constant labled 'C'.", "");
+
+        /// <summary>
+        /// The generic notion of a constant labled as "K".
+        /// </summary>
+        public static readonly Constant K = new Constant("K", "Generic Constant", "The generic notion of a constant labled 'K'.", "");
+
+
+        /// <summary>
         /// Creates a new mathematical constant (which will have "C" as the default symbol).
         /// </summary>
         public Constant()
@@ -144,9 +160,6 @@ namespace Simplex.Math.Operands
         /// <summary>
         /// The unique identifier associated with this constant.
         /// </summary>
-        /// <remarks>
-        /// This is now generated using GUID.
-        /// </remarks>
         public string ID
         {
             get;
@@ -199,14 +212,134 @@ namespace Simplex.Math.Operands
         {
             if (Comparison is Constant)
             {
-                
+                return (this.ID == (Comparison as Constant).ID);
             }
             return base.IsEqualTo(Comparison);
         }
 
+        /// <summary>
+        /// Converts this constant to a generic form.
+        /// Some constants such as infinity and "e" will not be converted.
+        /// </summary>
         public override Expression ToGenericForm()
         {
-            return base.ToGenericForm();
+            if (this == Infinity || this == e || this == pi) return this;
+            return C;
+        }
+
+        /// <summary>
+        /// Obtains the string representation of this mathematical expression with specific formatting options.
+        /// </summary>
+        /// <param name="Format">The general format to use for the output</param>
+        /// <param name="VariableFormat">The format to use for variables in the output</param>
+        /// <param name="ConstantFormat">The format to use for constants and values in the output</param>
+        public override string ToString(ExpressionStringFormat Format, ExpressionStringVariableFormat VariableFormat, ExpressionStringConstantFormat ConstantFormat)
+        {
+            if (ConstantFormat == ExpressionStringConstantFormat.Default)
+            {
+                if (this.Symbol != string.Empty)
+                {
+                    if (this.Subscript != string.Empty)
+                    {
+                        if (Format == ExpressionStringFormat.Default)
+                        {
+                            return this.Symbol + "_[" + this.Subscript + "]";
+                        }
+                        else if (Format == ExpressionStringFormat.LaTeX)
+                        {
+                            return this.Symbol + "_{" + this.Subscript + "}";
+                        }
+                        else
+                        {
+                            throw new Exceptions.ExpressionParsingException("Unable to convert constant to string - Invalid ExpressionStringFormat");
+                        }
+                    }
+                    else
+                    {
+                        return this.Symbol;
+                    }
+                }
+                else
+                {
+                    if (this.HasDescreteValue)
+                    {
+                        return this.Value.ToString(Format, VariableFormat, ConstantFormat);
+                    }
+                    else
+                    {
+                        return "\"[UNKNOWN CONSTANT]\"";
+                    }
+                }
+            }
+            else if (ConstantFormat == ExpressionStringConstantFormat.Numeric)
+            {
+                if (this.HasDescreteValue)
+                {
+                    return this.Value.ToString(Format, VariableFormat, ConstantFormat);
+                }
+                else
+                {
+                    if (this.Symbol != string.Empty)
+                    {
+                        if (this.Subscript != string.Empty)
+                        {
+                            if (Format == ExpressionStringFormat.Default)
+                            {
+                                return this.Symbol + "_[" + this.Subscript + "]";
+                            }
+                            else if (Format == ExpressionStringFormat.LaTeX)
+                            {
+                                return this.Symbol + "_{" + this.Subscript + "}";
+                            }
+                            else
+                            {
+                                throw new Exceptions.ExpressionParsingException("Unable to convert constant to string - Invalid ExpressionStringFormat");
+                            }
+                        }
+                        else
+                        {
+                            return this.Symbol;
+                        }
+                    }
+                    else
+                    {
+                        return "\"[UNKNOWN CONSTANT]\"";
+                    }
+                }
+            }
+            else if (ConstantFormat == ExpressionStringConstantFormat.Symbolic)
+            {
+                if (this.Symbol != string.Empty)
+                {
+                    if (this.Subscript != string.Empty)
+                    {
+                        if (Format == ExpressionStringFormat.Default)
+                        {
+                            return this.Symbol + "_[" + this.Subscript + "]";
+                        }
+                        else if (Format == ExpressionStringFormat.LaTeX)
+                        {
+                            return this.Symbol + "_{" + this.Subscript + "}";
+                        }
+                        else
+                        {
+                            throw new Exceptions.ExpressionParsingException("Unable to convert constant to string - Invalid ExpressionStringFormat");
+                        }
+                    }
+                    else
+                    {
+                        return this.Symbol;
+                    }
+                }
+                else
+                {
+                    return "C";
+                }
+            }
+            else
+            {
+                throw new Exceptions.ExpressionParsingException("Unable to convert constant to string - Invalid ExpressionStringConstantFormat");
+            }
         }
     }
 }

@@ -7,6 +7,9 @@ using Simplex.Math.Core;
 
 namespace Simplex.Math.Operations.Elementary
 {
+    /// <summary>
+    /// Represents the multiplication of two expressions.
+    /// </summary>
     public class Product : ArithmeticOperation
     {
         /// <summary>
@@ -14,38 +17,60 @@ namespace Simplex.Math.Operations.Elementary
         /// </summary>
         /// <param name="LeftExpression">The expression associated with the left side of the operation</param>
         /// <param name="RightExpression">The expression associated with the right side of the operation</param>
-        public Product(Expression LeftExpression, Expression RightExpression)
+        public Product(Expression LeftExpression, Expression RightExpression) : base(LeftExpression, RightExpression, true, false, true)
         {
-            throw new System.NotImplementedException();
+            
         }
 
-        public int LeftExpression
+        /// <summary>
+        /// The mathematical expression corresponding to the left side of this product.
+        /// </summary>
+        public Expression LeftExpression
         {
             get
             {
-                throw new System.NotImplementedException();
+                return this.Operands[0];
             }
 
             set
             {
+                this.Operands[0] = value;
             }
         }
 
-        public int RightExpression
+        /// <summary>
+        /// The mathematical expression corresponding to the right side of this product.
+        /// </summary>
+        public Expression RightExpression
         {
             get
             {
-                throw new System.NotImplementedException();
+                return this.Operands[1];
             }
 
             set
             {
+                this.Operands[1] = value;
             }
         }
 
+        /// <summary>
+        /// Computes the symbolic multiplication between two expressions.
+        /// </summary>
+        /// <param name="E1">The first expression</param>
+        /// <param name="E2">The second expression</param>
         public static Expression Multiply(Expression E1, Expression E2)
         {
-            throw new System.NotImplementedException();
+            //If we can't combine anything, just create a new object
+            return new Product(E1, E2);
+        }
+
+        /// <summary>
+        /// Makes a copy of this operation.
+        /// </summary>
+        public override Expression Copy()
+        {
+            return new Product(this.LeftExpression.Copy(), this.RightExpression.Copy());
         }
     }
 }

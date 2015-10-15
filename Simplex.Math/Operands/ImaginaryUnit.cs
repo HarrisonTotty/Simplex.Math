@@ -12,7 +12,12 @@ namespace Simplex.Math.Operands
     public class ImaginaryUnit : Operand
     {
         /// <summary>
-        /// Creates a new imaginary unit.
+        /// The imaginary number
+        /// </summary>
+        public static readonly ImaginaryUnit i = new ImaginaryUnit();
+
+        /// <summary>
+        /// Creates a new imaginary unit (in most cases it is more practical to use the pre-initialized "ImaginaryUnit.i").
         /// </summary>
         public ImaginaryUnit()
         {

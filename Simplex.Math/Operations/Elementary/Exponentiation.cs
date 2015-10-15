@@ -7,40 +7,61 @@ using Simplex.Math.Core;
 
 namespace Simplex.Math.Operations.Elementary
 {
+    /// <summary>
+    /// Represents the symbolic exponentiation of a particular base to a particular exponent.
+    /// </summary>
     public class Exponentiation : ElementaryOperation
     {
-        public Exponentiation(Expression Base, Expression Exponent)
+        /// <summary>
+        /// Creates a new exponentiation expression from a given base and exponent.
+        /// </summary>
+        /// <param name="Base">The base of this exponentiation</param>
+        /// <param name="Exponent">The exponent of this exponentiation</param>
+        public Exponentiation(Expression Base, Expression Exponent) : base(Base, Exponent, false, false, false)
         {
-            throw new System.NotImplementedException();
+            
         }
 
-        public int Base
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
 
-            set
-            {
-            }
-        }
-
-        public int Exponent
+        /// <summary>
+        /// The base expression of this exponentiation.
+        /// </summary>
+        public Expression Base
         {
             get
             {
-                throw new System.NotImplementedException();
+                return this.Operands[0];
             }
-
             set
             {
+                this.Operands[0] = value;
             }
         }
 
+        /// <summary>
+        /// The exponent expression of this exponentiation.
+        /// </summary>
+        public Expression Exponent
+        {
+            get
+            {
+                return this.Operands[1];
+            }
+            set
+            {
+                this.Operands[1] = value;
+            }
+        }
+
+        /// <summary>
+        /// Exponentiates an expression by a power given by another expression.
+        /// </summary>
+        /// <param name="Base">The base of the exponentiation</param>
+        /// <param name="Exponent">The exponent of the exponentiation</param>
         public static Expression Exponentiate(Expression Base, Expression Exponent)
         {
-            throw new System.NotImplementedException();
+            //If we can't figure out what to do:
+            return new Exponentiation(Base, Exponent);
         }
     }
 }

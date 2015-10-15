@@ -3,7 +3,7 @@
   <Class Name="Simplex.Math.Core.Math">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQAiAQAIBJggBCgAkABEAAAIAAGAEAAEAAAIAAIAACQ=</HashCode>
+      <HashCode>AQAiAQAIBJggBCgAkABEAAAIAAmAEAAEAAAIAAIAACQ=</HashCode>
       <FileName>Core\Math.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -17,29 +17,50 @@
   <Class Name="Simplex.Math.Core.Expression">
     <Position X="4.25" Y="0.5" Width="3" />
     <TypeIdentifier>
-      <HashCode>QQAiAAAAAAAAABAEYgUAAAAEAEIAAAAAAAAAABAAQiA=</HashCode>
+      <HashCode>QQAiAAAAAAgAQjAEYgWAAEAEAkIAAAACAAAAABAIQiA=</HashCode>
       <FileName>Core\Expression.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="Simplex.Math.Core.Scope">
+    <Position X="10.75" Y="3" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Core\Scope.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Enum Name="Simplex.Math.Core.ExpressionStringFormat">
-    <Position X="7.5" Y="2.75" Width="1.5" />
+    <Position X="7.5" Y="2.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAIAABAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Core\ExpressionStringFormat.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Simplex.Math.Core.ExpressionStringVariableFormat">
-    <Position X="7.5" Y="4" Width="1.5" />
+    <Position X="7.5" Y="4" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAEAAAAAAAAAAIAQAAAAAIAAAAAAAAAAACAA=</HashCode>
       <FileName>Core\ExpressionStringVariableFormat.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Simplex.Math.Core.ExpressionStringConstantFormat">
-    <Position X="7.5" Y="5.75" Width="1.5" />
+    <Position X="7.5" Y="5.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAIAAAAAAAAAAAAAAAAIAACAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Core\ExpressionStringConstantFormat.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Simplex.Math.Core.SubstitutionType">
+    <Position X="7.5" Y="1.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAACAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Core\SubstitutionType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Simplex.Math.Core.GeneralFormType">
+    <Position X="10.25" Y="1.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\GeneralFormType.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />

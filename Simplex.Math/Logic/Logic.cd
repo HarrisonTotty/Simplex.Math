@@ -1,2 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Simplex.Math.Logic.Proposition">
+    <Position X="2" Y="0.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logic\Proposition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simplex.Math.Logic.Proposition&lt;T&gt;">
+    <Position X="3.5" Y="2.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACACAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logic\Proposition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simplex.Math.Logic.Proposition&lt;T1, T2&gt;">
+    <Position X="0.5" Y="2.75" Width="2.25" />
+    <NestedTypes>
+      <Delegate Name="Simplex.Math.Logic.Proposition&lt;T1, T2&gt;.CD">
+        <TypeIdentifier>
+          <NewMemberFileName>Logic\Proposition.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logic\Proposition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simplex.Math.Logic.Rule">
+    <Position X="6.25" Y="1.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logic\Rule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simplex.Math.Logic.Transform">
+    <Position X="6.25" Y="2.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logic\Transform.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simplex.Math.Logic.MapMatrix">
+    <Position X="6.25" Y="4" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAACAAAAAAAAAAAABAAAAAAAE=</HashCode>
+      <FileName>Logic\MapMatrix.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simplex.Math.Logic.OneWayMapMatrix">
+    <Position X="6.25" Y="6.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logic\OneWayMapMatrix.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

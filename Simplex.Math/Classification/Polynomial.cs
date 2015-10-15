@@ -21,7 +21,7 @@ namespace Simplex.Math.Classification
         /// <summary>
         /// The list of terms contained in this polynomial.
         /// </summary>
-        public List<PolynomialTerm> Terms
+        public virtual List<PolynomialTerm> Terms
         {
             get
             {
