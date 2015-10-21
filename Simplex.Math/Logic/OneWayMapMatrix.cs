@@ -44,5 +44,18 @@ namespace Simplex.Math.Logic
                 }
             }
         }
+
+        /// <summary>
+        /// Removes the mapping between two expressions.
+        /// </summary>
+        /// <remarks>
+        /// Since this is one-way, we DO NOT go backwards.
+        /// </remarks>
+        /// <param name="A">The first expression</param>
+        /// <param name="B">The second expression</param>
+        public override void RemoveMap(Expression A, Expression B)
+        {
+            if (this[A].Equals(B)) this.InnerMatrix.Remove(A);
+        }
     }
 }

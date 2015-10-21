@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Simplex.Math.Core;
+using Simplex.Math.Operands;
 
 namespace Simplex.Math.Logic
 {
@@ -16,6 +17,64 @@ namespace Simplex.Math.Logic
     /// </remarks>
     public class Proposition
     {
+        //The different forms a proposition can have
+        public delegate bool ConditionDelegate1(Expression E);
+        public delegate bool ConditionDelegate2(Expression E1, Expression E2);
+        public delegate bool ConditionDelegate3(Expression E1, Expression E2, Expression E3);
+        public delegate bool ConditionDelegate4(Expression E1, Expression E2, Expression E3, Expression E4);
+        public delegate bool ConditionDelegate5(Expression E1, Expression E2, Expression E3, Expression E4, Expression E5);
+        //------------------------------------------
+
+        /// <summary>
+        /// Creates a new proposition with a single-parameter lambda expression.
+        /// </summary>
+        /// <param name="Condition">The lambda expression used to evaluate this proposition</param>
+        public Proposition(System.Linq.Expressions.Expression<ConditionDelegate1> Condition)
+        {
+            this.Condition = Condition;
+            this.NumberParameters = 1;
+        }
+
+        /// <summary>
+        /// Creates a new proposition with a 2-parameter lambda expression.
+        /// </summary>
+        /// <param name="Condition">The lambda expression used to evaluate this proposition</param>
+        public Proposition(System.Linq.Expressions.Expression<ConditionDelegate2> Condition)
+        {
+            this.Condition = Condition;
+            this.NumberParameters = 2;
+        }
+
+        /// <summary>
+        /// Creates a new proposition with a 3-parameter lambda expression.
+        /// </summary>
+        /// <param name="Condition">The lambda expression used to evaluate this proposition</param>
+        public Proposition(System.Linq.Expressions.Expression<ConditionDelegate3> Condition)
+        {
+            this.Condition = Condition;
+            this.NumberParameters = 3;
+        }
+
+        /// <summary>
+        /// Creates a new proposition with a 4-parameter lambda expression.
+        /// </summary>
+        /// <param name="Condition">The lambda expression used to evaluate this proposition</param>
+        public Proposition(System.Linq.Expressions.Expression<ConditionDelegate4> Condition)
+        {
+            this.Condition = Condition;
+            this.NumberParameters = 4;
+        }
+
+        /// <summary>
+        /// Creates a new proposition with a 5-parameter lambda expression.
+        /// </summary>
+        /// <param name="Condition">The lambda expression used to evaluate this proposition</param>
+        public Proposition(System.Linq.Expressions.Expression<ConditionDelegate5> Condition)
+        {
+            this.Condition = Condition;
+            this.NumberParameters = 5;
+        }
+
         /// <summary>
         /// Evaluates the proposition with the given mathematical expression(s).
         /// This will return "true" if the given mathematical expression(s) pass the proposition statement.
@@ -23,58 +82,54 @@ namespace Simplex.Math.Logic
         /// <param name="Input">The mathematical expression(s) to evaluate the proposition under</param>
         public virtual bool Evaluate(params Expression[] Input)
         {
+            //If we are given enough expressions to evaluate this proposition:
+            if (Input.Length >= this.NumberParameters)
+            {
+                //Evaluate the proposition with the necessary number of parameters
+                if (this.NumberParameters == 1) return (this.Condition as System.Linq.Expressions.Expression<ConditionDelegate1>).Compile()(Input[0]);
+                if (this.NumberParameters == 2) return (this.Condition as System.Linq.Expressions.Expression<ConditionDelegate2>).Compile()(Input[0], Input[1]);
+                if (this.NumberParameters == 3) return (this.Condition as System.Linq.Expressions.Expression<ConditionDelegate3>).Compile()(Input[0], Input[1], Input[2]);
+                if (this.NumberParameters == 4) return (this.Condition as System.Linq.Expressions.Expression<ConditionDelegate4>).Compile()(Input[0], Input[1], Input[2], Input[3]);
+                if (this.NumberParameters == 5) return (this.Condition as System.Linq.Expressions.Expression<ConditionDelegate5>).Compile()(Input[0], Input[1], Input[2], Input[3], Input[4]);
+            }
+
+            //Otherwise, just return false
             return false;
-        }
-
-        /// <summary>
-        /// Obtains the C# name of the variable in the lambda expression used as the condition for this proposition.
-        /// </summary>
-        public virtual string ConditionVariableName()
-        {
-            throw new Exceptions.SimplexMathException("Unable to obtain variable name for proposition.");
-        }
-    }
-
-    /// <summary>
-    /// Represents a mathematical statement that communicates one or more facts.
-    /// Propositions may be true or false.
-    /// </summary>
-    /// <typeparam name="T">The type of mathematical expression that this proposition accepts</typeparam>
-    public class Proposition<T> : Proposition where T : Expression
-    {
-        /// <summary>
-        /// Creates a new proposition with a particular condition as a lambda expression.
-        /// </summary>
-        /// <remarks>
-        /// See the remarks for property "Condition" below for more information as to why we use a System.Linq.Expressions.Expression object.
-        /// </remarks>
-        /// <param name="Condition">The lambda expression used to evaluate this proposition</param>
-        public Proposition(System.Linq.Expressions.Expression<Predicate<T>> Condition)
-        {
-            this.Condition = Condition;
-        }
-
-        /// <summary>
-        /// The lambda expression used to evaluate this proposition.
-        /// </summary>
-        /// <remarks>
-        /// We use a System.Linq.Expressions.Expression object instead of just a Predicate object so that we can access members for printing.
-        /// </remarks>
-        public System.Linq.Expressions.Expression<Predicate<T>> Condition
-        {
-            get;
-            set;
         }
 
         /// <summary>
         /// Evaluates the proposition with the given mathematical expression(s).
         /// This will return "true" if the given mathematical expression(s) pass the proposition statement.
         /// </summary>
+        /// <remarks>
+        /// This is "prettier" than Proposition.Evaluate()
+        /// </remarks>
         /// <param name="Input">The mathematical expression(s) to evaluate the proposition under</param>
-        public override bool Evaluate(params Expression[] Input)
+        public virtual bool this[params Expression[] Input]
         {
-            if (!(Input[0] is T)) return false;
-            return Condition.Compile()(Input[0] as T);
+            get
+            {
+                return this.Evaluate(Input);
+            }
+        }
+
+        /// <summary>
+        /// The lambda expression used to evaluate this proposition.
+        /// </summary>
+        private System.Linq.Expressions.Expression Condition
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Obtains the C# names of the variables in the lambda expression used as the condition for this proposition.
+        /// </summary>
+        public virtual List<string> ConditionVariableNames()
+        {
+            List<string> RL = new List<string>(this.NumberParameters);
+            //foreach (var P in this.Condition.) RL.Add(P.ToString());
+            return RL;
         }
 
         public override string ToString()
@@ -101,59 +156,12 @@ namespace Simplex.Math.Logic
         }
 
         /// <summary>
-        /// Obtains the C# name of the variable in the lambda expression used as the condition for this proposition.
+        /// The number of operands/parameters that this proposition accepts
         /// </summary>
-        public override string ConditionVariableName()
-        {
-            return this.Condition.Parameters[0].ToString();
-        }
-    }
-
-
-    /// <summary>
-    /// Represents a mathematical statement that communicates one or more facts.
-    /// Propositions may be true or false.
-    /// </summary>
-    /// <typeparam name="T1">The first type of mathematical expression that this proposition accepts</typeparam>
-    /// <typeparam name="T2">The second type of mathematical expression that this proposition accepts</typeparam>
-    public class Proposition<T1, T2> : Proposition where T1 : Expression where T2 : Expression
-    {
-        /// <summary>
-        /// The generic delegate format for evaluating two input expressions.
-        /// </summary>
-        /// <param name="E1">The first expression to evaluate the delegate with</param>
-        /// <param name="E2">The second expression to evaluate the delegate with</param>
-        public delegate bool CD(T1 E1, T2 E2);
-
-        /// <summary>
-        /// Creates a new proposition with a single lambda expression between two variables.
-        /// </summary>
-        /// <param name="Condition">The lambda expression used to evaluate this proposition</param>
-        public Proposition(System.Linq.Expressions.Expression<CD> Condition)
-        {
-            this.Condition = Condition;
-        }
-
-
-        /// <summary>
-        /// The lambda expression used to evaluate this proposition.
-        /// </summary>
-        /// <remarks>
-        /// We use a System.Linq.Expressions.Expression object instead of just a Predicate object so that we can access members for printing.
-        /// </remarks>
-        public System.Linq.Expressions.Expression<CD> Condition
+        public int NumberParameters
         {
             get;
-            set;
-        }
-
-
-        public override bool Evaluate(params Expression[] Input)
-        {
-            if (Input.Length < 2) return false;
-            if (!(Input[0] is T1)) return false;
-            if (!(Input[1] is T2)) return false;
-            return Condition.Compile()(Input[0] as T1, Input[1] as T2);
+            private set;
         }
     }
 }

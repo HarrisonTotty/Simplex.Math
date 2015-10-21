@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Simplex.Math.Classification;
 using Simplex.Math.Core;
+using Simplex.Math.Logic;
+using Simplex.Math.Operands;
 
 namespace Simplex.Math.Operations.Elementary
 {
@@ -13,6 +15,11 @@ namespace Simplex.Math.Operations.Elementary
     /// </summary>
     public class Sum : ArithmeticOperation
     {
+        /// <summary>
+        /// The rule set associated with sums.
+        /// </summary>
+        public static RuleSet Rules = new RuleSet(Logic.Rules.Sum);
+
         /// <summary>
         /// Creates a new sum from a given left and right expression.
         /// </summary>
@@ -62,10 +69,30 @@ namespace Simplex.Math.Operations.Elementary
         /// <param name="E2">The second expression</param>
         public static Expression Add(Expression E1, Expression E2)
         {
-            //Do some stuff
+            //If we qualify for transform via our ruleset:
+            if (Sum.Rules.CanTransform(E1, E2))
+            {
+                //Apply our rules to the input
+                return Sum.Rules.Apply(E1, E2);
+            }
 
             //If we can't combine anything, just create a new object
             return new Sum(E1, E2);
+        }
+
+        /// <summary>
+        /// Computes the addition of an array of expressions by combining like terms.
+        /// </summary>
+        /// <param name="Expressions">The expressions to add</param>
+        public static Expression SelectionAdd(params Expression[] Expressions)
+        {
+            Expression NE = 0;
+            //If we can't combine anything, just add them all up
+            foreach(Expression E in Expressions)
+            {
+                NE += E;
+            }
+            return NE;
         }
 
         /// <summary>
@@ -83,6 +110,24 @@ namespace Simplex.Math.Operations.Elementary
         {
             
             return base.Classify();
+        }
+
+        public override string ToString(ExpressionStringFormat Format, ExpressionStringVariableFormat VariableFormat, ExpressionStringConstantFormat ConstantFormat)
+        {
+            return this.LeftExpression.ToString(Format, VariableFormat, ConstantFormat) + " + " + this.RightExpression.ToString(Format, VariableFormat, ConstantFormat);
+        }
+
+        public override bool IsEqualTo(Expression Comparison)
+        {
+            //If the comparison is a sum, lets send it to another method
+            if (Comparison is Sum) return this.IsEqualTo(Comparison as Sum);
+            return base.IsEqualTo(Comparison);
+        }
+
+        public bool IsEqualTo(Sum Comparison)
+        {
+            //(x + 1) = (x + 1)
+            return true;
         }
     }
 }

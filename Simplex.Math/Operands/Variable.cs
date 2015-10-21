@@ -182,9 +182,9 @@ namespace Simplex.Math.Operands
             {
                 if (Format == ExpressionStringFormat.Default)
                 {
-                    if (this.Symbol != string.Empty)
+                    if (this.Symbol != null && this.Symbol != string.Empty)
                     {
-                        if (this.Subscript != string.Empty)
+                        if (this.Subscript != null && this.Subscript != string.Empty)
                         {
                             return this.Symbol + "_[" + this.Subscript + "]";
                         }
@@ -193,7 +193,7 @@ namespace Simplex.Math.Operands
                             return this.Symbol;
                         }
                     }
-                    else if (this.Name != string.Empty)
+                    else if (this.Name != null && this.Name != string.Empty)
                     {
                         if (this.Name.Length == 1)
                         {
@@ -208,7 +208,7 @@ namespace Simplex.Math.Operands
                             return "\"" + this.Name.Substring(0, 5) + "...\"";
                         }
                     }
-                    else if (this.ID != string.Empty)
+                    else if (this.ID != null && this.ID != string.Empty)
                     {
                         return "\"[" + this.ID.Substring(0, 5) + "...]\"";
                     }
@@ -219,9 +219,9 @@ namespace Simplex.Math.Operands
                 }
                 else if (Format == ExpressionStringFormat.LaTeX)
                 {
-                    if (this.Symbol != string.Empty)
+                    if (this.Symbol != null && this.Symbol != string.Empty)
                     {
-                        if (this.Subscript != string.Empty)
+                        if (this.Subscript != null && this.Subscript != string.Empty)
                         {
                             return this.Symbol + "_{" + this.Subscript + "}";
                         }
@@ -230,7 +230,7 @@ namespace Simplex.Math.Operands
                             return this.Symbol;
                         }
                     }
-                    else if (this.Name != string.Empty)
+                    else if (this.Name != null && this.Name != string.Empty)
                     {
                         if (this.Name.Length == 1)
                         {
@@ -245,7 +245,7 @@ namespace Simplex.Math.Operands
                             return "\"" + this.Name.Substring(0, 5) + "...\"";
                         }
                     }
-                    else if (this.ID != string.Empty)
+                    else if (this.ID != null && this.ID != string.Empty)
                     {
                         return "\"[" + this.ID.Substring(0, 5) + "...]\"";
                     }
@@ -263,9 +263,9 @@ namespace Simplex.Math.Operands
             {
                 if (Format == ExpressionStringFormat.Default)
                 {
-                    if (this.Symbol != string.Empty)
+                    if (this.Symbol != null && this.Symbol != string.Empty)
                     {
-                        if (this.Subscript != string.Empty)
+                        if (this.Subscript != null && this.Subscript != string.Empty)
                         {
                             return this.Symbol + "_[" + this.Subscript + "]";
                         }
@@ -281,9 +281,9 @@ namespace Simplex.Math.Operands
                 }
                 else if (Format == ExpressionStringFormat.LaTeX)
                 {
-                    if (this.Symbol != string.Empty)
+                    if (this.Symbol != null && this.Symbol != string.Empty)
                     {
-                        if (this.Subscript != string.Empty)
+                        if (this.Subscript != null && this.Subscript != string.Empty)
                         {
                             return this.Symbol + "_{" + this.Subscript + "}";
                         }
@@ -306,7 +306,7 @@ namespace Simplex.Math.Operands
             {
                 if (Format == ExpressionStringFormat.Default)
                 {
-                    if (this.Name != string.Empty)
+                    if (this.Name != null && this.Name != string.Empty)
                     {
                         if (this.Name.Length == 1)
                         {
@@ -328,7 +328,7 @@ namespace Simplex.Math.Operands
                 }
                 else if (Format == ExpressionStringFormat.LaTeX)
                 {
-                    if (this.Name != string.Empty)
+                    if (this.Name != null && this.Name != string.Empty)
                     {
                         if (this.Name.Length == 1)
                         {
@@ -357,7 +357,7 @@ namespace Simplex.Math.Operands
             {
                 if (Format == ExpressionStringFormat.Default)
                 {
-                    if (this.ID != string.Empty)
+                    if (this.ID != null && this.ID != string.Empty)
                     {
                         return "\"[" + this.ID.Substring(0, 5) + "...]\"";
                     }
@@ -368,7 +368,7 @@ namespace Simplex.Math.Operands
                 }
                 else if (Format == ExpressionStringFormat.LaTeX)
                 {
-                    if (this.ID != string.Empty)
+                    if (this.ID != null && this.ID != string.Empty)
                     {
                         return "\"[" + this.ID.Substring(0, 5) + "...]\"";
                     }
@@ -386,7 +386,7 @@ namespace Simplex.Math.Operands
             {
                 if (Format == ExpressionStringFormat.Default)
                 {
-                    if (this.ID != string.Empty)
+                    if (this.ID != null && this.ID != string.Empty)
                     {
                         return "\"[" + this.ID + "]\"";
                     }
@@ -397,7 +397,7 @@ namespace Simplex.Math.Operands
                 }
                 else if (Format == ExpressionStringFormat.LaTeX)
                 {
-                    if (this.ID != string.Empty)
+                    if (this.ID != null && this.ID != string.Empty)
                     {
                         return "\"[" + this.ID + "]\"";
                     }

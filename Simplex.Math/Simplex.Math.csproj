@@ -66,8 +66,17 @@
     <Compile Include="Classification\Indeterminate.cs" />
     <Compile Include="Exceptions\ExpressionParsingException.cs" />
     <Compile Include="Core\GeneralFormType.cs" />
+    <Compile Include="Logic\DoubleParameterProposition.cs" />
+    <Compile Include="Logic\EqualityDefinition.cs" />
+    <Compile Include="Logic\EqualityDefinitions.cs" />
+    <Compile Include="Logic\ExpressionForm.cs" />
+    <Compile Include="Logic\SingleParameterProposition.cs" />
+    <Compile Include="Operations\Elementary\Arithmetic\Negation.cs" />
+    <Compile Include="Operands\Integer.cs" />
     <Compile Include="Logic\MapMatrix.cs" />
     <Compile Include="Logic\OneWayMapMatrix.cs" />
+    <Compile Include="Logic\Rules.cs" />
+    <Compile Include="Logic\Transforms.cs" />
     <Compile Include="Operands\ImaginaryUnit.cs" />
     <Compile Include="Logic\Proposition.cs" />
     <Compile Include="Classification\NonFactorialArithmeticExpression.cs" />
@@ -134,6 +143,10 @@
     <Compile Include="Logic\Rule.cs" />
     <Compile Include="Core\SubstitutionType.cs" />
     <Compile Include="Logic\Transform.cs" />
+    <Compile Include="Logic\Propositions.cs" />
+    <Compile Include="Logic\RuleSet.cs" />
+    <Compile Include="Sets\Set.cs" />
+    <Compile Include="Classification\SingleVariablePolynomialTerm.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Operations\Calculus\" />

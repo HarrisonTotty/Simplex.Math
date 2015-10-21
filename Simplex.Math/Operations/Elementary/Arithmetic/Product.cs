@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Simplex.Math.Core;
+using Simplex.Math.Logic;
+using Simplex.Math.Operands;
 
 namespace Simplex.Math.Operations.Elementary
 {
@@ -12,6 +14,36 @@ namespace Simplex.Math.Operations.Elementary
     /// </summary>
     public class Product : ArithmeticOperation
     {
+        /// <summary>
+        /// The pre-built sequence of rules that we will use to calculate products.
+        /// </summary>
+        private static Rule[] RuleArray = new Rule[]
+        {   
+            // 2 * 3 = 6
+            new Rule(Propositions.AreValues, Transforms.ValueMultiply),
+            // x * x = x^2
+            new Rule(Propositions.AreEqual, Transforms.SquareExpression),
+            // x * (1 / x) = 1
+            new Rule(Propositions.AreReciprocals, Transforms.ToOne),
+            // 1 * x = x
+            new Rule(Propositions.FirstOne, Transforms.ReturnSecondExpression),
+            // x * 1 = x
+            new Rule(Propositions.SecondOne, Transforms.ReturnFirstExpression),
+            // 0 * x = 0
+            new Rule(Propositions.FirstZero, Transforms.ToZero),
+            // x * 0 = 0
+            new Rule(Propositions.SecondZero, Transforms.ToZero),
+            //Inf * x = Inf
+            new Rule(Propositions.EitherInfinity, Transforms.ToInfinity),
+
+        };
+
+        /// <summary>
+        /// The rule set associated with products.
+        /// </summary>
+        public static RuleSet Rules = new RuleSet(RuleArray);
+
+
         /// <summary>
         /// Creates a new product from a given left and right expression.
         /// </summary>
@@ -61,6 +93,13 @@ namespace Simplex.Math.Operations.Elementary
         /// <param name="E2">The second expression</param>
         public static Expression Multiply(Expression E1, Expression E2)
         {
+            //If we qualify for transform via our ruleset:
+            if (Product.Rules.CanTransform(E1, E2))
+            {
+                //Apply our rules to the input
+                return Product.Rules.Apply(E1, E2);
+            }
+
             //If we can't combine anything, just create a new object
             return new Product(E1, E2);
         }
@@ -71,6 +110,19 @@ namespace Simplex.Math.Operations.Elementary
         public override Expression Copy()
         {
             return new Product(this.LeftExpression.Copy(), this.RightExpression.Copy());
+        }
+
+        /// <summary>
+        /// Whether this product represents a negation.
+        /// </summary>
+        public bool IsNegation()
+        {
+            return (this.LeftExpression == -1 || this.RightExpression == -1);
+        }
+
+        public override string ToString(ExpressionStringFormat Format, ExpressionStringVariableFormat VariableFormat, ExpressionStringConstantFormat ConstantFormat)
+        {
+            return this.LeftExpression.ToString(Format, VariableFormat, ConstantFormat) + " * " + this.RightExpression.ToString(Format, VariableFormat, ConstantFormat);
         }
     }
 }

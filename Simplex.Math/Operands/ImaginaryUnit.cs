@@ -23,5 +23,10 @@ namespace Simplex.Math.Operands
         {
             
         }
+
+        public override string ToString(ExpressionStringFormat Format, ExpressionStringVariableFormat VariableFormat, ExpressionStringConstantFormat ConstantFormat)
+        {
+            return "i";
+        }
     }
 }

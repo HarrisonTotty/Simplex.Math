@@ -17,7 +17,7 @@
   <Class Name="Simplex.Math.Classification.Polynomial">
     <Position X="8.5" Y="9.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAACAAAAAAAAgAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAIACAAAAQAAAgAAAAADAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Classification\Polynomial.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -66,14 +66,14 @@
   <Class Name="Simplex.Math.Classification.ElementarySumSequence">
     <Position X="7.25" Y="16.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <HashCode>AAAAAAAAAAAAIAAAAAAAAAAAAAAAAEAAAAAAAAAAACA=</HashCode>
       <FileName>Classification\ElementarySumSequence.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Simplex.Math.Classification.ElementaryProductSequence">
     <Position X="10" Y="16.75" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Classification\ElementaryProductSequence.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -145,6 +145,13 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Classification\DescreteValue.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simplex.Math.Classification.SingleVariablePolynomialTerm">
+    <Position X="19" Y="15.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAQAAAAAAAAADAAAQAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Classification\SingleVariablePolynomialTerm.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

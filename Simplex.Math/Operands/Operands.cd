@@ -10,14 +10,14 @@
   <Class Name="Simplex.Math.Operands.Constant">
     <Position X="3.75" Y="2.5" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAAACAAAAAAggAIEEACAAAQAAEAIAAACAAAgABAACAA=</HashCode>
+      <HashCode>AAAACAAAAAAggAIEEACAAAQAAEAIAAACAAAggJAACAA=</HashCode>
       <FileName>Operands\Constant.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Simplex.Math.Operands.Value">
     <Position X="7.25" Y="2.5" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAEAgDAAgAABEAAAAAAAAAAABAAByA=</HashCode>
+      <HashCode>AAACAAAAAAAAgAAEAgDAAgAABEAAAAAAAAEAARAAByA=</HashCode>
       <FileName>Operands\Value.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -31,8 +31,15 @@
   <Class Name="Simplex.Math.Operands.ImaginaryUnit">
     <Position X="14.25" Y="2.5" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
       <FileName>Operands\ImaginaryUnit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simplex.Math.Operands.Integer">
+    <Position X="7.25" Y="7.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAACACEAAAAAAAAAAgBAAAAAAAAAAAAAAAEAAQAAAAA=</HashCode>
+      <FileName>Operands\Integer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

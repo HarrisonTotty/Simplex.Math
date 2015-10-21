@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Simplex.Math.Core;
+using Simplex.Math.Logic;
 
 namespace Simplex.Math.Operations
 {

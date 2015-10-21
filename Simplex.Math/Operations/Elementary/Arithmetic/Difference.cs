@@ -70,5 +70,10 @@ namespace Simplex.Math.Operations.Elementary
         {
             return new Difference(this.LeftExpression.Copy(), this.RightExpression.Copy());
         }
+
+        public override string ToString(ExpressionStringFormat Format, ExpressionStringVariableFormat VariableFormat, ExpressionStringConstantFormat ConstantFormat)
+        {
+            return this.LeftExpression.ToString(Format, VariableFormat, ConstantFormat) + " - " + this.RightExpression.ToString(Format, VariableFormat, ConstantFormat);
+        }
     }
 }

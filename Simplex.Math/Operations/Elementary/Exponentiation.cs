@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Simplex.Math.Core;
+using Simplex.Math.Operands;
+using Simplex.Math.Logic;
 
 namespace Simplex.Math.Operations.Elementary
 {
@@ -62,6 +64,26 @@ namespace Simplex.Math.Operations.Elementary
         {
             //If we can't figure out what to do:
             return new Exponentiation(Base, Exponent);
+        }
+
+        public bool IsIntegerExponent()
+        {
+            return (this.Exponent is Integer);
+        }
+
+        public bool IsPositiveIntegerExponent()
+        {
+            return this.IsIntegerExponent() && ((this.Exponent as Integer) > 0);
+        }
+
+        public bool IsNegativeIntegerExponent()
+        {
+            return this.IsIntegerExponent() && ((this.Exponent as Integer) < 0);
+        }
+
+        public bool IsZeroIntegerExponent()
+        {
+            return this.IsIntegerExponent() && ((this.Exponent as Integer) == 0);
         }
     }
 }

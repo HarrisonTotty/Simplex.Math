@@ -1,59 +1,107 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Simplex.Math.Logic.Proposition">
-    <Position X="2" Y="0.75" Width="2.25" />
+  <Class Name="Simplex.Math.Logic.Proposition" Collapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAACAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAACAAAAECAAAAgQAIAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Logic\Proposition.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Simplex.Math.Logic.Proposition&lt;T&gt;">
-    <Position X="3.5" Y="2.75" Width="2.25" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAACACAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Logic\Proposition.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Simplex.Math.Logic.Proposition&lt;T1, T2&gt;">
-    <Position X="0.5" Y="2.75" Width="2.25" />
-    <NestedTypes>
-      <Delegate Name="Simplex.Math.Logic.Proposition&lt;T1, T2&gt;.CD">
-        <TypeIdentifier>
-          <NewMemberFileName>Logic\Proposition.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Delegate>
-    </NestedTypes>
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAACAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Logic\Proposition.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Simplex.Math.Logic.Rule">
-    <Position X="6.25" Y="1.25" Width="2.25" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Logic\Rule.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Simplex.Math.Logic.Transform">
-    <Position X="6.25" Y="2.75" Width="2.25" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Logic\Transform.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Simplex.Math.Logic.MapMatrix">
-    <Position X="6.25" Y="4" Width="2.25" />
+    <Position X="2" Y="0.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAACAAAACAAAAAAAAAAAABAAAAAAAE=</HashCode>
       <FileName>Logic\MapMatrix.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Simplex.Math.Logic.OneWayMapMatrix">
-    <Position X="6.25" Y="6.5" Width="2.25" />
+    <Position X="2" Y="3.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
       <FileName>Logic\OneWayMapMatrix.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simplex.Math.Logic.Rule" Collapsed="true">
+    <Position X="8.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAABACAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logic\Rule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simplex.Math.Logic.Transform" Collapsed="true">
+    <Position X="7" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAABAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logic\Transform.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simplex.Math.Logic.RuleSet" Collapsed="true">
+    <Position X="5.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAABACAAAACAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Logic\RuleSet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simplex.Math.Logic.Propositions" Collapsed="true">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BABEhgkFBAQADBQBYASAAoBgAAgAwACQCCCQAwEEEjg=</HashCode>
+      <FileName>Logic\Propositions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simplex.Math.Logic.Transforms" Collapsed="true">
+    <Position X="8.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IkIAACAAEQEABIiAAACDBAQAAAABSAAAQAAIACAAACA=</HashCode>
+      <FileName>Logic\Transforms.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simplex.Math.Logic.ExpressionForm">
+    <Position X="5.5" Y="3.25" Width="2" />
+    <NestedTypes>
+      <Delegate Name="Simplex.Math.Logic.ExpressionForm.EFDelegate1" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ExpressionForm.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="Simplex.Math.Logic.ExpressionForm.EFDelegate2" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ExpressionForm.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="Simplex.Math.Logic.ExpressionForm.EFDelegate3" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ExpressionForm.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="Simplex.Math.Logic.ExpressionForm.EFDelegate4" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ExpressionForm.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="Simplex.Math.Logic.ExpressionForm.EFDelegate5" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ExpressionForm.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAIAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logic\ExpressionForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simplex.Math.Logic.EqualityDefinition">
+    <Position X="8.5" Y="2.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAICAAAAAAAAAAAACAAAAgAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Logic\EqualityDefinition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simplex.Math.Logic.SingleParameterProposition">
+    <Position X="11.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logic\SingleParameterProposition.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

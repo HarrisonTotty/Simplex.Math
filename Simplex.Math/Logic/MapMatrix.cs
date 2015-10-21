@@ -55,8 +55,9 @@ namespace Simplex.Math.Logic
         /// <param name="ExpressionList1">The first array of expressions</param>
         /// <param name="ExpressionList2">The second array of expressions</param>
         /// <param name="QualifyingProposition">The qualifying proposition that a pair of expressions must pass in order to be mapped</param>
-        public MapMatrix(Expression[] ExpressionList1, Expression[] ExpressionList2, Proposition<Expression, Expression> QualifyingProposition)
+        public MapMatrix(Expression[] ExpressionList1, Expression[] ExpressionList2, Proposition QualifyingProposition)
         {
+            if (QualifyingProposition.NumberParameters != 2) throw new Exceptions.SimplexMathException("Unable to construct map matrix - Qualifying proposition must have 2 parameters");
             if (ExpressionList1 == null || ExpressionList2 == null) throw new Exceptions.SimplexMathException("Unable to construct map matrix - Null input expression array(s)");
             if (ExpressionList1.Length == 0 || ExpressionList2.Length == 0) throw new Exceptions.SimplexMathException("Unable to construct map matrix - Empty input expression array(s)");
 
@@ -251,9 +252,10 @@ namespace Simplex.Math.Logic
         /// </summary>
         /// <param name="A">The first expression</param>
         /// <param name="B">The second expression</param>
-        public void RemoveMap(Expression A, Expression B)
+        public virtual void RemoveMap(Expression A, Expression B)
         {
-            throw new System.NotImplementedException();
+            if (this[A].Equals(B)) this.InnerMatrix.Remove(A);
+            if (this[B].Equals(A)) this.InnerMatrix.Remove(B);
         }
     }
 }

@@ -23,14 +23,8 @@ namespace Simplex.Math.Classification
         /// </summary>
         public virtual List<PolynomialTerm> Terms
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
+            get;
+            private set;
         }
 
         /// <summary>
@@ -38,14 +32,8 @@ namespace Simplex.Math.Classification
         /// </summary>
         public virtual int Degree
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
+            get;
+            private set;
         }
 
         /// <summary>
@@ -53,14 +41,44 @@ namespace Simplex.Math.Classification
         /// </summary>
         public int LowestDegree
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
+            get;
+            private set;
+        }
 
-            set
-            {
-            }
+        /// <summary>
+        /// Computes the addition of two or more polynomials
+        /// </summary>
+        /// <param name="Polynomials">The polynomials to add</param>
+        public static Expression Add(params Polynomial[] Polynomials)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        /// <summary>
+        /// Computes the addition of two or more polynomials
+        /// </summary>
+        /// <param name="Polynomials">The polynomials to add</param>
+        public void Subtract(params Polynomial[] Polynomials)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        /// <summary>
+        /// Computes the addition of two or more polynomials
+        /// </summary>
+        /// <param name="Polynomials">The polynomials to add</param>
+        public void Multiply(params Polynomial[] Polynomials)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        /// <summary>
+        /// Computes the addition of two or more polynomials
+        /// </summary>
+        /// <param name="Polynomials">The polynomials to add</param>
+        public void Divide(params Polynomial[] Polynomials)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -28,10 +28,6 @@ namespace Simplex.Math.Classification
             {
                 throw new System.NotImplementedException();
             }
-
-            set
-            {
-            }
         }
     }
 }

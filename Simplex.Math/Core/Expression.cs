@@ -116,15 +116,18 @@ namespace Simplex.Math.Core
             if (E is Value) return (int)(E as Value);
             else if (E is Constant) return (int)(E as Constant);
 
-            throw new Exception("Cannot explicitly cast mathematical expression to type \"int\"!");
+            throw new Exceptions.SimplexMathException("Cannot explicitly cast mathematical expression to type \"int\"!");
         }
         public static explicit operator double (Expression E)
         {
             if (E is Value) return (double)(E as Value);
             else if (E is Constant) return (double)(E as Constant);
 
-            throw new Exception("Cannot explicitly cast mathematical expression to type \"double\"!");
+            throw new Exceptions.SimplexMathException("Cannot explicitly cast mathematical expression to type \"double\"!");
         }
+
+        //Handy for passing a single expression as an expression list
+        public static explicit operator List<Expression>(Expression E) { return new Expression[] { E }.ToList(); }
 
 
         //The following operators are overloaded between math expressions:
@@ -270,6 +273,22 @@ namespace Simplex.Math.Core
         }
 
         /// <summary>
+        /// Determines if all children of this expression pass a particular proposition.
+        /// </summary>
+        /// <param name="Proposition">The single-parameter proposition to test</param>
+        public virtual bool ChildrenPassProposition(Logic.SingleParameterProposition Proposition)
+        {
+            if (!this.HasChildren()) return false;
+
+            foreach (Expression Child in this.ChildExpressions)
+            {
+                if (!Proposition.Evaluate(Child)) return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
         /// Determines if this expression contains another type of expression.
         /// </summary>
         /// <typeparam name="T">The type of expression to search for</typeparam>
@@ -287,6 +306,15 @@ namespace Simplex.Math.Core
                 foreach (Classification.ClassifiedExpression C in myclassification)
                 {
                     if (typeof(T).IsAssignableFrom(C.GetType())) return true;
+                }
+            }
+
+            //If we have children, check them
+            if (this.HasChildren())
+            {
+                foreach (Expression Child in this.ChildExpressions)
+                {
+                    if (Child.ContainsExpressionType<T>()) return true;
                 }
             }
 
@@ -368,6 +396,36 @@ namespace Simplex.Math.Core
         public virtual Expression ToGenericForm(GeneralFormType FormType)
         {
             throw new Exceptions.SimplificationException("Unable to convert expression to generic form");
+        }
+
+        /// <summary>
+        /// Returns an expression where a particular part of the expression is replaced with another expression.
+        /// </summary>
+        /// <param name="QualifyingProposition">The qualifying proposition by which an expression must pass in order to be replaced</param>
+        /// <param name="NewExpression">The expression to replace the old expression with</param>
+        public virtual Expression Substitute(Logic.Proposition QualifyingProposition, Expression NewExpression)
+        {
+            //If we pass the qualifying proposition, return the new expression
+            if (QualifyingProposition.Evaluate(this)) return NewExpression;
+
+            //Now check all of our children
+            if (this.HasChildren())
+            {
+                //Make a copy of this expression
+                Expression MeCopied = this.Copy();
+
+                //Iterate through the childern and try to perform the substitution on each one.
+                for (int i = 0; i < this.ChildExpressions.Count; i++)
+                {
+                    MeCopied.ChildExpressions[i] = this.ChildExpressions[i].Substitute(QualifyingProposition, NewExpression);
+                }
+
+                //Return the modified copy
+                return MeCopied;
+            }
+
+            //If we can't substitute anything, return the origional expression
+            return this;
         }
 
         /// <summary>
@@ -459,12 +517,34 @@ namespace Simplex.Math.Core
         }
 
         /// <summary>
+        /// Extracts or substitues a(n) expression(s) that match a particular qualifying proposition.
+        /// </summary>
+        /// <param name="QualifyingProposition">The proposition that a child of this expression must match in order to qualify for extraction/substitution</param>
+        public virtual List<Expression> this[Logic.Proposition QualifyingProposition]
+        {
+            get
+            {
+                return this.Extract(QualifyingProposition);
+            }
+            set
+            {
+                if (value != null && value.Count > 0)
+                {
+                    foreach (Expression E in value)
+                    {
+                        this.Substitute(QualifyingProposition, E);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Creates a map between this expression and another expression within the scope of this expression.
         /// </summary>
         /// <remarks>
         /// Remember that we map in both directions!
         /// </remarks>
-        /// <param name="ExpressionToMap">The expression to map this expression to</param>
+        /// <param name="ExpressionToMap">The expression to map this expression with</param>
         public void Map(Expression ExpressionToMap)
         {
             this.Scope.ExpressionMappings[this] = ExpressionToMap;
@@ -476,10 +556,20 @@ namespace Simplex.Math.Core
         /// <remarks>
         /// Remember that we map in both directions!
         /// </remarks>
-        /// <param name="ExpressionToMap">The expression to map this expression to</param>
-        public void UnMap(Expression ExpressionToMap)
+        /// <param name="ExpressionToRemove">The expression to unmap this expression from</param>
+        public void RemoveMap(Expression ExpressionToRemove)
         {
-            if (this.Scope.ExpressionMappings.ContainsMap(this)) this.Scope.ExpressionMappings.RemoveMap(this, ExpressionToMap);
+            if (this.Scope.ExpressionMappings.ContainsMap(this)) this.Scope.ExpressionMappings.RemoveMap(this, ExpressionToRemove);
+        }
+
+        /// <summary>
+        /// Returns whether this particular expression is mapped to another expression (or something equal to the other expression).
+        /// </summary>
+        /// <param name="Comparison">The expression to compare</param>
+        public bool MapsTo(Expression Comparison)
+        {
+            if (this.Scope.ExpressionMappings.ContainsMap(this)) return this.Scope.ExpressionMappings[this] == Comparison;
+            return false;
         }
     }
 }

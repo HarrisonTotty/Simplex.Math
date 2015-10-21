@@ -10,7 +10,7 @@
   <Class Name="Simplex.Math.Operations.Elementary.Exponentiation">
     <Position X="11.75" Y="2.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEgAAAAAAQAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAQIAAAAAAAAAAAAAQEgQAAAAAQAA=</HashCode>
       <FileName>Operations\Elementary\Exponentiation.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -24,43 +24,50 @@
   <Class Name="Simplex.Math.Operations.Elementary.NaturalLogarithm">
     <Position X="14.5" Y="5.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Operations\Elementary\NaturalLogarithm.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Simplex.Math.Operations.Elementary.ArithmeticOperation">
     <Position X="5" Y="2.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Operations\Elementary\Arithmetic\ArithmeticOperation.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Simplex.Math.Operations.Elementary.Difference">
     <Position X="0.75" Y="4.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAACAACAAAAAgAAAAAAAIAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAECAACAAAAAgAAAAAAAIAAAAAAAAA=</HashCode>
       <FileName>Operations\Elementary\Arithmetic\Difference.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Simplex.Math.Operations.Elementary.Product">
     <Position X="6.25" Y="4.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAACAABAAAAAgAAAAAAAIAAAAAAAAA=</HashCode>
+      <HashCode>AgAgAAAAAAAAAAAECAABAAAAAwAAAAAAAIAAAAAAAAA=</HashCode>
       <FileName>Operations\Elementary\Arithmetic\Product.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Simplex.Math.Operations.Elementary.Quotient">
     <Position X="9" Y="4.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAQgAAAAAAAAAAAAAAgAAAAAAIAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAQgAAAAEAAAAAAAgAgAAAAAAIAAAAAAAAAA=</HashCode>
       <FileName>Operations\Elementary\Arithmetic\Quotient.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Simplex.Math.Operations.Elementary.Sum">
     <Position X="3.5" Y="4.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAIAAAAAAAAAAAAACAAAAAAAAkAAAAAAAIAAAAAAAAA=</HashCode>
+      <HashCode>AgIAAAAAAAAAAAAECAAAIAAAAkAAAAAAAIAAABAAAAA=</HashCode>
       <FileName>Operations\Elementary\Arithmetic\Sum.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simplex.Math.Operations.Elementary.Negation">
+    <Position X="6.25" Y="8" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Operations\Elementary\Arithmetic\Negation.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

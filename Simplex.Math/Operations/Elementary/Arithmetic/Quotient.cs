@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Simplex.Math.Core;
+using Simplex.Math.Operands;
 
 namespace Simplex.Math.Operations.Elementary
 {
@@ -71,6 +72,48 @@ namespace Simplex.Math.Operations.Elementary
         public override Expression Copy()
         {
             return new Quotient(this.Numerator.Copy(), this.Denominator.Copy());
+        }
+
+        public override string ToString(ExpressionStringFormat Format, ExpressionStringVariableFormat VariableFormat, ExpressionStringConstantFormat ConstantFormat)
+        {
+            return this.Numerator.ToString(Format, VariableFormat, ConstantFormat) + " / " + this.Denominator.ToString(Format, VariableFormat, ConstantFormat);
+        }
+
+        /// <summary>
+        /// Returns whether this expression represents a coefficient (see remarks).
+        /// </summary>
+        /// <remarks>
+        /// 3
+        /// C
+        /// 3C
+        /// 3CK
+        /// 3/(Ck)
+        /// Are all coefficients
+        /// </remarks>
+        public bool IsCoefficient()
+        {
+            //Constants and values
+            if (this.Operands[0] is Constant && this.Operands[1] is Constant) return true;
+            if (this.Operands[0] is Constant && this.Operands[1] is Value) return true;
+            if (this.Operands[0] is Value && this.Operands[1] is Constant) return true;
+            if (this.Operands[0] is Value && this.Operands[1] is Value) return true;
+            //Products and constants/values
+            if (this.Operands[0] is Constant && (this.Operands[1] is Product && (this.Operands[1] as Product).IsCoefficient())) return true;
+            if (this.Operands[0] is Value && (this.Operands[1] is Product && (this.Operands[1] as Product).IsCoefficient())) return true;
+            if ((this.Operands[0] is Product && (this.Operands[0] as Product).IsCoefficient()) && this.Operands[1] is Constant) return true;
+            if ((this.Operands[0] is Product && (this.Operands[0] as Product).IsCoefficient()) && this.Operands[1] is Value) return true;
+            if ((this.Operands[0] is Product && (this.Operands[0] as Product).IsCoefficient()) && (this.Operands[1] is Product && (this.Operands[1] as Product).IsCoefficient())) return true;
+            //Quotients and constants/values
+            if (this.Operands[0] is Constant && (this.Operands[1] is Quotient && (this.Operands[1] as Quotient).IsCoefficient())) return true;
+            if (this.Operands[0] is Value && (this.Operands[1] is Quotient && (this.Operands[1] as Quotient).IsCoefficient())) return true;
+            if ((this.Operands[0] is Quotient && (this.Operands[0] as Quotient).IsCoefficient()) && this.Operands[1] is Constant) return true;
+            if ((this.Operands[0] is Quotient && (this.Operands[0] as Quotient).IsCoefficient()) && this.Operands[1] is Value) return true;
+            if ((this.Operands[0] is Quotient && (this.Operands[0] as Quotient).IsCoefficient()) && (this.Operands[1] is Quotient && (this.Operands[1] as Quotient).IsCoefficient())) return true;
+            //Quotients and products
+            if ((this.Operands[0] is Quotient && (this.Operands[0] as Quotient).IsCoefficient()) && (this.Operands[1] is Product && (this.Operands[1] as Product).IsCoefficient())) return true;
+            if ((this.Operands[0] is Product && (this.Operands[0] as Product).IsCoefficient()) && (this.Operands[1] is Quotient && (this.Operands[1] as Quotient).IsCoefficient())) return true;
+
+            return false;
         }
     }
 }
