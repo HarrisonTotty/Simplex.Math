@@ -50,7 +50,11 @@ namespace Simplex.Math.Core
         {
             if (NumberChildren < 0) throw new Exceptions.SimplexMathException("Cannot create generic expression - Invalid number of children");
             else if (NumberChildren == 0) this.ChildExpressions = null;
-            else this.ChildExpressions = Enumerable.Repeat<Expression>(null, NumberChildren).ToList<Expression>();
+            else
+            {
+                this.ChildExpressions = Enumerable.Repeat<Expression>(null, NumberChildren).ToList<Expression>();
+                this.ChildExpressions.TrimExcess();
+            }
 
             this.Scope = Scope.Global;
         }
@@ -75,39 +79,39 @@ namespace Simplex.Math.Core
         }
 
         //The following operators are overloaded between a math expression and a number
-        public static Expression operator +(Expression I1, double I2) { return Sum.Add(I1, new Value(I2)); }
-        public static Expression operator -(Expression I1, double I2) { return Difference.Subtract(I1, new Value(I2)); }
-        public static Expression operator *(Expression I1, double I2) { return Product.Multiply(I1, new Value(I2)); }
-        public static Expression operator /(Expression I1, double I2) { return Quotient.Divide(I1, new Value(I2)); }
-        public static Expression operator ^(Expression I1, double I2) { return Exponentiation.Exponentiate(I1, new Value(I2)); }
-        public static Expression operator +(Expression I1, int I2) { return Sum.Add(I1, new Value(I2)); }
-        public static Expression operator -(Expression I1, int I2) { return Difference.Subtract(I1, new Value(I2)); }
-        public static Expression operator *(Expression I1, int I2) { return Product.Multiply(I1, new Value(I2)); }
-        public static Expression operator /(Expression I1, int I2) { return Quotient.Divide(I1, new Value(I2)); }
-        public static Expression operator ^(Expression I1, int I2) { return Exponentiation.Exponentiate(I1, new Value(I2)); }
-        public static Expression operator +(double I1, Expression I2) { return Sum.Add(new Value(I1), I2); }
-        public static Expression operator -(double I1, Expression I2) { return Difference.Subtract(new Value(I1), I2); }
-        public static Expression operator *(double I1, Expression I2) { return Product.Multiply(new Value(I1), I2); }
-        public static Expression operator /(double I1, Expression I2) { return Quotient.Divide(new Value(I1), I2); }
-        public static Expression operator ^(double I1, Expression I2) { return Exponentiation.Exponentiate(new Value(I1), I2); }
-        public static Expression operator +(int I1, Expression I2) { return Sum.Add(new Value(I1), I2); }
-        public static Expression operator -(int I1, Expression I2) { return Difference.Subtract(new Value(I1), I2); }
-        public static Expression operator *(int I1, Expression I2) { return Product.Multiply(new Value(I1), I2); }
-        public static Expression operator /(int I1, Expression I2) { return Quotient.Divide(new Value(I1), I2); }
-        public static Expression operator ^(int I1, Expression I2) { return Exponentiation.Exponentiate(new Value(I1), I2); }
-        public static bool operator ==(Expression I1, int I2) { return (I1 == (new Value(I2))); }
-        public static bool operator !=(Expression I1, int I2) { return (I1 != (new Value(I2))); }
-        public static bool operator ==(Expression I1, double I2) { return (I1 == (new Value(I2))); }
-        public static bool operator !=(Expression I1, double I2) { return (I1 != (new Value(I2))); }
-        public static bool operator ==(int I1, Expression I2) { return ((new Value(I1)) == I2); }
-        public static bool operator !=(int I1, Expression I2) { return ((new Value(I1)) != I2); }
-        public static bool operator ==(double I1, Expression I2) { return ((new Value(I1)) == I2); }
-        public static bool operator !=(double I1, Expression I2) { return ((new Value(I1)) != I2); }
+        //public static Expression operator +(Expression I1, double I2) { return Sum.Add(I1, new Value(I2)); }
+        //public static Expression operator -(Expression I1, double I2) { return Difference.Subtract(I1, new Value(I2)); }
+        //public static Expression operator *(Expression I1, double I2) { return Product.Multiply(I1, new Value(I2)); }
+        //public static Expression operator /(Expression I1, double I2) { return Quotient.Divide(I1, new Value(I2)); }
+        //public static Expression operator ^(Expression I1, double I2) { return Exponentiation.Exponentiate(I1, new Value(I2)); }
+        //public static Expression operator +(Expression I1, int I2) { return Sum.Add(I1, new Value(I2)); }
+        //public static Expression operator -(Expression I1, int I2) { return Difference.Subtract(I1, new Value(I2)); }
+        //public static Expression operator *(Expression I1, int I2) { return Product.Multiply(I1, new Value(I2)); }
+        //public static Expression operator /(Expression I1, int I2) { return Quotient.Divide(I1, new Value(I2)); }
+        //public static Expression operator ^(Expression I1, int I2) { return Exponentiation.Exponentiate(I1, new Value(I2)); }
+        //public static Expression operator +(double I1, Expression I2) { return Sum.Add(new Value(I1), I2); }
+        //public static Expression operator -(double I1, Expression I2) { return Difference.Subtract(new Value(I1), I2); }
+        //public static Expression operator *(double I1, Expression I2) { return Product.Multiply(new Value(I1), I2); }
+        //public static Expression operator /(double I1, Expression I2) { return Quotient.Divide(new Value(I1), I2); }
+        //public static Expression operator ^(double I1, Expression I2) { return Exponentiation.Exponentiate(new Value(I1), I2); }
+        //public static Expression operator +(int I1, Expression I2) { return Sum.Add(new Value(I1), I2); }
+        //public static Expression operator -(int I1, Expression I2) { return Difference.Subtract(new Value(I1), I2); }
+        //public static Expression operator *(int I1, Expression I2) { return Product.Multiply(new Value(I1), I2); }
+        //public static Expression operator /(int I1, Expression I2) { return Quotient.Divide(new Value(I1), I2); }
+        //public static Expression operator ^(int I1, Expression I2) { return Exponentiation.Exponentiate(new Value(I1), I2); }
+        //public static bool operator ==(Expression I1, int I2) { return (I1 == (new Value(I2))); }
+        //public static bool operator !=(Expression I1, int I2) { return (I1 != (new Value(I2))); }
+        //public static bool operator ==(Expression I1, double I2) { return (I1 == (new Value(I2))); }
+        //public static bool operator !=(Expression I1, double I2) { return (I1 != (new Value(I2))); }
+        //public static bool operator ==(int I1, Expression I2) { return ((new Value(I1)) == I2); }
+        //public static bool operator !=(int I1, Expression I2) { return ((new Value(I1)) != I2); }
+        //public static bool operator ==(double I1, Expression I2) { return ((new Value(I1)) == I2); }
+        //public static bool operator !=(double I1, Expression I2) { return ((new Value(I1)) != I2); }
 
 
         //The following operators allow you to make statements such as "Value x = 10;"
         public static implicit operator Expression(double D) { return new Value(D); }
-        public static implicit operator Expression(int I) { return new Value(I); }
+        public static implicit operator Expression(int I) { return new Integer(I); }
 
 
         //The following operators allow a mathematical expression to be cast to a "int" or "double"
@@ -127,7 +131,7 @@ namespace Simplex.Math.Core
         }
 
         //Handy for passing a single expression as an expression list
-        public static explicit operator List<Expression>(Expression E) { return new Expression[] { E }.ToList(); }
+        //public static explicit operator List<Expression>(Expression E) { return new Expression[] { E }.ToList(); }
 
 
         //The following operators are overloaded between math expressions:
@@ -170,10 +174,7 @@ namespace Simplex.Math.Core
         /// <param name="I2">The second expression</param>
         public static bool operator ==(Expression I1, Expression I2)
         {
-            if ((I1 as object) == null && (I2 as object) == null) return true;
-            if ((I1 as object) == null || (I2 as object) == null) return false;
-
-            return (I1.IsEqualTo(I2));
+            return Logic.EqualityDefinitions.TestEquality(I1, I2);
         }
 
         /// <summary>
@@ -232,7 +233,7 @@ namespace Simplex.Math.Core
         /// <param name="Comparison">The expression to compare to this expression</param>
         public virtual bool IsEqualTo(Expression Comparison)
         {
-            return false;
+            return Logic.EqualityDefinitions.TestEquality(this, Comparison);
         }
 
         /// <summary>

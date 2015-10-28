@@ -28,6 +28,7 @@ namespace Simplex.Math.Logic
         {
             this.TransformExpression = TransformExpression;
             this.NumberParameters = 1;
+            CompileTransformExpression();
         }
 
         /// <summary>
@@ -38,6 +39,7 @@ namespace Simplex.Math.Logic
         {
             this.TransformExpression = TransformExpression;
             this.NumberParameters = 2;
+            CompileTransformExpression();
         }
 
         /// <summary>
@@ -48,6 +50,7 @@ namespace Simplex.Math.Logic
         {
             this.TransformExpression = TransformExpression;
             this.NumberParameters = 3;
+            CompileTransformExpression();
         }
 
         /// <summary>
@@ -58,6 +61,7 @@ namespace Simplex.Math.Logic
         {
             this.TransformExpression = TransformExpression;
             this.NumberParameters = 4;
+            CompileTransformExpression();
         }
 
         /// <summary>
@@ -68,6 +72,7 @@ namespace Simplex.Math.Logic
         {
             this.TransformExpression = TransformExpression;
             this.NumberParameters = 5;
+            CompileTransformExpression();
         }
 
 
@@ -78,6 +83,31 @@ namespace Simplex.Math.Logic
         {
             get;
             set;
+        }
+
+        private void CompileTransformExpression()
+        {
+            try
+            {
+                if (this.NumberParameters == 1) TransformExpression_Compiled = (this.TransformExpression as System.Linq.Expressions.Expression<TransformDelegate1>).Compile();
+                if (this.NumberParameters == 2) TransformExpression_Compiled = (this.TransformExpression as System.Linq.Expressions.Expression<TransformDelegate2>).Compile();
+                if (this.NumberParameters == 3) TransformExpression_Compiled = (this.TransformExpression as System.Linq.Expressions.Expression<TransformDelegate3>).Compile();
+                if (this.NumberParameters == 4) TransformExpression_Compiled = (this.TransformExpression as System.Linq.Expressions.Expression<TransformDelegate4>).Compile();
+                if (this.NumberParameters == 5) TransformExpression_Compiled = (this.TransformExpression as System.Linq.Expressions.Expression<TransformDelegate5>).Compile();
+            }
+            catch (Exception ex)
+            {
+                throw new Exceptions.LogicException("Unable to compile transform statement - " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// The compiled version of the transform expression
+        /// </summary>
+        public Delegate TransformExpression_Compiled
+        {
+            get;
+            private set;
         }
 
 
@@ -96,15 +126,15 @@ namespace Simplex.Math.Logic
         /// <param name="Input">The expression(s) to transform</param>
         public virtual Expression Apply(params Expression[] Input)
         {
-            //If we are given enough expressions to evaluate this proposition:
+            //If we are given enough expressions to evaluate this transform:
             if (Input.Length >= this.NumberParameters)
             {
-                //Evaluate the proposition with the necessary number of parameters
-                if (this.NumberParameters == 1) return (this.TransformExpression as System.Linq.Expressions.Expression<TransformDelegate1>).Compile()(Input[0]);
-                if (this.NumberParameters == 2) return (this.TransformExpression as System.Linq.Expressions.Expression<TransformDelegate2>).Compile()(Input[0], Input[1]);
-                if (this.NumberParameters == 3) return (this.TransformExpression as System.Linq.Expressions.Expression<TransformDelegate3>).Compile()(Input[0], Input[1], Input[2]);
-                if (this.NumberParameters == 4) return (this.TransformExpression as System.Linq.Expressions.Expression<TransformDelegate4>).Compile()(Input[0], Input[1], Input[2], Input[3]);
-                if (this.NumberParameters == 5) return (this.TransformExpression as System.Linq.Expressions.Expression<TransformDelegate5>).Compile()(Input[0], Input[1], Input[2], Input[3], Input[4]);
+                //Evaluate the transform with the necessary number of parameters
+                if (this.NumberParameters == 1) return (TransformExpression_Compiled as TransformDelegate1)(Input[0]);
+                if (this.NumberParameters == 2) return (TransformExpression_Compiled as TransformDelegate2)(Input[0], Input[1]);
+                if (this.NumberParameters == 3) return (TransformExpression_Compiled as TransformDelegate3)(Input[0], Input[1], Input[2]);
+                if (this.NumberParameters == 4) return (TransformExpression_Compiled as TransformDelegate4)(Input[0], Input[1], Input[2], Input[3]);
+                if (this.NumberParameters == 5) return (TransformExpression_Compiled as TransformDelegate5)(Input[0], Input[1], Input[2], Input[3], Input[4]);
             }
 
             //Otherwise, just return false

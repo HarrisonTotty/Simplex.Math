@@ -16,6 +16,7 @@ namespace Simplex.Math.Operations.Elementary
     /// </remarks>
     public class Negation : Product
     {
+        
         /// <summary>
         /// Creates a new negation expression with a particular inner expression.
         /// </summary>
@@ -23,6 +24,22 @@ namespace Simplex.Math.Operations.Elementary
         public Negation(Expression InnerExpression) : base(-1, InnerExpression)
         {
             
+        }
+
+        /// <summary>
+        /// The expression that is being negated.
+        /// </summary>
+        public Expression InnerExpression
+        {
+            get
+            {
+                return this.Operands[1];
+            }
+
+            set
+            {
+                this.Operands[1] = value;
+            }
         }
     }
 }

@@ -15,33 +15,9 @@ namespace Simplex.Math.Operations.Elementary
     public class Product : ArithmeticOperation
     {
         /// <summary>
-        /// The pre-built sequence of rules that we will use to calculate products.
-        /// </summary>
-        private static Rule[] RuleArray = new Rule[]
-        {   
-            // 2 * 3 = 6
-            new Rule(Propositions.AreValues, Transforms.ValueMultiply),
-            // x * x = x^2
-            new Rule(Propositions.AreEqual, Transforms.SquareExpression),
-            // x * (1 / x) = 1
-            new Rule(Propositions.AreReciprocals, Transforms.ToOne),
-            // 1 * x = x
-            new Rule(Propositions.FirstOne, Transforms.ReturnSecondExpression),
-            // x * 1 = x
-            new Rule(Propositions.SecondOne, Transforms.ReturnFirstExpression),
-            // 0 * x = 0
-            new Rule(Propositions.FirstZero, Transforms.ToZero),
-            // x * 0 = 0
-            new Rule(Propositions.SecondZero, Transforms.ToZero),
-            //Inf * x = Inf
-            new Rule(Propositions.EitherInfinity, Transforms.ToInfinity),
-
-        };
-
-        /// <summary>
         /// The rule set associated with products.
         /// </summary>
-        public static RuleSet Rules = new RuleSet(RuleArray);
+        public static RuleSet Rules = new RuleSet(Logic.Rules.Product);
 
 
         /// <summary>
@@ -122,7 +98,20 @@ namespace Simplex.Math.Operations.Elementary
 
         public override string ToString(ExpressionStringFormat Format, ExpressionStringVariableFormat VariableFormat, ExpressionStringConstantFormat ConstantFormat)
         {
-            return this.LeftExpression.ToString(Format, VariableFormat, ConstantFormat) + " * " + this.RightExpression.ToString(Format, VariableFormat, ConstantFormat);
+
+            string LS = this.LeftExpression.ToString(Format, VariableFormat, ConstantFormat);
+            string RS = this.RightExpression.ToString(Format, VariableFormat, ConstantFormat);
+
+            //Special Formats
+            if ((this.LeftExpression is Value) && (this.LeftExpression as Value).InnerValue == -1) return "-" + RS;
+            else if ((this.RightExpression is Value) && (this.RightExpression as Value).InnerValue == -1) return "-" + LS;
+            else if ((this.LeftExpression is Value) && (this.LeftExpression as Value).IsInteger() && (this.RightExpression is Variable)) return LS + RS;
+            else if ((this.RightExpression is Value) && (this.RightExpression as Value).IsInteger() && (this.LeftExpression is Variable)) return RS + LS;
+            else if ((this.LeftExpression is Value) && (this.LeftExpression as Value).IsInteger() && (this.RightExpression is Constant)) return LS + RS;
+            else if ((this.RightExpression is Value) && (this.RightExpression as Value).IsInteger() && (this.LeftExpression is Constant)) return RS + LS;
+
+            //Otherwise, just return the default:
+            return LS + " * " + RS;
         }
     }
 }

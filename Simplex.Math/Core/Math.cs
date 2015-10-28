@@ -178,7 +178,8 @@ namespace Simplex.Math.Core
         /// <remarks>
         /// Remember to create an overload with two inputs that takes the nth root of an expression.
         /// </remarks>
-        public static void Root()
+        /// <param name="Input">The expression to take the square root of</param>
+        public static Expression Root(Expression Input)
         {
             throw new System.NotImplementedException();
         }
@@ -292,6 +293,52 @@ namespace Simplex.Math.Core
         public static Expression Log(Expression Base, Expression LogExpression)
         {
             return Logarithm.Log(Base, LogExpression);
+        }
+
+        /// <summary>
+        /// Computes the sum of two or more input expressions.
+        /// </summary>
+        /// <param name="Expressions">The expressions to sum</param>
+        public static Expression Sum(params Expression[] Expressions)
+        {
+            if (Expressions == null || Expressions.Length < 1) throw new Exceptions.CalculationException("Cannot calculate summation of expressions - input array is null or empty");
+            if (Expressions.Length == 1) return Expressions[0];
+            if (Expressions.Length == 2) return Expressions[0] + Expressions[1];
+
+            return new CollapsedSumOperation(Expressions).Reduce().ToExpression();
+        }
+
+        /// <summary>
+        /// Computes the sum of the squares of two or more input expressions.
+        /// </summary>
+        /// <param name="Expressions">The expressions to sum</param>
+        public static Expression SquareSum(params Expression[] Expressions)
+        {
+            if (Expressions == null || Expressions.Length < 1) throw new Exceptions.CalculationException("Cannot calculate summation of expressions - input array is null or empty");
+            if (Expressions.Length == 1) return Expressions[0] ^ 2;
+            if (Expressions.Length == 2) return (Expressions[0] ^ 2) + (Expressions[1] ^ 2);
+
+            return new CollapsedSumOperation(Expressions.Select(x => x ^ 2).ToArray()).Reduce().ToExpression();
+        }
+
+        public static void Differentiate()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public static void PartialDifferentiate()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public static void Limit()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public static void Integrate()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

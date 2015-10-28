@@ -28,5 +28,19 @@
       <FileName>Operations\Arity\UnaryOperation.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="Simplex.Math.Operations.Special.CollapsedBinaryOperation">
+    <Position X="10.5" Y="0.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Operations\Special\CollapsedBinaryOperation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simplex.Math.Operations.Special.CollapsedSumOperation">
+    <Position X="10.5" Y="2.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Operations\Special\CollapsedSumOperation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

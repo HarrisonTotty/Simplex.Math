@@ -26,7 +26,6 @@ namespace Simplex.Math.Operands
         public Integer(long InnerValue)
         {
             this.InnerValue = InnerValue;
-            base.InnerValue = InnerValue;
         }
 
         /// <summary>
@@ -35,14 +34,19 @@ namespace Simplex.Math.Operands
         public Integer()
         {
             this.InnerValue = 0;
-            base.InnerValue = 0;
         }
 
 
         public new long InnerValue
         {
-            get;
-            set;
+            get
+            {
+                return (long)base.InnerValue;
+            }
+            set
+            {
+                base.InnerValue = value;
+            }
         }
 
         /// <summary>

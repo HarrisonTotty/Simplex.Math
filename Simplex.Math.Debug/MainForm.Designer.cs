@@ -32,14 +32,18 @@
             this.initializationTestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.operandInitializationTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.operationInitializationTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stringFormatTestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.generalStringFormatTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.equalityTestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.operandsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.binaryOperationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cSOEqualityTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.arithmeticTestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.additionTestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.subtractionTestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.multiplicationTestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.divisionTestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TB = new System.Windows.Forms.RichTextBox();
-            this.stringFormatTestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.generalStringFormatTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,10 +52,11 @@
             this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.initializationTestsToolStripMenuItem,
             this.stringFormatTestsToolStripMenuItem,
+            this.equalityTestsToolStripMenuItem,
             this.arithmeticTestsToolStripMenuItem});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
-            this.MainMenu.Size = new System.Drawing.Size(660, 24);
+            this.MainMenu.Size = new System.Drawing.Size(863, 24);
             this.MainMenu.TabIndex = 0;
             this.MainMenu.Text = "MainMenu";
             // 
@@ -78,6 +83,52 @@
             this.operationInitializationTestToolStripMenuItem.Text = "Operation Initialization Test";
             this.operationInitializationTestToolStripMenuItem.Click += new System.EventHandler(this.operationInitializationTestToolStripMenuItem_Click);
             // 
+            // stringFormatTestsToolStripMenuItem
+            // 
+            this.stringFormatTestsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.generalStringFormatTestToolStripMenuItem});
+            this.stringFormatTestsToolStripMenuItem.Name = "stringFormatTestsToolStripMenuItem";
+            this.stringFormatTestsToolStripMenuItem.Size = new System.Drawing.Size(120, 20);
+            this.stringFormatTestsToolStripMenuItem.Text = "String Format Tests";
+            // 
+            // generalStringFormatTestToolStripMenuItem
+            // 
+            this.generalStringFormatTestToolStripMenuItem.Name = "generalStringFormatTestToolStripMenuItem";
+            this.generalStringFormatTestToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.generalStringFormatTestToolStripMenuItem.Text = "General String Format Test";
+            this.generalStringFormatTestToolStripMenuItem.Click += new System.EventHandler(this.generalStringFormatTestToolStripMenuItem_Click);
+            // 
+            // equalityTestsToolStripMenuItem
+            // 
+            this.equalityTestsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.operandsToolStripMenuItem,
+            this.binaryOperationsToolStripMenuItem,
+            this.cSOEqualityTestToolStripMenuItem});
+            this.equalityTestsToolStripMenuItem.Name = "equalityTestsToolStripMenuItem";
+            this.equalityTestsToolStripMenuItem.Size = new System.Drawing.Size(90, 20);
+            this.equalityTestsToolStripMenuItem.Text = "Equality Tests";
+            // 
+            // operandsToolStripMenuItem
+            // 
+            this.operandsToolStripMenuItem.Name = "operandsToolStripMenuItem";
+            this.operandsToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.operandsToolStripMenuItem.Text = "Operands";
+            this.operandsToolStripMenuItem.Click += new System.EventHandler(this.operandsToolStripMenuItem_Click);
+            // 
+            // binaryOperationsToolStripMenuItem
+            // 
+            this.binaryOperationsToolStripMenuItem.Name = "binaryOperationsToolStripMenuItem";
+            this.binaryOperationsToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.binaryOperationsToolStripMenuItem.Text = "BinaryOperations";
+            this.binaryOperationsToolStripMenuItem.Click += new System.EventHandler(this.binaryOperationsToolStripMenuItem_Click);
+            // 
+            // cSOEqualityTestToolStripMenuItem
+            // 
+            this.cSOEqualityTestToolStripMenuItem.Name = "cSOEqualityTestToolStripMenuItem";
+            this.cSOEqualityTestToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.cSOEqualityTestToolStripMenuItem.Text = "CSO Equality Test";
+            this.cSOEqualityTestToolStripMenuItem.Click += new System.EventHandler(this.cSOEqualityTestToolStripMenuItem_Click);
+            // 
             // arithmeticTestsToolStripMenuItem
             // 
             this.arithmeticTestsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -101,12 +152,14 @@
             this.subtractionTestsToolStripMenuItem.Name = "subtractionTestsToolStripMenuItem";
             this.subtractionTestsToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.subtractionTestsToolStripMenuItem.Text = "Subtraction Tests";
+            this.subtractionTestsToolStripMenuItem.Click += new System.EventHandler(this.subtractionTestsToolStripMenuItem_Click);
             // 
             // multiplicationTestsToolStripMenuItem
             // 
             this.multiplicationTestsToolStripMenuItem.Name = "multiplicationTestsToolStripMenuItem";
             this.multiplicationTestsToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.multiplicationTestsToolStripMenuItem.Text = "Multiplication Tests";
+            this.multiplicationTestsToolStripMenuItem.Click += new System.EventHandler(this.multiplicationTestsToolStripMenuItem_Click);
             // 
             // divisionTestsToolStripMenuItem
             // 
@@ -123,32 +176,17 @@
             this.TB.Location = new System.Drawing.Point(0, 24);
             this.TB.Name = "TB";
             this.TB.ReadOnly = true;
-            this.TB.Size = new System.Drawing.Size(660, 465);
+            this.TB.Size = new System.Drawing.Size(863, 465);
             this.TB.TabIndex = 1;
             this.TB.Text = "";
             this.TB.WordWrap = false;
             this.TB.TextChanged += new System.EventHandler(this.TB_TextChanged);
             // 
-            // stringFormatTestsToolStripMenuItem
-            // 
-            this.stringFormatTestsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.generalStringFormatTestToolStripMenuItem});
-            this.stringFormatTestsToolStripMenuItem.Name = "stringFormatTestsToolStripMenuItem";
-            this.stringFormatTestsToolStripMenuItem.Size = new System.Drawing.Size(120, 20);
-            this.stringFormatTestsToolStripMenuItem.Text = "String Format Tests";
-            // 
-            // generalStringFormatTestToolStripMenuItem
-            // 
-            this.generalStringFormatTestToolStripMenuItem.Name = "generalStringFormatTestToolStripMenuItem";
-            this.generalStringFormatTestToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
-            this.generalStringFormatTestToolStripMenuItem.Text = "General String Format Test";
-            this.generalStringFormatTestToolStripMenuItem.Click += new System.EventHandler(this.generalStringFormatTestToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(660, 489);
+            this.ClientSize = new System.Drawing.Size(863, 489);
             this.Controls.Add(this.TB);
             this.Controls.Add(this.MainMenu);
             this.MainMenuStrip = this.MainMenu;
@@ -178,6 +216,10 @@
         private System.Windows.Forms.ToolStripMenuItem divisionTestsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stringFormatTestsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generalStringFormatTestToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem equalityTestsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem operandsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem binaryOperationsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cSOEqualityTestToolStripMenuItem;
     }
 }
 

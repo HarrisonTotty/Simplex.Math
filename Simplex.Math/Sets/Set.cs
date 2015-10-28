@@ -257,26 +257,6 @@ namespace Simplex.Math.Sets
             }
         }
 
-        public static Set Union(Set A, Set B)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public static Set Intersection(Set A, Set B)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public static Set Difference(Set A, Set B)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public static Set Complement(Set A, Set B)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public override string ToString()
         {
             if (this == Set.Empty) return "Ø";

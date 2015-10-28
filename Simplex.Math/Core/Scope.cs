@@ -14,7 +14,6 @@ namespace Simplex.Math.Core
     /// <remarks>
     /// These are important because it allows us to save our work 
     /// as well as create maps between variables and other expressions without unwanted consequences.
-    /// 
     /// </remarks>
     public class Scope
     {
@@ -30,17 +29,7 @@ namespace Simplex.Math.Core
         {
             this.Constants = new Dictionary<string, Constant>();
             this.ExpressionMappings = new MapMatrix();
-            this.Expressions = new List<Expression>();
             this.Variables = new Dictionary<string, Variable>();
-        }
-
-        /// <summary>
-        /// The list of all expressions created within this scope.
-        /// </summary>
-        public List<Expression> Expressions
-        {
-            get;
-            private set;
         }
 
         /// <summary>

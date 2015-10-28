@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Simplex.Math.Core;
+using Simplex.Math.Logic;
 
 namespace Simplex.Math.Operations.Elementary
 {
@@ -12,6 +13,11 @@ namespace Simplex.Math.Operations.Elementary
     /// </summary>
     public class Difference : ArithmeticOperation
     {
+        /// <summary>
+        /// The rule set associated with differences.
+        /// </summary>
+        public static RuleSet Rules = new RuleSet(Logic.Rules.Difference);
+
         /// <summary>
         /// Creates a new difference between two different mathematical expressions
         /// </summary>
@@ -59,6 +65,13 @@ namespace Simplex.Math.Operations.Elementary
         /// <param name="E2">The second expression</param>
         public static Expression Subtract(Expression E1, Expression E2)
         {
+            //If we qualify for transform via our ruleset:
+            if (Difference.Rules.CanTransform(E1, E2))
+            {
+                //Apply our rules to the input
+                return Difference.Rules.Apply(E1, E2);
+            }
+
             //If we can't combine anything, just create a new object
             return new Difference(E1, E2);
         }

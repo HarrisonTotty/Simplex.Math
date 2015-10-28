@@ -116,18 +116,5 @@ namespace Simplex.Math.Operations.Elementary
         {
             return this.LeftExpression.ToString(Format, VariableFormat, ConstantFormat) + " + " + this.RightExpression.ToString(Format, VariableFormat, ConstantFormat);
         }
-
-        public override bool IsEqualTo(Expression Comparison)
-        {
-            //If the comparison is a sum, lets send it to another method
-            if (Comparison is Sum) return this.IsEqualTo(Comparison as Sum);
-            return base.IsEqualTo(Comparison);
-        }
-
-        public bool IsEqualTo(Sum Comparison)
-        {
-            //(x + 1) = (x + 1)
-            return true;
-        }
     }
 }

@@ -33,6 +33,7 @@ namespace Simplex.Math.Logic
         {
             this.Condition = Condition;
             this.NumberParameters = 1;
+            CompileCondition();
         }
 
         /// <summary>
@@ -43,6 +44,7 @@ namespace Simplex.Math.Logic
         {
             this.Condition = Condition;
             this.NumberParameters = 2;
+            CompileCondition();
         }
 
         /// <summary>
@@ -53,6 +55,7 @@ namespace Simplex.Math.Logic
         {
             this.Condition = Condition;
             this.NumberParameters = 3;
+            CompileCondition();
         }
 
         /// <summary>
@@ -63,6 +66,7 @@ namespace Simplex.Math.Logic
         {
             this.Condition = Condition;
             this.NumberParameters = 4;
+            CompileCondition();
         }
 
         /// <summary>
@@ -73,6 +77,7 @@ namespace Simplex.Math.Logic
         {
             this.Condition = Condition;
             this.NumberParameters = 5;
+            CompileCondition();
         }
 
         /// <summary>
@@ -86,11 +91,19 @@ namespace Simplex.Math.Logic
             if (Input.Length >= this.NumberParameters)
             {
                 //Evaluate the proposition with the necessary number of parameters
-                if (this.NumberParameters == 1) return (this.Condition as System.Linq.Expressions.Expression<ConditionDelegate1>).Compile()(Input[0]);
-                if (this.NumberParameters == 2) return (this.Condition as System.Linq.Expressions.Expression<ConditionDelegate2>).Compile()(Input[0], Input[1]);
-                if (this.NumberParameters == 3) return (this.Condition as System.Linq.Expressions.Expression<ConditionDelegate3>).Compile()(Input[0], Input[1], Input[2]);
-                if (this.NumberParameters == 4) return (this.Condition as System.Linq.Expressions.Expression<ConditionDelegate4>).Compile()(Input[0], Input[1], Input[2], Input[3]);
-                if (this.NumberParameters == 5) return (this.Condition as System.Linq.Expressions.Expression<ConditionDelegate5>).Compile()(Input[0], Input[1], Input[2], Input[3], Input[4]);
+                try
+                {
+                    //string DEBUGSTRING = this.ToString();
+                    if (this.NumberParameters == 1) return (Condition_Compiled as ConditionDelegate1)(Input[0]);
+                    if (this.NumberParameters == 2) return (Condition_Compiled as ConditionDelegate2)(Input[0], Input[1]);
+                    if (this.NumberParameters == 3) return (Condition_Compiled as ConditionDelegate3)(Input[0], Input[1], Input[2]);
+                    if (this.NumberParameters == 4) return (Condition_Compiled as ConditionDelegate4)(Input[0], Input[1], Input[2], Input[3]);
+                    if (this.NumberParameters == 5) return (Condition_Compiled as ConditionDelegate5)(Input[0], Input[1], Input[2], Input[3], Input[4]);
+                }
+                catch (Exception)
+                {
+                    throw new Exceptions.SimplexMathException("Unable to evalute proposition: {" + this.ToString() + "} ...");
+                }
             }
 
             //Otherwise, just return false
@@ -122,6 +135,31 @@ namespace Simplex.Math.Logic
             set;
         }
 
+        private void CompileCondition()
+        {
+            try
+            {
+                if (this.NumberParameters == 1) Condition_Compiled = (this.Condition as System.Linq.Expressions.Expression<ConditionDelegate1>).Compile();
+                if (this.NumberParameters == 2) Condition_Compiled = (this.Condition as System.Linq.Expressions.Expression<ConditionDelegate2>).Compile();
+                if (this.NumberParameters == 3) Condition_Compiled = (this.Condition as System.Linq.Expressions.Expression<ConditionDelegate3>).Compile();
+                if (this.NumberParameters == 4) Condition_Compiled = (this.Condition as System.Linq.Expressions.Expression<ConditionDelegate4>).Compile();
+                if (this.NumberParameters == 5) Condition_Compiled = (this.Condition as System.Linq.Expressions.Expression<ConditionDelegate5>).Compile();
+            }
+            catch (Exception ex)
+            {
+                throw new Exceptions.LogicException("Unable to compile proposition statement - " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// The pre-compiled varient of the condition lambda expression for evaluating this proposition.
+        /// </summary>
+        private Delegate Condition_Compiled
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// Obtains the C# names of the variables in the lambda expression used as the condition for this proposition.
         /// </summary>
@@ -135,7 +173,12 @@ namespace Simplex.Math.Logic
         public override string ToString()
         {
             //Convert the predicate lambda statement to a string
-            string PredicateString = this.Condition.ToString();
+            string PredicateString = "";
+            if (this.NumberParameters == 1) PredicateString = (this.Condition as System.Linq.Expressions.Expression<ConditionDelegate1>).ToString();
+            if (this.NumberParameters == 2) PredicateString = (this.Condition as System.Linq.Expressions.Expression<ConditionDelegate2>).ToString();
+            if (this.NumberParameters == 3) PredicateString = (this.Condition as System.Linq.Expressions.Expression<ConditionDelegate3>).ToString();
+            if (this.NumberParameters == 4) PredicateString = (this.Condition as System.Linq.Expressions.Expression<ConditionDelegate4>).ToString();
+            if (this.NumberParameters == 5) PredicateString = (this.Condition as System.Linq.Expressions.Expression<ConditionDelegate5>).ToString();
 
             //Remove the part before "=>"
             PredicateString = PredicateString.Substring(PredicateString.IndexOf("=>") + 2);

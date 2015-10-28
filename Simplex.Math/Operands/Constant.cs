@@ -16,12 +16,12 @@ namespace Simplex.Math.Operands
         /// <summary>
         /// Represents the mathematical constant associated with Euler's Number.
         /// </summary>
-        public static readonly Constant e = new Constant("e", "Euler's Number", "A common mathematical constant that forms the base of the natural logarithm", "", 2.71828182845904523536028747135266249775724709369995);
+        public static readonly Constant e = new Constant("e", "Euler's Number", "A common mathematical constant that forms the base of the natural logarithm", "", System.Math.E);
 
         /// <summary>
         /// Represents the mathematical constant associated with Pi.
         /// </summary>
-        public static readonly Constant pi = new Constant("π", "Pi", "The ratio of a circle's circumference to its diameter", "", 3.1415926535897932384626433832795028842);
+        public static readonly Constant pi = new Constant("π", "Pi", "The ratio of a circle's circumference to its diameter", "", System.Math.PI);
 
         /// <summary>
         /// Represents the mathematical constant associated with infinity.
@@ -179,7 +179,7 @@ namespace Simplex.Math.Operands
         {
             get
             {
-                return (this.Value != null);
+                return ((this.Value as object) != null);
             }
         }
 
@@ -207,15 +207,6 @@ namespace Simplex.Math.Operands
             }
         }
 
-
-        public override bool IsEqualTo(Expression Comparison)
-        {
-            if (Comparison is Constant)
-            {
-                return (this.ID == (Comparison as Constant).ID);
-            }
-            return base.IsEqualTo(Comparison);
-        }
 
         /// <summary>
         /// Converts this constant to a generic form.

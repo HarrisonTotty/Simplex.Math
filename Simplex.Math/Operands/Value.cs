@@ -44,14 +44,14 @@ namespace Simplex.Math.Operands
         public static bool operator <=(Value V1, Value V2) { return (V1.InnerValue <= V2.InnerValue); }
 
         //Equality operators associated with values
-        public static bool operator ==(Value V, int I) { return (V.InnerValue == I); }
-        public static bool operator ==(Value V, double D) { return (V.InnerValue == D); }
-        public static bool operator !=(Value V, int I) { return (V.InnerValue != I); }
-        public static bool operator !=(Value V, double D) { return (V.InnerValue != D); }
-        public static bool operator ==(int I, Value V) { return (I == V.InnerValue); }
-        public static bool operator ==(double D, Value V) { return (D == V.InnerValue); }
-        public static bool operator !=(int I, Value V) { return (I != V.InnerValue); }
-        public static bool operator !=(double D, Value V) { return (D != V.InnerValue); }
+        //public static bool operator ==(Value V, int I) { return (V.InnerValue == I); }
+        //public static bool operator ==(Value V, double D) { return (V.InnerValue == D); }
+        //public static bool operator !=(Value V, int I) { return (V.InnerValue != I); }
+        //public static bool operator !=(Value V, double D) { return (V.InnerValue != D); }
+        //public static bool operator ==(int I, Value V) { return (I == V.InnerValue); }
+        //public static bool operator ==(double D, Value V) { return (D == V.InnerValue); }
+        //public static bool operator !=(int I, Value V) { return (I != V.InnerValue); }
+        //public static bool operator !=(double D, Value V) { return (D != V.InnerValue); }
 
         public virtual double InnerValue
         {
@@ -66,27 +66,6 @@ namespace Simplex.Math.Operands
         {
             if (this.InnerValue < 0) return new ClassifiedExpression[] { new PolynomialTerm(-this) { IsNegated = true }, new DescreteValue(-this) { IsNegated = true } };
             return new ClassifiedExpression[] { new PolynomialTerm(this), new DescreteValue(this) };
-        }
-
-        public override bool IsEqualTo(Expression Comparison)
-        {
-            //If the comparison is a value, then it makes our job easier:
-            if (Comparison is Value)
-            {
-                //If they have the same innder values, then they are equal
-                if ((Comparison as Value).InnerValue == this.InnerValue) return true;
-                return false;
-            }
-
-            //If the comparison is a constant with a particular value, the same applies:
-            if (Comparison is Constant)
-            {
-                //If they have the same innder values, then they are equal
-                if ((Comparison as Constant).HasDescreteValue) if ((Comparison as Constant).Value == this) return true;
-                return false;
-            }
-
-            return base.IsEqualTo(Comparison);
         }
 
         /// <summary>

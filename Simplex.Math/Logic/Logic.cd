@@ -3,7 +3,7 @@
   <Class Name="Simplex.Math.Logic.Proposition" Collapsed="true">
     <Position X="5.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAACAAAAECAAAAgQAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AACAAAAAAACAAAAECAAAAgQAIAAAAAAAAAEAAAAAAAA=</HashCode>
       <FileName>Logic\Proposition.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -31,7 +31,7 @@
   <Class Name="Simplex.Math.Logic.Transform" Collapsed="true">
     <Position X="7" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAAAAAAAABAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>EAAAAAAAABAAAAAQCAAAgAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Logic\Transform.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -42,17 +42,17 @@
       <FileName>Logic\RuleSet.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Simplex.Math.Logic.Propositions" Collapsed="true">
-    <Position X="7" Y="0.5" Width="1.5" />
+  <Class Name="Simplex.Math.Logic.Propositions">
+    <Position X="13.5" Y="0.5" Width="3" />
     <TypeIdentifier>
-      <HashCode>BABEhgkFBAQADBQBYASAAoBgAAgAwACQCCCQAwEEEjg=</HashCode>
+      <HashCode>BgBlxqklBUYQDRRDdiTAIqB4EQ6C0MGQCCGYAwEsVzg=</HashCode>
       <FileName>Logic\Propositions.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Simplex.Math.Logic.Transforms" Collapsed="true">
     <Position X="8.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IkIAACAAEQEABIiAAACDBAQAAAABSAAAQAAIACAAACA=</HashCode>
+      <HashCode>IsIAACAAEQEABIiAAACDBCQAAACBSAAAQABIASCAACA=</HashCode>
       <FileName>Logic\Transforms.cs</FileName>
     </TypeIdentifier>
   </Class>

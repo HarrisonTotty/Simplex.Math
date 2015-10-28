@@ -33,27 +33,27 @@ namespace Simplex.Math.Operations
         {
             get
             {
-                return this.Operands.Capacity;
+                return this.Operands.Count;
             }
-            set
-            {
-                if (value > this.Operands.Capacity)
-                {
-                    int numbertoadd = value - this.Operands.Capacity;
-                    for (int i = 0; i < numbertoadd; i++)
-                    {
-                        this.Operands.Add(null);
-                    }
-                }
-                else if (value < this.Operands.Capacity)
-                {
-                    int numbertoremove = value - this.Operands.Capacity;
-                    for (int i = 0; i < numbertoremove; i++)
-                    {
-                        this.Operands.RemoveAt(this.Operands.Capacity - 1);
-                    }
-                }
-            }
+            //set
+            //{
+            //    if (value > this.Operands.Capacity)
+            //    {
+            //        int numbertoadd = value - this.Operands.Capacity;
+            //        for (int i = 0; i < numbertoadd; i++)
+            //        {
+            //            this.Operands.Add(null);
+            //        }
+            //    }
+            //    else if (value < this.Operands.Capacity)
+            //    {
+            //        int numbertoremove = value - this.Operands.Capacity;
+            //        for (int i = 0; i < numbertoremove; i++)
+            //        {
+            //            this.Operands.RemoveAt(this.Operands.Capacity - 1);
+            //        }
+            //    }
+            //}
         }
 
         /// <summary>

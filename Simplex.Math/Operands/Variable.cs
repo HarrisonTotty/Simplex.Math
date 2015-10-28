@@ -128,23 +128,6 @@ namespace Simplex.Math.Operands
         }
 
         /// <summary>
-        /// Determine if this variable is equivalent to another expression.
-        /// </summary>
-        /// <param name="Comparison">The expression to compare this variable to</param>
-        public override bool IsEqualTo(Expression Comparison)
-        {
-            //If the comparison is a variable, then it makes our job easier
-            if (Comparison is Variable)
-            {
-                //If they have the same IDs, then they are equal
-                if ((Comparison as Variable).ID == this.ID) return true;
-                else return false;
-            }
-
-            return base.IsEqualTo(Comparison);
-        }
-
-        /// <summary>
         /// Determine if this variable is similar to another expression.
         /// </summary>
         /// <param name="Comparison">The expression to compare this variable to</param>
