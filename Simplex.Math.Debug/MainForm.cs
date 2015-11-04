@@ -132,7 +132,7 @@ namespace Simplex.Math.Debug
                 PrintLine("x + y = " + (x + y).ToString(), Color.Blue);
                 PrintLine("x + i = " + (x + i).ToString(), Color.Blue);
                 PrintLine("x + C = " + (x + C).ToString(), Color.Blue);
-                PrintLine("x + Infinity = " + (x + Constant.Infinity).ToString(), Color.Blue);
+                PrintLine("x + Infinity = " + (x + Constant.PositiveInfinity).ToString(), Color.Blue);
                 PrintLine("2 + 2 + 2 = " + ((Value)2 + 2 + 2).ToString(), Color.Blue);
                 PrintLine("x + x + x = " + (x + x + x).ToString(), Color.Blue);
                 PrintLine("3x + 4x = " + ((3 * x) + (4 * x)).ToString(), Color.Blue);
@@ -174,6 +174,24 @@ namespace Simplex.Math.Debug
                 PrintLine("V_0 => " + V.ToString(), Color.Blue);
                 PrintLine("i => " + i.ToString(), Color.Blue);
                 PrintLine("C => " + C.ToString(), Color.Blue);
+                PrintLine("x + y => " + (x + y).ToString(), Color.Blue);
+                PrintLine("x - y => " + (x - y).ToString(), Color.Blue);
+                PrintLine("x * y => " + (x * y).ToString(), Color.Blue);
+                PrintLine("x / y => " + (x / y).ToString(), Color.Blue);
+                PrintLine("x ^ y => " + (x ^ y).ToString(), Color.Blue);
+                PrintLine("PARSE FRIENDLY:");
+                PrintLine("1/3 => " + F1.ToString(ExpressionStringFormat.ParseFriendly), Color.Blue);
+                PrintLine("2/5 => " + F2.ToString(ExpressionStringFormat.ParseFriendly), Color.Blue);
+                PrintLine("x => " + x.ToString(ExpressionStringFormat.ParseFriendly), Color.Blue);
+                PrintLine("U => " + U.ToString(ExpressionStringFormat.ParseFriendly), Color.Blue);
+                PrintLine("V_0 => " + V.ToString(ExpressionStringFormat.ParseFriendly), Color.Blue);
+                PrintLine("i => " + i.ToString(ExpressionStringFormat.ParseFriendly), Color.Blue);
+                PrintLine("C => " + C.ToString(ExpressionStringFormat.ParseFriendly), Color.Blue);
+                PrintLine("x + y => " + (x + y).ToString(ExpressionStringFormat.ParseFriendly), Color.Blue);
+                PrintLine("x - y => " + (x - y).ToString(ExpressionStringFormat.ParseFriendly), Color.Blue);
+                PrintLine("x * y => " + (x * y).ToString(ExpressionStringFormat.ParseFriendly), Color.Blue);
+                PrintLine("x / y => " + (x / y).ToString(ExpressionStringFormat.ParseFriendly), Color.Blue);
+                PrintLine("x ^ y => " + (x ^ y).ToString(ExpressionStringFormat.ParseFriendly), Color.Blue);
                 PrintLine("LATEX:");
                 PrintLine("1/3 => " + F1.ToString(ExpressionStringFormat.LaTeX), Color.Blue);
                 PrintLine("2/5 => " + F2.ToString(ExpressionStringFormat.LaTeX), Color.Blue);
@@ -182,6 +200,11 @@ namespace Simplex.Math.Debug
                 PrintLine("V_0 => " + V.ToString(ExpressionStringFormat.LaTeX), Color.Blue);
                 PrintLine("i => " + i.ToString(ExpressionStringFormat.LaTeX), Color.Blue);
                 PrintLine("C => " + C.ToString(ExpressionStringFormat.LaTeX), Color.Blue);
+                PrintLine("x + y => " + (x + y).ToString(ExpressionStringFormat.LaTeX), Color.Blue);
+                PrintLine("x - y => " + (x - y).ToString(ExpressionStringFormat.LaTeX), Color.Blue);
+                PrintLine("x * y => " + (x * y).ToString(ExpressionStringFormat.LaTeX), Color.Blue);
+                PrintLine("x / y => " + (x / y).ToString(ExpressionStringFormat.LaTeX), Color.Blue);
+                PrintLine("x ^ y => " + (x ^ y).ToString(ExpressionStringFormat.LaTeX), Color.Blue);
                 PrintLine("SUCCESS", Color.Green);
             }
             catch (Exception ex)
@@ -372,7 +395,7 @@ namespace Simplex.Math.Debug
                 PrintLine("x * y = " + (x * y).ToString(), Color.Blue);
                 PrintLine("x * i = " + (x * i).ToString(), Color.Blue);
                 PrintLine("x * C = " + (x * C).ToString(), Color.Blue);
-                PrintLine("x * Infinity = " + (x * Constant.Infinity).ToString(), Color.Blue);
+                PrintLine("x * Infinity = " + (x * Constant.PositiveInfinity).ToString(), Color.Blue);
                 PrintLine("2 * 2 * 2 = " + ((Value)2 * 2 * 2).ToString(), Color.Blue);
                 PrintLine("x * x * x = " + (x * x * x).ToString(), Color.Blue);
                 PrintLine("3x * 4x = " + ((3 * x) * (4 * x)).ToString(), Color.Blue);
@@ -383,8 +406,8 @@ namespace Simplex.Math.Debug
                 PrintLine("(x * 4) * (x / 2) = " + ((x * 4) * (x / 2)).ToString(), Color.Blue);
                 PrintLine("(x * 4) * (y / 2) = " + ((x * 4) * (y / 2)).ToString(), Color.Blue);
                 PrintLine("-(x * 4) * (x / 2) = " + (-(x * 4) * (x / 2)).ToString(), Color.Blue);
-                PrintLine("-(x * 4) * -(x / 2) = " + (-(x * 4) * -(x / 2)).ToString(), Color.Blue);
-                PrintLine("-(3x * 4) * -(2x / 2) = " + (-((3 * x) * 4) * -((2 * x) / 2)).ToString(), Color.Blue);
+                //PrintLine("-(x * 4) * -(x / 2) = " + (-(x * 4) * -(x / 2)).ToString(), Color.Blue);
+                //PrintLine("-(3x * 4) * -(2x / 2) = " + (-((3 * x) * 4) * -((2 * x) / 2)).ToString(), Color.Blue);
                 PrintLine("SUCCESS", Color.Green);
             }
             catch (Exception ex)
@@ -410,7 +433,7 @@ namespace Simplex.Math.Debug
                 PrintLine("x - y = " + (x - y).ToString(), Color.Blue);
                 PrintLine("x - i = " + (x - i).ToString(), Color.Blue);
                 PrintLine("x - C = " + (x - C).ToString(), Color.Blue);
-                PrintLine("x - Infinity = " + (x - Constant.Infinity).ToString(), Color.Blue);
+                PrintLine("x - Infinity = " + (x - Constant.PositiveInfinity).ToString(), Color.Blue);
                 PrintLine("2 - 2 - 2 = " + ((Value)2 - 2 - 2).ToString(), Color.Blue);
                 PrintLine("x - x - x = " + (x - x - x).ToString(), Color.Blue);
                 PrintLine("3x - 4x = " + ((3 * x) - (4 * x)).ToString(), Color.Blue);
@@ -424,6 +447,27 @@ namespace Simplex.Math.Debug
                 PrintLine("-(x - 4) - (x - 3) = " + (-(x - 4) - (x - 3)).ToString(), Color.Blue);
                 PrintLine("-(x - 4) - -(x - 3) = " + (-(x - 4) - -(x - 3)).ToString(), Color.Blue);
                 PrintLine("-(3x - 4) - -(2x - 3) = " + (-((3 * x) - 4) - -((2 * x) - 3)).ToString(), Color.Blue);
+                PrintLine("SUCCESS", Color.Green);
+            }
+            catch (Exception ex)
+            {
+                PrintLine(ex.Message, Color.Red);
+            }
+            PrintLine();
+        }
+
+        private void divisionTestsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dumpGlobalScopeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PrintLine("D U M P I N G   G L O B A L   S C O P E");
+            PrintLine("---------------------------------------");
+            try
+            {
+                PrintLine(Scope.Global.ToString(), Color.Blue);
                 PrintLine("SUCCESS", Color.Green);
             }
             catch (Exception ex)

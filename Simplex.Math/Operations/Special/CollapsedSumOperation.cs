@@ -171,7 +171,7 @@ namespace Simplex.Math.Operations.Special
                     var added = this.ChildExpressions[i] + NewChildren[j];
                     
                     //If we find a match (AKA adding them together makes something OTHER than returning their new sum):
-                    if (added != new Sum(this.ChildExpressions[i], NewChildren[j]))
+                    if (!added.IsIdenticalTo(new Sum(this.ChildExpressions[i], NewChildren[j])))
                     {
                         NewChildren[j] = added;
                         foundmatch = true;
@@ -202,20 +202,20 @@ namespace Simplex.Math.Operations.Special
             //If we only have two terms, just return the sum of those two terms, unless the child is negated
             if (this.Arity == 2)
             {
-                if (!Propositions.IsNegation[this.ChildExpressions[0]] && Propositions.IsNegation[this.ChildExpressions[1]]) return new Difference(this.ChildExpressions[0], -this.ChildExpressions[1]);
-                if (Propositions.IsNegation[this.ChildExpressions[0]] && !Propositions.IsNegation[this.ChildExpressions[1]]) return new Difference(this.ChildExpressions[1], -this.ChildExpressions[0]);
-                if (Propositions.IsNegation[this.ChildExpressions[0]] && Propositions.IsNegation[this.ChildExpressions[1]]) return new Negation(new Sum(-this.ChildExpressions[0], -this.ChildExpressions[1]));
-                return new Sum(this.ChildExpressions[0], this.ChildExpressions[1]);
+                if (!Propositions.IsNegation[this.ChildExpressions[0]] && Propositions.IsNegation[this.ChildExpressions[1]]) return (this.ChildExpressions[0] - (-this.ChildExpressions[1]));
+                if (Propositions.IsNegation[this.ChildExpressions[0]] && !Propositions.IsNegation[this.ChildExpressions[1]]) return (this.ChildExpressions[1] - (-this.ChildExpressions[0]));
+                if (Propositions.IsNegation[this.ChildExpressions[0]] && Propositions.IsNegation[this.ChildExpressions[1]]) return -((-this.ChildExpressions[0]) + (-this.ChildExpressions[1]));
+                return (this.ChildExpressions[0] + this.ChildExpressions[1]);
             }
 
             //Otherwise, if we have more than two terms, we will return a new sum of the first term
             //and the rest of the terms cast to a CSO which are converted back to an expression.
             var FirstTerm = this.ChildExpressions[0];
             var SecondTerm = new CollapsedSumOperation(this.ChildExpressions.GetRange(1, this.ChildExpressions.Count - 1).ToArray()).ToExpression();
-            if (!Propositions.IsNegation[FirstTerm] && Propositions.IsNegation[SecondTerm]) return new Difference(FirstTerm, -SecondTerm);
-            if (Propositions.IsNegation[FirstTerm] && !Propositions.IsNegation[SecondTerm]) return new Difference(SecondTerm, -FirstTerm);
-            if (Propositions.IsNegation[FirstTerm] && Propositions.IsNegation[SecondTerm]) return new Negation(new Sum(-FirstTerm, -SecondTerm));
-            return new Sum(FirstTerm, SecondTerm);
+            if (!Propositions.IsNegation[FirstTerm] && Propositions.IsNegation[SecondTerm]) return (FirstTerm - (-SecondTerm));
+            if (Propositions.IsNegation[FirstTerm] && !Propositions.IsNegation[SecondTerm]) return (SecondTerm - (-FirstTerm));
+            if (Propositions.IsNegation[FirstTerm] && Propositions.IsNegation[SecondTerm]) return -((-FirstTerm) + (-SecondTerm));
+            return new Sum(FirstTerm, SecondTerm); //Changing this to "+" instead of "new Sum" results in an infinite loop
         }
 
         public override string ToString(ExpressionStringFormat Format, ExpressionStringVariableFormat VariableFormat, ExpressionStringConstantFormat ConstantFormat)

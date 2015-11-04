@@ -15,6 +15,11 @@ namespace Simplex.Math.Operations.Elementary
     public class Exponentiation : ElementaryOperation
     {
         /// <summary>
+        /// The rule set associated with exponentiation.
+        /// </summary>
+        public static RuleSet Rules = new RuleSet(Logic.Rules.Exponentiation);
+
+        /// <summary>
         /// Creates a new exponentiation expression from a given base and exponent.
         /// </summary>
         /// <param name="Base">The base of this exponentiation</param>
@@ -62,6 +67,13 @@ namespace Simplex.Math.Operations.Elementary
         /// <param name="Exponent">The exponent of the exponentiation</param>
         public static Expression Exponentiate(Expression Base, Expression Exponent)
         {
+            //If we qualify for transform via our ruleset:
+            if (Exponentiation.Rules.CanTransform(Base, Exponent))
+            {
+                //Apply our rules to the input
+                return Exponentiation.Rules.Apply(Base, Exponent);
+            }
+
             //If we can't figure out what to do:
             return new Exponentiation(Base, Exponent);
         }
@@ -81,9 +93,37 @@ namespace Simplex.Math.Operations.Elementary
             return this.IsIntegerExponent() && ((this.Exponent as Integer) < 0);
         }
 
+        public bool IsInverse()
+        {
+            return this.IsIntegerExponent() && ((this.Exponent as Integer) == -1);
+        }
+
         public bool IsZeroIntegerExponent()
         {
             return this.IsIntegerExponent() && ((this.Exponent as Integer) == 0);
+        }
+
+        public override string ToString(ExpressionStringFormat Format, ExpressionStringVariableFormat VariableFormat, ExpressionStringConstantFormat ConstantFormat)
+        {
+            string B = this.Base.ToString(Format, VariableFormat, ConstantFormat);
+            string E = this.Exponent.ToString(Format, VariableFormat, ConstantFormat);
+
+            if (Format == ExpressionStringFormat.Default)
+            {
+                return B + "^" + E;
+            }
+            else if (Format == ExpressionStringFormat.LaTeX)
+            {
+                return B + "^{" + E + "}";
+            }
+            else if (Format == ExpressionStringFormat.ParseFriendly)
+            {
+                return "(" + B + " ^ " + E + ")";
+            }
+            else
+            {
+                throw new Exceptions.ExpressionParsingException("Unable to convert exponentiation to string - Invalid ExpressionStringFormat");
+            }
         }
     }
 }

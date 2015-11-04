@@ -86,7 +86,10 @@ namespace Simplex.Math.Operations.Elementary
 
         public override string ToString(ExpressionStringFormat Format, ExpressionStringVariableFormat VariableFormat, ExpressionStringConstantFormat ConstantFormat)
         {
-            return this.LeftExpression.ToString(Format, VariableFormat, ConstantFormat) + " - " + this.RightExpression.ToString(Format, VariableFormat, ConstantFormat);
+            string L = this.LeftExpression.ToString(Format, VariableFormat, ConstantFormat);
+            string R = this.RightExpression.ToString(Format, VariableFormat, ConstantFormat);
+            if (Format == ExpressionStringFormat.ParseFriendly) return "(" + L + " - " + R + ")";
+            return L + " - " + R;
         }
     }
 }

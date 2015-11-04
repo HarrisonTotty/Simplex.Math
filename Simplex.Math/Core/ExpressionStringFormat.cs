@@ -11,12 +11,20 @@ namespace Simplex.Math.Core
     public enum ExpressionStringFormat
     {
         /// <summary>
-        /// The default expression format.
+        /// The default "pretty" expression format.
         /// </summary>
         /// <remarks>
         /// Example: 2x^2 + 3xy - Sin(x)
         /// </remarks>
         Default,
+
+        /// <summary>
+        /// A format designed to be compatable with C# expression parsing.
+        /// </summary>
+        /// <remarks>
+        /// Example: (2 * (x ^ 2)) + (3 * (x * y))
+        /// </remarks>
+        ParseFriendly,
 
         /// <summary>
         /// A LaTeX interpretation of the expression.

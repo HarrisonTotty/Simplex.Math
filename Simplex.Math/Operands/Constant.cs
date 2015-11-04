@@ -26,7 +26,12 @@ namespace Simplex.Math.Operands
         /// <summary>
         /// Represents the mathematical constant associated with infinity.
         /// </summary>
-        public static readonly Constant Infinity = new Constant("∞", "Infinity", "The mathematical constant associated with infinity", "", double.PositiveInfinity);
+        public static readonly Constant PositiveInfinity = new Constant("∞", "Infinity", "The mathematical constant associated with positive infinity", "", double.PositiveInfinity);
+
+        /// <summary>
+        /// Represents the mathematical constant associated with infinity.
+        /// </summary>
+        public static readonly Constant NegativeInfinity = new Constant("-∞", "Infinity", "The mathematical constant associated with negaive infinity", "", double.NegativeInfinity);
 
         /// <summary>
         /// The generic notion of a constant labled as "C".
@@ -46,6 +51,7 @@ namespace Simplex.Math.Operands
         {
             this.Symbol = "C";
             this.ID = Core.Random.AlphaNumeric(100);
+            this.Scope.Register(this);
         }
 
         /// <summary>
@@ -56,6 +62,7 @@ namespace Simplex.Math.Operands
         {
             this.Symbol = Symbol;
             this.ID = Core.Random.AlphaNumeric(100);
+            this.Scope.Register(this);
         }
 
         /// <summary>
@@ -68,6 +75,7 @@ namespace Simplex.Math.Operands
             this.Symbol = Symbol;
             this.Value = Value;
             this.ID = Core.Random.AlphaNumeric(100);
+            this.Scope.Register(this);
         }
 
         /// <summary>
@@ -80,6 +88,7 @@ namespace Simplex.Math.Operands
             this.Symbol = Symbol;
             this.Name = Name;
             this.ID = Core.Random.AlphaNumeric(100);
+            this.Scope.Register(this);
         }
 
         /// <summary>
@@ -94,6 +103,7 @@ namespace Simplex.Math.Operands
             this.Name = Name;
             this.Value = Value;
             this.ID = Core.Random.AlphaNumeric(100);
+            this.Scope.Register(this);
         }
 
         /// <summary>
@@ -110,6 +120,7 @@ namespace Simplex.Math.Operands
             this.Description = Description;
             this.Subscript = Subscript;
             this.ID = Core.Random.AlphaNumeric(100);
+            this.Scope.Register(this);
         }
 
         /// <summary>
@@ -128,6 +139,7 @@ namespace Simplex.Math.Operands
             this.Subscript = Subscript;
             this.Value = Value;
             this.ID = Core.Random.AlphaNumeric(100);
+            this.Scope.Register(this);
         }
 
         /// <summary>
@@ -214,7 +226,7 @@ namespace Simplex.Math.Operands
         /// </summary>
         public override Expression ToGenericForm()
         {
-            if (this == Infinity || this == e || this == pi) return this;
+            if (this == PositiveInfinity || this == e || this == pi) return this;
             return C;
         }
 
@@ -232,7 +244,7 @@ namespace Simplex.Math.Operands
                 {
                     if (this.Subscript != string.Empty)
                     {
-                        if (Format == ExpressionStringFormat.Default)
+                        if (Format == ExpressionStringFormat.Default || Format == ExpressionStringFormat.ParseFriendly)
                         {
                             return this.Symbol + "_[" + this.Subscript + "]";
                         }
@@ -274,7 +286,7 @@ namespace Simplex.Math.Operands
                     {
                         if (this.Subscript != string.Empty)
                         {
-                            if (Format == ExpressionStringFormat.Default)
+                            if (Format == ExpressionStringFormat.Default || Format == ExpressionStringFormat.ParseFriendly)
                             {
                                 return this.Symbol + "_[" + this.Subscript + "]";
                             }
@@ -304,7 +316,7 @@ namespace Simplex.Math.Operands
                 {
                     if (this.Subscript != string.Empty)
                     {
-                        if (Format == ExpressionStringFormat.Default)
+                        if (Format == ExpressionStringFormat.Default || Format == ExpressionStringFormat.ParseFriendly)
                         {
                             return this.Symbol + "_[" + this.Subscript + "]";
                         }

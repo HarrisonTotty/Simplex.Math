@@ -34,6 +34,7 @@ namespace Simplex.Math.Operands
         public Variable()
         {
             this.ID = Core.Random.AlphaNumeric(100);
+            this.Scope.Register(this);
         }
 
         /// <summary>
@@ -44,6 +45,7 @@ namespace Simplex.Math.Operands
         {
             this.Symbol = Symbol;
             this.ID = Core.Random.AlphaNumeric(100);
+            this.Scope.Register(this);
         }
 
         /// <summary>
@@ -56,6 +58,7 @@ namespace Simplex.Math.Operands
             this.Symbol = Symbol;
             this.Subscript = Subscript;
             this.ID = Core.Random.AlphaNumeric(100);
+            this.Scope.Register(this);
         }
 
         /// <summary>
@@ -72,6 +75,7 @@ namespace Simplex.Math.Operands
             this.Name = Name;
             this.Description = Description;
             this.ID = Core.Random.AlphaNumeric(100);
+            this.Scope.Register(this);
         }
 
         /// <summary>
@@ -127,26 +131,6 @@ namespace Simplex.Math.Operands
             return new ClassifiedExpression[] { new Indeterminate(this) , new SingleVariableCoefficientlessPolynomialTerm(this) };
         }
 
-        /// <summary>
-        /// Determine if this variable is similar to another expression.
-        /// </summary>
-        /// <param name="Comparison">The expression to compare this variable to</param>
-        public override bool IsSimilarTo(Expression Comparison)
-        {
-            if (Comparison is Variable) return this.IsEqualTo(Comparison);
-            return base.IsSimilarTo(Comparison);
-        }
-
-        /// <summary>
-        /// Determine if this variable is identical to another expression.
-        /// </summary>
-        /// <param name="Comparison">The expression to compare this variable to</param>
-        public override bool IsIdenticalTo(Expression Comparison)
-        {
-            if (Comparison is Variable) return this.IsEqualTo(Comparison);
-            return false;
-        }
-
         public override bool ContainsExpressionType<T>()
         {
             //The base method contains all of the code we need since this is irreducible.
@@ -163,7 +147,7 @@ namespace Simplex.Math.Operands
         {
             if (VariableFormat == ExpressionStringVariableFormat.Default)
             {
-                if (Format == ExpressionStringFormat.Default)
+                if (Format == ExpressionStringFormat.Default || Format == ExpressionStringFormat.ParseFriendly)
                 {
                     if (this.Symbol != null && this.Symbol != string.Empty)
                     {
@@ -244,7 +228,7 @@ namespace Simplex.Math.Operands
             }
             else if (VariableFormat == ExpressionStringVariableFormat.Symbol)
             {
-                if (Format == ExpressionStringFormat.Default)
+                if (Format == ExpressionStringFormat.Default || Format == ExpressionStringFormat.ParseFriendly)
                 {
                     if (this.Symbol != null && this.Symbol != string.Empty)
                     {
@@ -287,7 +271,7 @@ namespace Simplex.Math.Operands
             }
             else if (VariableFormat == ExpressionStringVariableFormat.Name)
             {
-                if (Format == ExpressionStringFormat.Default)
+                if (Format == ExpressionStringFormat.Default || Format == ExpressionStringFormat.ParseFriendly)
                 {
                     if (this.Name != null && this.Name != string.Empty)
                     {
@@ -338,7 +322,7 @@ namespace Simplex.Math.Operands
             }
             else if (VariableFormat == ExpressionStringVariableFormat.ID_Short)
             {
-                if (Format == ExpressionStringFormat.Default)
+                if (Format == ExpressionStringFormat.Default || Format == ExpressionStringFormat.ParseFriendly)
                 {
                     if (this.ID != null && this.ID != string.Empty)
                     {
@@ -367,7 +351,7 @@ namespace Simplex.Math.Operands
             }
             else if (VariableFormat == ExpressionStringVariableFormat.ID_Long)
             {
-                if (Format == ExpressionStringFormat.Default)
+                if (Format == ExpressionStringFormat.Default || Format == ExpressionStringFormat.ParseFriendly)
                 {
                     if (this.ID != null && this.ID != string.Empty)
                     {

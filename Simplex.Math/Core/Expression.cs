@@ -248,7 +248,7 @@ namespace Simplex.Math.Core
         /// <param name="Comparison">The expression to compare to this expression</param>
         public virtual bool IsIdenticalTo(Expression Comparison)
         {
-            return false;
+            return Logic.EqualityDefinitions.TestIdenticality(this, Comparison);
         }
 
         /// <summary>

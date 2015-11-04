@@ -24,14 +24,21 @@
   <Class Name="Simplex.Math.Core.Scope">
     <Position X="10.75" Y="3" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAEAAAAAAAAAAAAAAAAAAAgAAAQAAgABAAA=</HashCode>
+      <HashCode>AAAAAAAAAAEAAAAEAAAAAAAAAAABAAgAAAQAAAABAAA=</HashCode>
       <FileName>Core\Scope.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simplex.Math.Core.ExpressionParser">
+    <Position X="15" Y="1.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAACAAAAAAAAABAAAAAIEAAAAAAAA=</HashCode>
+      <FileName>Core\ExpressionParser.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Enum Name="Simplex.Math.Core.ExpressionStringFormat">
     <Position X="7.5" Y="2.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAIAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAABAAAAAAAAAAAAAAAAAIA=</HashCode>
       <FileName>Core\ExpressionStringFormat.cs</FileName>
     </TypeIdentifier>
   </Enum>

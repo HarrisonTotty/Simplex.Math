@@ -68,12 +68,12 @@ namespace Simplex.Math.Operations.Elementary
         /// <param name="Denominator">The denominator expression</param>
         public static Expression Divide(Expression Numerator, Expression Denominator)
         {
-            ////If we qualify for transform via our ruleset:
-            //if (Quotient.Rules.CanTransform(Numerator, Denominator))
-            //{
-            //    //Apply our rules to the input
-            //    return Quotient.Rules.Apply(Numerator, Denominator);
-            //}
+            //If we qualify for transform via our ruleset:
+            if (Quotient.Rules.CanTransform(Numerator, Denominator))
+            {
+                //Apply our rules to the input
+                //return Quotient.Rules.Apply(Numerator, Denominator);
+            }
 
             //If we can't combine anything, just create a new object
             return new Quotient(Numerator, Denominator);
@@ -89,7 +89,25 @@ namespace Simplex.Math.Operations.Elementary
 
         public override string ToString(ExpressionStringFormat Format, ExpressionStringVariableFormat VariableFormat, ExpressionStringConstantFormat ConstantFormat)
         {
-            return this.Numerator.ToString(Format, VariableFormat, ConstantFormat) + " / " + this.Denominator.ToString(Format, VariableFormat, ConstantFormat);
+            string N = this.Numerator.ToString(Format, VariableFormat, ConstantFormat);
+            string D = this.Denominator.ToString(Format, VariableFormat, ConstantFormat);
+
+            if (Format == ExpressionStringFormat.Default)
+            {
+                return N + " / " + D;
+            }
+            else if (Format == ExpressionStringFormat.LaTeX)
+            {
+                return @"\frac{" + N + "}{" + D + "}";
+            }
+            else if (Format == ExpressionStringFormat.ParseFriendly)
+            {
+                return "(" + N + " / " + D + ")";
+            }
+            else
+            {
+                throw new Exceptions.ExpressionParsingException("Unable to convert product to string - Invalid ExpressionStringConstantFormat");
+            }
         }
     }
 }

@@ -102,16 +102,47 @@ namespace Simplex.Math.Operations.Elementary
             string LS = this.LeftExpression.ToString(Format, VariableFormat, ConstantFormat);
             string RS = this.RightExpression.ToString(Format, VariableFormat, ConstantFormat);
 
-            //Special Formats
-            if ((this.LeftExpression is Value) && (this.LeftExpression as Value).InnerValue == -1) return "-" + RS;
-            else if ((this.RightExpression is Value) && (this.RightExpression as Value).InnerValue == -1) return "-" + LS;
-            else if ((this.LeftExpression is Value) && (this.LeftExpression as Value).IsInteger() && (this.RightExpression is Variable)) return LS + RS;
-            else if ((this.RightExpression is Value) && (this.RightExpression as Value).IsInteger() && (this.LeftExpression is Variable)) return RS + LS;
-            else if ((this.LeftExpression is Value) && (this.LeftExpression as Value).IsInteger() && (this.RightExpression is Constant)) return LS + RS;
-            else if ((this.RightExpression is Value) && (this.RightExpression as Value).IsInteger() && (this.LeftExpression is Constant)) return RS + LS;
+            if (Format == ExpressionStringFormat.Default)
+            {
+                //Special Formats
+                if ((this.LeftExpression is Value) && (this.LeftExpression as Value).InnerValue == -1) return "-" + RS;
+                else if ((this.RightExpression is Value) && (this.RightExpression as Value).InnerValue == -1) return "-" + LS;
+                else if ((this.LeftExpression is Value) && (this.LeftExpression as Value).IsInteger() && !(this.RightExpression is Value)) return LS + RS;
+                else if ((this.RightExpression is Value) && (this.RightExpression as Value).IsInteger() && !(this.LeftExpression is Value)) return RS + LS;
+                else if ((this.LeftExpression is Value) && (this.LeftExpression as Value).IsInteger() && (this.RightExpression is Constant)) return LS + RS;
+                else if ((this.RightExpression is Value) && (this.RightExpression as Value).IsInteger() && (this.LeftExpression is Constant)) return RS + LS;
+                else if ((this.LeftExpression is Value) && (this.LeftExpression as Value).IsInteger() && (this.RightExpression is Exponentiation)) return LS + RS;
+                else if ((this.RightExpression is Value) && (this.RightExpression as Value).IsInteger() && (this.LeftExpression is Exponentiation)) return RS + LS;
+                //else if (!(this.LeftExpression is Value) && !(this.RightExpression is Value)) return LS + RS;
 
-            //Otherwise, just return the default:
-            return LS + " * " + RS;
+                //Otherwise, just return the default:
+                return LS + " * " + RS;
+            }
+            else if (Format == ExpressionStringFormat.LaTeX)
+            {
+                //Special Formats
+                if ((this.LeftExpression is Value) && (this.LeftExpression as Value).InnerValue == -1) return "-" + RS;
+                else if ((this.RightExpression is Value) && (this.RightExpression as Value).InnerValue == -1) return "-" + LS;
+                else if ((this.LeftExpression is Value) && (this.LeftExpression as Value).IsInteger() && (this.RightExpression is Variable)) return LS + RS;
+                else if ((this.RightExpression is Value) && (this.RightExpression as Value).IsInteger() && (this.LeftExpression is Variable)) return RS + LS;
+                else if ((this.LeftExpression is Value) && (this.LeftExpression as Value).IsInteger() && (this.RightExpression is Constant)) return LS + RS;
+                else if ((this.RightExpression is Value) && (this.RightExpression as Value).IsInteger() && (this.LeftExpression is Constant)) return RS + LS;
+                else if ((this.LeftExpression is Value) && (this.LeftExpression as Value).IsInteger() && (this.RightExpression is Exponentiation)) return LS + RS;
+                else if ((this.RightExpression is Value) && (this.RightExpression as Value).IsInteger() && (this.LeftExpression is Exponentiation)) return RS + LS;
+
+                //Otherwise, just return the default:
+                return LS + @" \times " + RS;
+            }
+            else if (Format == ExpressionStringFormat.ParseFriendly)
+            {
+                if ((this.LeftExpression is Value) && (this.LeftExpression as Value).InnerValue == -1) return "-(" + RS + ")";
+                else if ((this.RightExpression is Value) && (this.RightExpression as Value).InnerValue == -1) return "-(" + LS + ")";
+                return "(" + LS + " * " + RS + ")";
+            }
+            else
+            {
+                throw new Exceptions.ExpressionParsingException("Unable to convert product to string - Invalid ExpressionStringConstantFormat");
+            }
         }
     }
 }

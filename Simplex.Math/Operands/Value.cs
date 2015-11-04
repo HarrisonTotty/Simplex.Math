@@ -121,6 +121,10 @@ namespace Simplex.Math.Operands
                 if (this.InnerValue == (4.0 / 5)) return @"\frac{4}{5}";
                 return this.InnerValue.ToString();
             }
+            else if (Format == ExpressionStringFormat.ParseFriendly)
+            {
+                return this.InnerValue.ToString();
+            }
             else
             {
                 throw new Exceptions.ExpressionParsingException("");

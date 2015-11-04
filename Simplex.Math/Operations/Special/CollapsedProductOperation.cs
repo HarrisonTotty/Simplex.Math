@@ -86,18 +86,18 @@ namespace Simplex.Math.Operations.Special
         }
 
         /// <summary>
-        /// Returns a new collapsed product operation equivalent to the source CPO with all of its terms inverted.
+        /// Returns a new collapsed product operation equivalent to the source CPO with all of its terms inverted by raising to the -1th power.
         /// </summary>
         /// <remarks>
-        /// (x + y) => 1 / (x + y)
-        /// Because "x / y" is the same as "x * (1 / y)"
+        /// (x + y) => (x + y)^-1
+        /// Because "x / y" is the same as "x * y^-1"
         /// </remarks>
         public CollapsedProductOperation InvertTerms()
         {
             List<Expression> NewChildren = new List<Expression>(this.ChildExpressions.Count);
             for (int i = 0; i < this.ChildExpressions.Count; i++)
             {
-                NewChildren.Add(1 / this.ChildExpressions[i]);
+                NewChildren.Add(new Exponentiation(this.ChildExpressions[i], -1));
             }
             NewChildren.Capacity = NewChildren.Count;
             return new CollapsedProductOperation(NewChildren.ToArray());
@@ -126,12 +126,12 @@ namespace Simplex.Math.Operations.Special
                 for (int j = 0; j < NewChildren.Count; j++)
                 {
                     //Multiply the terms together
-                    var added = this.ChildExpressions[i] * NewChildren[j];
+                    var mul = this.ChildExpressions[i] * NewChildren[j];
 
-                    //If we find a match (AKA multiplying them together makes something OTHER than returning their new sum):
-                    if (added != new Product(this.ChildExpressions[i], NewChildren[j]))
+                    //If we find a match (AKA multiplying them together makes something OTHER than returning their new product):
+                    if (!mul.IsIdenticalTo(new Product(this.ChildExpressions[i], NewChildren[j])))
                     {
-                        NewChildren[j] = added;
+                        NewChildren[j] = mul;
                         foundmatch = true;
                         break;
                     }
@@ -200,13 +200,22 @@ namespace Simplex.Math.Operations.Special
             //If we only have one term, just return that term
             if (this.Arity == 1) return this.ChildExpressions[0];
 
-            //If we only have two terms, just return the sum of those two terms
-            if (this.Arity == 2) return new Product(this.ChildExpressions[0], this.ChildExpressions[1]);
+            //If we only have two terms, just return the product of those two terms
+            if (this.Arity == 2)
+            {
+                if (!Propositions.IsNonValueInverse[this.ChildExpressions[0]] && Propositions.IsNonValueInverse[this.ChildExpressions[1]]) return (this.ChildExpressions[0] / (1 / this.ChildExpressions[1]));
+                if (Propositions.IsNonValueInverse[this.ChildExpressions[0]] && !Propositions.IsNonValueInverse[this.ChildExpressions[1]]) return (this.ChildExpressions[1] / (1 / this.ChildExpressions[0]));
+                if (Propositions.IsNonValueInverse[this.ChildExpressions[0]] && Propositions.IsNonValueInverse[this.ChildExpressions[1]]) return 1 / ((1 / this.ChildExpressions[0]) * (1 / this.ChildExpressions[1]));
+                return (this.ChildExpressions[0] * this.ChildExpressions[1]);
+            }
 
-            //Otherwise, if we have more than two terms, we will return a new sum of the first term
-            //and the rest of the terms cast to a CSO which are converted back to an expression.
+            //Otherwise, if we have more than two terms, we will return a new product of the first term
+            //and the rest of the terms cast to a CPO which are converted back to an expression.
             var FirstTerm = this.ChildExpressions[0];
             var SecondTerm = new CollapsedProductOperation(this.ChildExpressions.GetRange(1, this.ChildExpressions.Count - 1).ToArray()).ToExpression();
+            if (!Propositions.IsNonValueInverse[FirstTerm] && Propositions.IsNonValueInverse[SecondTerm]) return (FirstTerm / (1 / SecondTerm));
+            if (Propositions.IsNonValueInverse[FirstTerm] && !Propositions.IsNonValueInverse[SecondTerm]) return (SecondTerm / (1 / FirstTerm));
+            if (Propositions.IsNonValueInverse[FirstTerm] && Propositions.IsNonValueInverse[SecondTerm]) return 1 / ((1 / FirstTerm) * (1 / SecondTerm));
             return new Product(FirstTerm, SecondTerm);
         }
 

@@ -7,5 +7,26 @@
       <FileName>Operations\Special\AbsoluteValue.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="Simplex.Math.Operations.Special.CollapsedBinaryOperation">
+    <Position X="5.25" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Operations\Special\CollapsedBinaryOperation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simplex.Math.Operations.Special.CollapsedProductOperation">
+    <Position X="3.75" Y="2.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AIAAIAAAAAAgAAAEAACAAAAAAAAAAUAAAAAAAAAAgAA=</HashCode>
+      <FileName>Operations\Special\CollapsedProductOperation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simplex.Math.Operations.Special.CollapsedSumOperation">
+    <Position X="6.75" Y="2.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AIAAIAAAAAAAAAAEAACAAAAAAAAIAUAAAAAAAAAAgAA=</HashCode>
+      <FileName>Operations\Special\CollapsedSumOperation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

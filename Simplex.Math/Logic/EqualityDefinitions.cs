@@ -46,6 +46,33 @@ namespace Simplex.Math.Logic
         }
 
         /// <summary>
+        /// Tests a pair of expressions for identicality using the equality definitions defined in this class.
+        /// </summary>
+        /// <param name="E1">The first expression to test</param>
+        /// <param name="E2">The second expression to test</param>
+        public static bool TestIdenticality(Expression E1, Expression E2)
+        {
+            //Test for "null" arguments
+            if ((E1 as object) == null && (E2 as object) == null) return true;
+            if ((E1 as object) == null || (E2 as object) == null) return false;
+
+            //To be identical, they must have the same type
+            if (E1.GetType() != E2.GetType()) return false;
+
+            //If E1 maps to E2
+            if (E1.MapsTo(E2)) return true;
+
+            //Fast tests amoungst operands
+            if ((E1 is Operand) && (E2 is Operand)) return TestIdenticality_FastTests_Operands(E1, E2);
+
+            //Test for identicality amoungst binary operations
+            if (((E1 is Operation) && (E1 as Operation).Arity == 2) && ((E2 is Operation) && (E2 as Operation).Arity == 2)) return TestEquality(E1, E2, BinaryOperations);
+
+            //If we couldn't determine that they are equal:
+            return false;
+        }
+
+        /// <summary>
         /// Tests a pair of expressions for equality using a particular test list.
         /// </summary>
         /// <param name="E1">The first expression to test</param>
@@ -114,6 +141,44 @@ namespace Simplex.Math.Logic
             }
             else if ((E1 is ImaginaryUnit) && (E2 is ImaginaryUnit))
             {
+                // i = i
+                return true;
+            }
+
+            return false;
+        }
+
+
+        /// <summary>
+        /// Performs the easiest comparison operations between operands without utilizing the EqualityDefinition system.
+        /// </summary>
+        /// <remarks>
+        /// This makes computation faster
+        /// </remarks>
+        private static bool TestIdenticality_FastTests_Operands(Expression E1, Expression E2)
+        {
+            if ((E1 is Variable) && (E2 is Variable))
+            {
+                // x = x
+                if ((E1 as Variable).ID == (E2 as Variable).ID) return true;
+            }
+            else if ((E1 is Value) && (E2 is Value))
+            {
+                // 3 = 3
+                if ((E1 as Value).InnerValue == (E2 as Value).InnerValue) return true;
+            }
+            else if ((E1 is Constant) && (E2 is Constant))
+            {
+                // C = C    AND     C(3.14) = Pi
+                if ((E1 as Constant).ID == (E2 as Constant).ID) return true;
+                if ((E1 as Constant).HasDescreteValue && (E2 as Constant).HasDescreteValue)
+                {
+                    if ((E1 as Constant).Value.InnerValue == (E2 as Constant).Value.InnerValue) return true;
+                }
+            }
+            else if ((E1 is ImaginaryUnit) && (E2 is ImaginaryUnit))
+            {
+                //i = i
                 return true;
             }
 
@@ -151,6 +216,14 @@ namespace Simplex.Math.Logic
             new EqualityDefinition(Propositions.IsDifference, Propositions.HaveEqualChildExpressions),
             // (x / y) = (x / y)
             new EqualityDefinition(Propositions.IsQuotient, Propositions.HaveEqualChildExpressions),
+            // x^2 = x^2
+            new EqualityDefinition(Propositions.IsExponentiation, Propositions.HaveEqualChildExpressions),
+            // (x + -y) = (x - y)
+            new EqualityDefinition(Propositions.IsSum, Propositions.IsDifference, Propositions.OperationsHaveEqualFirstOppositeSecondOperands),
+            // (x * (1 / y)) = (x / y)
+            new EqualityDefinition(Propositions.IsProduct, Propositions.IsQuotient, Propositions.OperationsHaveEqualFirstInverseSecondOperands),
+            // (1 / x) = x^-1
+            new EqualityDefinition(Propositions.IsQuotient, Propositions.IsExponentiation, Propositions.QuotientExponentiationEquality),
             // Equates very complex sum/difference trees
             new EqualityDefinition(Propositions.QualifiesForCSO, Propositions.EqualityTestViaCSO),
             // Equates very complex product/quotient trees

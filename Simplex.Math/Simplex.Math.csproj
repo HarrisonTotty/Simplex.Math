@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\ExpressionParser_Template.cs" />
     <Compile Include="Core\Scope.cs" />
     <Compile Include="Exceptions\CalculationException.cs" />
     <Compile Include="Exceptions\ClassificationException.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Operations\Trigonometric\TrigonometricOperation.cs" />
     <Compile Include="Classification\Polynomial.cs" />
     <Compile Include="Classification\PolynomialTerm.cs" />
+    <Compile Include="Core\ExpressionParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\Random.cs" />
     <Compile Include="Core\ExpressionStringFormat.cs" />

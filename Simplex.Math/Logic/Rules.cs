@@ -62,7 +62,7 @@ namespace Simplex.Math.Logic
         public static readonly Rule[] Difference = new Rule[]
         {   
             // This is not necessary because (Propositions.FirstZero -> Transforms.ReturnSecondExpression) does it for us.
-            //new Rule(Propositions.BothZero, Transforms.ToZero),
+            new Rule(Propositions.BothZero, Transforms.ToZero),
             // 2 - 3 = -1
             new Rule(Propositions.AreValues, Transforms.ValueSubtract),
             // x - x = 0
@@ -73,11 +73,11 @@ namespace Simplex.Math.Logic
             new Rule(Propositions.FirstZero, Transforms.NegateSecondExpression),
             // x - 0 = x
             new Rule(Propositions.SecondZero, Transforms.ReturnFirstExpression),
-            // 3x + 4x = 7x
+            // 3x - 4x = -x
             new Rule(Propositions.AreMultiplesOfSameExpression, Transforms.SubtractMultiples),
-            //Inf - x = Inf
+            // Inf - x = Inf
             new Rule(Propositions.FirstInfinity, Transforms.ToInfinity),
-            //x - Inf = -Inf
+            // x - Inf = -Inf
             new Rule(Propositions.SecondInfinity, Transforms.ToNegativeInfinity),
             // (x + 3) - (y - 2) = x - y + 4
             new Rule(Propositions.EitherSumsOrDifferences, Transforms.SubtractViaCSOConversion),
@@ -104,10 +104,12 @@ namespace Simplex.Math.Logic
             new Rule(Propositions.FirstZero, Transforms.ToZero),
             // x * 0 = 0
             new Rule(Propositions.SecondZero, Transforms.ToZero),
-            //Inf * x = Inf
+            // Inf * x = Inf
             new Rule(Propositions.EitherInfinity, Transforms.ToInfinity),
-            //3 * (x + 5) = 3x + 15
+            // 3 * (x + 5) = 3x + 15
             new Rule(Propositions.EitherSumsOrDifferences, Transforms.DistributeMultiply),
+            // x^2 * x = x^3     AND     x^2 * x^3 = x^5
+            new Rule(Propositions.EitherExponentiations, Transforms.MultiplyExponentiations),
             // (x * 3) * (y * 2) = 6 * x * y
             new Rule(Propositions.EitherProductOrQuotient, Transforms.MultiplyViaCPOConversion),
             // (x * 3)^-1 * (y * 2) = (2 / 3) * (x / y)
@@ -133,10 +135,31 @@ namespace Simplex.Math.Logic
             new Rule(Propositions.FirstZero, Transforms.ToZero),
             // x / Inf = 0
             new Rule(Propositions.SecondInfinity, Transforms.ToZero),
+            // x^2 / x = x     AND     x^2 / x^3 = 1 / x
+            new Rule(Propositions.EitherExponentiations, Transforms.DivideExponentiations),
             // (x * 3) / (y * 2) = (3 / 2) * (x / y)
             new Rule(Propositions.EitherProductOrQuotient, Transforms.DivideViaCPOConversion),
             // (x * 3)^-1 / (y * 2) = 
             new Rule(Propositions.EitherNegativeOneExponentiationOfProductOrQuotient, Transforms.DivideViaCPOConversion),
+        };
+
+        /// <summary>
+        /// The pre-built sequence of rules that we will use to calculate exponents.
+        /// </summary>
+        public static readonly Rule[] Exponentiation = new Rule[]
+        {   
+            // 2 ^ 3 = 8
+            new Rule(Propositions.AreValues, Transforms.ValueExponentiate),
+            // x ^ 1 = x
+            new Rule(Propositions.SecondOne, Transforms.ReturnFirstExpression),
+            // x ^ -1 = 1 / x
+            new Rule(Propositions.SecondNegativeOne, Transforms.InvertExpression),
+            // 0 ^ x = 0
+            new Rule(Propositions.FirstZero, Transforms.ToZero),
+            // x ^ 0 = 0
+            new Rule(Propositions.SecondZero, Transforms.ToZero),
+            // x ^ Inf = 0
+            new Rule(Propositions.SecondInfinity, Transforms.ToInfinity),
         };
 
         /// <summary>

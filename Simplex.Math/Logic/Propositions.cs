@@ -291,12 +291,12 @@ namespace Simplex.Math.Logic
         /// <summary>
         /// Whether two expressions are reciprocals.
         /// </summary>
-        public static readonly DoubleParameterProposition AreReciprocals = new DoubleParameterProposition((x, y) => x == (1 / y));
+        public static readonly DoubleParameterProposition AreReciprocals = new DoubleParameterProposition((x, y) => (AreValues[x, y] && (x as Value).InnerValue == 1 / (y as Value).InnerValue) || (x == new Quotient(1, y)) || (x == new Exponentiation(y, -1)));
         
         /// <summary>
         /// Whether two expressions are opposite reciprocals.
         /// </summary>
-        public static readonly DoubleParameterProposition AreOppositeReciprocals = new DoubleParameterProposition((x, y) => x == -(1 / y));
+        public static readonly DoubleParameterProposition AreOppositeReciprocals = new DoubleParameterProposition((x, y) => (AreValues[x, y] && (x as Value).InnerValue == -(1 / (y as Value).InnerValue)) || (x == -new Quotient(1, y)) || (x == -new Exponentiation(y, -1)));
 
         /// <summary>
         /// Whether a single input expression is equal to "0".
@@ -307,6 +307,12 @@ namespace Simplex.Math.Logic
         /// Whether a single input expression is equal to "1".
         /// </summary>
         public static readonly SingleParameterProposition IsOne = new SingleParameterProposition(x => ((x is Value) && (x as Value).InnerValue == 1) || (!(x is Value) && x == 1));
+
+        /// <summary>
+        /// Whether a single input expression is equal to "-1".
+        /// </summary>
+        public static readonly SingleParameterProposition IsNegativeOne = new SingleParameterProposition(x => ((x is Value) && (x as Value).InnerValue == -1) || (!(x is Value) && x == -1));
+
 
         /// <summary>
         /// Whether the first expression of a pair is equal to "0". (Same as Propositions.IsZero)
@@ -339,6 +345,11 @@ namespace Simplex.Math.Logic
         public static readonly DoubleParameterProposition SecondOne = new DoubleParameterProposition((x, y) => IsOne[y]);
 
         /// <summary>
+        /// Whether the second expression of a pair is equal to "-1".
+        /// </summary>
+        public static readonly DoubleParameterProposition SecondNegativeOne = new DoubleParameterProposition((x, y) => IsNegativeOne[y]);
+
+        /// <summary>
         /// Whether either expression of a pair is equal to "1".
         /// </summary>
         public static readonly DoubleParameterProposition EitherOne = new DoubleParameterProposition((x, y) => IsOne[x] || IsOne[y]);
@@ -351,22 +362,22 @@ namespace Simplex.Math.Logic
         /// <summary>
         /// Whether the first expression of a pair is equal to "Infinity".
         /// </summary>
-        public static readonly DoubleParameterProposition FirstInfinity = new DoubleParameterProposition((x, y) => x == Constant.Infinity);
+        public static readonly DoubleParameterProposition FirstInfinity = new DoubleParameterProposition((x, y) => x == Constant.PositiveInfinity);
 
         /// <summary>
         /// Whether the second expression of a pair is equal to "Infinity".
         /// </summary>
-        public static readonly DoubleParameterProposition SecondInfinity = new DoubleParameterProposition((x, y) => y == Constant.Infinity);
+        public static readonly DoubleParameterProposition SecondInfinity = new DoubleParameterProposition((x, y) => y == Constant.NegativeInfinity);
 
         /// <summary>
         /// Whether either expression of a pair is equal to "Infinity".
         /// </summary>
-        public static readonly DoubleParameterProposition EitherInfinity = new DoubleParameterProposition((x, y) => (x == Constant.Infinity) || (y == Constant.Infinity));
+        public static readonly DoubleParameterProposition EitherInfinity = new DoubleParameterProposition((x, y) => (x == Constant.PositiveInfinity) || (y == Constant.PositiveInfinity));
 
         /// <summary>
         /// Whether both expressions of a pair are equal to "Infinity".
         /// </summary>
-        public static readonly DoubleParameterProposition BothInfinity = new DoubleParameterProposition((x, y) => (x == Constant.Infinity) && (y == Constant.Infinity));
+        public static readonly DoubleParameterProposition BothInfinity = new DoubleParameterProposition((x, y) => (x == Constant.PositiveInfinity) && (y == Constant.PositiveInfinity));
 
         /// <summary>
         /// Whether both expressions of a pair are polynomials.
@@ -771,6 +782,69 @@ namespace Simplex.Math.Logic
         /// <summary>
         /// Whether an input expression is a tensor.
         /// </summary>
-        public static readonly SingleParameterProposition IsTensor = new SingleParameterProposition(x => x is Arrays.Tensor);
+        public static readonly SingleParameterProposition IsTensor = new SingleParameterProposition(x => x is Tensor);
+
+        /// <summary>
+        /// Whether an input expression is an inverse (see remarks).
+        /// </summary>
+        /// <remarks>
+        /// Examples: 1/3   OR      1/x    OR      x^-1
+        /// </remarks>
+        public static readonly SingleParameterProposition IsInverse = new SingleParameterProposition(x => ((x is Value) && ((x as Value) < 1) && ((x as Value) > -1)) || ((x is Exponentiation) && (x as Exponentiation).Exponent == -1) || ((x is Quotient) && (x as Quotient).Numerator == 1));
+
+        /// <summary>
+        /// Whether an input expression is an inverse (not including values) (see remarks).
+        /// </summary>
+        /// <remarks>
+        /// Examples: 1/x   OR      x^-1
+        /// </remarks>
+        public static readonly SingleParameterProposition IsNonValueInverse = new SingleParameterProposition(x => ((x is Exponentiation) && (x as Exponentiation).Exponent == -1) || ((x is Quotient) && (x as Quotient).Numerator == 1));
+
+        /// <summary>
+        /// Whether two binary operations have equal first operands and opposite second operands.
+        /// </summary>
+        public static readonly DoubleParameterProposition OperationsHaveEqualFirstOppositeSecondOperands = new DoubleParameterProposition((x, y) => AreBinaryOperations[x, y] && (x.ChildExpressions[0] == y.ChildExpressions[0]) && (x.ChildExpressions[1] == -y.ChildExpressions[1]));
+
+        /// <summary>
+        /// Whether two binary operations have equal first operands and inverted second operands.
+        /// </summary>
+        public static readonly DoubleParameterProposition OperationsHaveEqualFirstInverseSecondOperands = new DoubleParameterProposition((x, y) => AreBinaryOperations[x, y] && (x.ChildExpressions[0] == y.ChildExpressions[0]) && AreReciprocals[x.ChildExpressions[1], y.ChildExpressions[1]]);
+
+        /// <summary>
+        /// Whether an input expression is an exponentiation (a base expression raised to a particular exponent).
+        /// </summary>
+        public static readonly SingleParameterProposition IsExponentiation = new SingleParameterProposition(x => x is Exponentiation);
+
+        /// <summary>
+        /// Whether two expressions are both exponentiations.
+        /// </summary>
+        public static readonly DoubleParameterProposition BothExponentiations = new DoubleParameterProposition((x, y) => (x is Exponentiation) && (y is Exponentiation));
+
+        /// <summary>
+        /// Whether either of two expressions are exponentiations.
+        /// </summary>
+        public static readonly DoubleParameterProposition EitherExponentiations = new DoubleParameterProposition((x, y) => (x is Exponentiation) || (y is Exponentiation));
+
+        /// <summary>
+        /// Determines the equality between a quotient and an exponentiation.
+        /// </summary>
+        public static readonly DoubleParameterProposition QuotientExponentiationEquality = new DoubleParameterProposition((x, y) => QuotientExponentiationEquality_Body(x, y));
+        private static bool QuotientExponentiationEquality_Body(Expression x, Expression y)
+        {
+            if ((x is Quotient) && (y is Exponentiation))
+            {
+                Quotient Q = x as Quotient;
+                Exponentiation E = y as Exponentiation;
+                if (Q.Numerator == 1 && E.Exponent == -1 && Q.Denominator == E.Base) return true;
+            }
+            else if ((x is Exponentiation) && (y is Quotient))
+            {
+                Quotient Q = y as Quotient;
+                Exponentiation E = x as Exponentiation;
+                if (Q.Numerator == 1 && E.Exponent == -1 && Q.Denominator == E.Base) return true;
+            }
+
+            return false;
+        }
     }
 }

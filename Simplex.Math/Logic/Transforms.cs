@@ -57,12 +57,12 @@ namespace Simplex.Math.Logic
         /// <summary>
         /// Returns "infinity" independent of the input expression.
         /// </summary>
-        public static readonly Transform ToInfinity = new Transform(x => Constant.Infinity);
+        public static readonly Transform ToInfinity = new Transform(x => Constant.PositiveInfinity);
 
         /// <summary>
         /// Returns "negative infinity" independent of the input expression.
         /// </summary>
-        public static readonly Transform ToNegativeInfinity = new Transform(x => -Constant.Infinity);
+        public static readonly Transform ToNegativeInfinity = new Transform(x => Constant.NegativeInfinity);
 
         /// <summary>
         /// Returns "i" independent of the input expression.
@@ -115,6 +115,11 @@ namespace Simplex.Math.Logic
         public static readonly Transform ValueDivide = new Transform((x, y) => (x as Value).InnerValue / (y as Value).InnerValue);
 
         /// <summary>
+        /// Returns the exponentiation of two input expressions cast as values.
+        /// </summary>
+        public static readonly Transform ValueExponentiate = new Transform((x, y) => System.Math.Pow((x as Value).InnerValue, (y as Value).InnerValue));
+
+        /// <summary>
         /// Returns a input expression without a transformation.
         /// </summary>
         public static readonly Transform ReturnExpression = new Transform(x => x);
@@ -139,6 +144,11 @@ namespace Simplex.Math.Logic
         /// Returns half the value of a single input expression (x/2).
         /// </summary>
         public static readonly Transform HalfExpression = new Transform(x => x / 2);
+
+        /// <summary>
+        /// Returns the inverse of a single input expression.
+        /// </summary>
+        public static readonly Transform InvertExpression = new Transform(x => 1 / x);
 
         /// <summary>
         /// Returns the input expression raised to the 2nd power.
@@ -339,6 +349,69 @@ namespace Simplex.Math.Logic
             if (ResultExpressions.Count == 1) return ResultExpressions[0];
             if (ResultExpressions.Count == 2) return (ResultExpressions[0] + ResultExpressions[1]);
             return new CollapsedSumOperation(ResultExpressions.ToArray()).Reduce().ToExpression();
+        }
+
+        /// <summary>
+        /// Computes the multiplication between an exponentiation and an expression or between two exponentiations.
+        /// </summary>
+        public static readonly Transform MultiplyExponentiations = new Transform((x, y) => MultiplyExponentiations_Body_ClassifyStep(x, y));
+        private static Expression MultiplyExponentiations_Body_ClassifyStep(Expression x, Expression y)
+        {
+            //Send them to the correct sub-method
+            if ((x is Exponentiation) && (y is Exponentiation)) return MultiplyExponentiations_Body(x as Exponentiation, y as Exponentiation);
+            if ((x is Exponentiation) && !(y is Exponentiation)) return MultiplyExponentiations_Body(x as Exponentiation, y);
+            if (!(x is Exponentiation) && (y is Exponentiation)) return MultiplyExponentiations_Body(y as Exponentiation, x);
+            
+            //If neither are powers, return a new product between them
+            return new Product(x, y);
+        }
+        private static Expression MultiplyExponentiations_Body(Exponentiation x, Expression y)
+        {
+            //If the bases are equal
+            if (x.Base == y) return x.Base ^ (x.Exponent + 1);
+
+            //If the bases are not equal
+            return new Product(x, y);
+        }
+        private static Expression MultiplyExponentiations_Body(Exponentiation x, Exponentiation y)
+        {
+            //If the bases are equal
+            if (x.Base == y.Base) return x.Base ^ (x.Exponent + y.Exponent);
+
+            //If the bases are not equal
+            return new Product(x, y);
+        }
+
+
+        /// <summary>
+        /// Computes the division between an exponentiation and an expression or between two exponentiations.
+        /// </summary>
+        public static readonly Transform DivideExponentiations = new Transform((x, y) => DivideExponentiations_Body_ClassifyStep(x, y));
+        private static Expression DivideExponentiations_Body_ClassifyStep(Expression x, Expression y)
+        {
+            //Send them to the correct sub-method
+            if ((x is Exponentiation) && (y is Exponentiation)) return DivideExponentiations_Body(x as Exponentiation, y as Exponentiation);
+            if ((x is Exponentiation) && !(y is Exponentiation)) return DivideExponentiations_Body(x as Exponentiation, y);
+            if (!(x is Exponentiation) && (y is Exponentiation)) return DivideExponentiations_Body(y as Exponentiation, x);
+
+            //If neither are powers, return a new quotient between them
+            return new Quotient(x, y);
+        }
+        private static Expression DivideExponentiations_Body(Exponentiation x, Expression y)
+        {
+            //If the bases are equal
+            if (x.Base == y) return x.Base ^ (x.Exponent - 1);
+
+            //If the bases are not equal
+            return new Quotient(x, y);
+        }
+        private static Expression DivideExponentiations_Body(Exponentiation x, Exponentiation y)
+        {
+            //If the bases are equal
+            if (x.Base == y.Base) return x.Base ^ (x.Exponent - y.Exponent);
+
+            //If the bases are not equal
+            return new Quotient(x, y);
         }
     }
 }

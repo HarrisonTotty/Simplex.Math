@@ -44,12 +44,15 @@
             this.multiplicationTestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.divisionTestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TB = new System.Windows.Forms.RichTextBox();
+            this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpGlobalScopeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainMenu
             // 
             this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.debugToolStripMenuItem,
             this.initializationTestsToolStripMenuItem,
             this.stringFormatTestsToolStripMenuItem,
             this.equalityTestsToolStripMenuItem,
@@ -166,6 +169,7 @@
             this.divisionTestsToolStripMenuItem.Name = "divisionTestsToolStripMenuItem";
             this.divisionTestsToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.divisionTestsToolStripMenuItem.Text = "Division Tests";
+            this.divisionTestsToolStripMenuItem.Click += new System.EventHandler(this.divisionTestsToolStripMenuItem_Click);
             // 
             // TB
             // 
@@ -181,6 +185,21 @@
             this.TB.Text = "";
             this.TB.WordWrap = false;
             this.TB.TextChanged += new System.EventHandler(this.TB_TextChanged);
+            // 
+            // debugToolStripMenuItem
+            // 
+            this.debugToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dumpGlobalScopeToolStripMenuItem});
+            this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
+            this.debugToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.debugToolStripMenuItem.Text = "Debug";
+            // 
+            // dumpGlobalScopeToolStripMenuItem
+            // 
+            this.dumpGlobalScopeToolStripMenuItem.Name = "dumpGlobalScopeToolStripMenuItem";
+            this.dumpGlobalScopeToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.dumpGlobalScopeToolStripMenuItem.Text = "Dump Global Scope";
+            this.dumpGlobalScopeToolStripMenuItem.Click += new System.EventHandler(this.dumpGlobalScopeToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -220,6 +239,8 @@
         private System.Windows.Forms.ToolStripMenuItem operandsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem binaryOperationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cSOEqualityTestToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dumpGlobalScopeToolStripMenuItem;
     }
 }
 
