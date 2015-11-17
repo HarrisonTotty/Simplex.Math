@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Simplex.Math.Operands;
-using Simplex.Math.Core;
+using Simplex.Math.Irreducibles;
+using Simplex.Math;
 using Simplex.Math.Logic;
 using Simplex.Math.Operations.Elementary;
 

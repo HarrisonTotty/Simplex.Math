@@ -1,69 +1,69 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Simplex.Math.Core.Math">
+  <Class Name="Simplex.Math.Math">
     <Position X="0.5" Y="0.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AQAiIQAIBJggBigAkABEAQAIAAmAEBAEAAAIAAMAACQ=</HashCode>
       <FileName>Core\Math.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Simplex.Math.Core.Random">
+  <Class Name="Simplex.Math.Random">
     <Position X="2.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAQQAAAAAgAAAAgAAAAACAgEAAAAAAABAAAA=</HashCode>
       <FileName>Core\Random.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Simplex.Math.Core.Expression">
+  <Class Name="Simplex.Math.Expression">
     <Position X="4.25" Y="0.5" Width="3" />
     <TypeIdentifier>
       <HashCode>QQAiAAAAABgAQjAEagWAAEAEAkIAAAACAAAAAJAIQiE=</HashCode>
       <FileName>Core\Expression.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Simplex.Math.Core.Scope">
+  <Class Name="Simplex.Math.Scope">
     <Position X="10.75" Y="3" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAEAAAAEAAAAAAAAAAABAAgAAAQAAAABAAA=</HashCode>
       <FileName>Core\Scope.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Simplex.Math.Core.ExpressionParser">
+  <Class Name="Simplex.Math.ExpressionParser">
     <Position X="15" Y="1.25" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAgAAAAAAAAAAAAACAAAAAAAAABAAAAAIEAAAAAAAA=</HashCode>
       <FileName>Core\ExpressionParser.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Enum Name="Simplex.Math.Core.ExpressionStringFormat">
+  <Enum Name="Simplex.Math.ExpressionStringFormat">
     <Position X="7.5" Y="2.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAIAABAAAAAAAAAAAAAAAAAIA=</HashCode>
       <FileName>Core\ExpressionStringFormat.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="Simplex.Math.Core.ExpressionStringVariableFormat">
+  <Enum Name="Simplex.Math.ExpressionStringVariableFormat">
     <Position X="7.5" Y="4" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAEAAAAAAAAAAIAQAAAAAIAAAAAAAAAAACAA=</HashCode>
       <FileName>Core\ExpressionStringVariableFormat.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="Simplex.Math.Core.ExpressionStringConstantFormat">
+  <Enum Name="Simplex.Math.ExpressionStringConstantFormat">
     <Position X="7.5" Y="5.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAIAAAAAAAAAAAAAAAAIAACAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Core\ExpressionStringConstantFormat.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="Simplex.Math.Core.SubstitutionType">
+  <Enum Name="Simplex.Math.SubstitutionType">
     <Position X="7.5" Y="1.25" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAIAAACAAAAAAIAAAAAAAAAAA=</HashCode>
       <FileName>Core\SubstitutionType.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="Simplex.Math.Core.GeneralFormType">
+  <Enum Name="Simplex.Math.GeneralFormType">
     <Position X="10.25" Y="1.25" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAIAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>

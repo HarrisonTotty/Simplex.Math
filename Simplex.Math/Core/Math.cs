@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Simplex.Math.Operands;
+using Simplex.Math.Irreducibles;
 using Simplex.Math.Operations.Elementary;
 using Simplex.Math.Operations.Trigonometric;
 using Simplex.Math.Operations.Special;
 
-namespace Simplex.Math.Core
+namespace Simplex.Math
 {
     /// <summary>
     /// Contains various static methods for common mathematical operations.
@@ -236,25 +236,28 @@ namespace Simplex.Math.Core
         }
 
         /// <summary>
-        /// Simplifies a given mathematical expression by canceling like terms and re-writing it into expanded form.
+        /// Simplifies a given mathematical expression by canceling like terms and re-writing it into its normal form.
         /// </summary>
         /// <remarks>
+        /// This is done automatically
         /// Example: (3x + y) + (2x + 4)  ->  5x + y + 4
         /// </remarks>
-        public static void Simplify()
+        /// <param name="Expression">The expression to simplify</param>
+        public static Expression Simplify(Expression Expression)
         {
-            throw new System.NotImplementedException();
+            return Operations.Grouping.Simplification.Simplify(Expression);
         }
 
         /// <summary>
-        /// Re-forms a given expression into an expanded form.
+        /// Re-forms a given expression into its most expanded form.
         /// </summary>
         /// <remarks>
-        /// Example: 3(x + y)  ->  3x + 3y
+        /// Example: 3(x + y)  ->  x + x + x + y + y + y
         /// </remarks>
-        public static void Expand()
+        /// <param name="Expression">The expression to expand</param>
+        public static Expression Expand(Expression Expression)
         {
-            throw new System.NotImplementedException();
+            return Operations.Grouping.Expansion.Expand(Expression);
         }
 
         /// <summary>
@@ -271,7 +274,8 @@ namespace Simplex.Math.Core
         /// <remarks>
         /// Example: 3x + 3y  ->  3(x + y)
         /// </remarks>
-        public static void Contract()
+        /// <param name="Expression">The expression to contract</param>
+        public static Expression Contract(Expression Expression)
         {
             throw new System.NotImplementedException();
         }

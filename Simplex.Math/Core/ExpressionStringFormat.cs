@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Simplex.Math.Core
+namespace Simplex.Math
 {
     /// <summary>
     /// Represents the possible string representations a mathematical expression can have.

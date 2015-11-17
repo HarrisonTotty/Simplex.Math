@@ -45,14 +45,14 @@
   <Class Name="Simplex.Math.Logic.Propositions">
     <Position X="13.5" Y="0.5" Width="3" />
     <TypeIdentifier>
-      <HashCode>BgBlxqklBUYQDRRDdiTAIqB4EQ6C0MGQCCGYAwEsVzg=</HashCode>
+      <HashCode>BgLlxqklBUYQDZRTfiTEIqB4kQ6C0MmQCCGaAwFsVzg=</HashCode>
       <FileName>Logic\Propositions.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Simplex.Math.Logic.Transforms" Collapsed="true">
-    <Position X="8.75" Y="1.5" Width="1.5" />
+  <Class Name="Simplex.Math.Logic.Transforms">
+    <Position X="16.75" Y="0.5" Width="3" />
     <TypeIdentifier>
-      <HashCode>IsIAACAAEQEABIiAAACDBCQAAACBSAAAQABIASCAACA=</HashCode>
+      <HashCode>IsIAAGAAEQEARIiAAUCDBCQAAICJSAEAQABIETCAACA=</HashCode>
       <FileName>Logic\Transforms.cs</FileName>
     </TypeIdentifier>
   </Class>

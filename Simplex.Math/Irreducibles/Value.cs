@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Simplex.Math.Classification;
-using Simplex.Math.Core;
+using Simplex.Math;
 
-namespace Simplex.Math.Operands
+namespace Simplex.Math.Irreducibles
 {
     /// <summary>
     /// A type of mathematical constant that has a descrete value.
     /// </summary>
-    public class Value : Operand
+    public class Value : Irreducible
     {
         //The following operators are for automatic conversion of integers and doubles to values
         public static implicit operator Value(double D) { return new Value(D); }
@@ -157,6 +157,11 @@ namespace Simplex.Math.Operands
         public virtual bool IsInteger()
         {
             return (this.InnerValue == (long)this.InnerValue);
+        }
+
+        public override Expression Copy()
+        {
+            return new Value(this.InnerValue);
         }
     }
 }

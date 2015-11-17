@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Simplex.Math;
+using Simplex.Math.Logic;
 
 namespace Simplex.Math.Operations
 {
@@ -14,8 +16,9 @@ namespace Simplex.Math.Operations
         /// <summary>
         /// Creates a new trinary operation
         /// </summary>
+        /// <param name="Rules">The set of rules that govern the application of this operation</param>
         /// <param name="IsIdempotent">Whether this mathematical operation is idempotent</param>
-        public TrinaryOperation(bool IsIdempotent) : base(3, IsIdempotent)
+        public TrinaryOperation(RuleSet Rules, bool IsIdempotent) : base(Rules, 3, IsIdempotent)
         {
 
         }

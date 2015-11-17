@@ -3,26 +3,26 @@
   <Class Name="Simplex.Math.Operations.Operation">
     <Position X="4.25" Y="0.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAIAAAAAAAAAAEAAAAAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AgIAAAAAABAAAEAAAAAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Operations\Operation.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Simplex.Math.Operations.BinaryOperation">
-    <Position X="7.25" Y="3.5" Width="2.25" />
+    <Position X="7.25" Y="3.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAQ=</HashCode>
       <FileName>Operations\Arity\BinaryOperation.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Simplex.Math.Operations.TrinaryOperation">
-    <Position X="4.25" Y="3.5" Width="2.25" />
+    <Position X="4.25" Y="3.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Operations\Arity\TrinaryOperation.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Simplex.Math.Operations.UnaryOperation">
-    <Position X="1.25" Y="3.5" Width="2.25" />
+    <Position X="1.25" Y="3.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Operations\Arity\UnaryOperation.cs</FileName>
@@ -38,7 +38,7 @@
   <Class Name="Simplex.Math.Operations.Special.CollapsedSumOperation">
     <Position X="10.5" Y="2.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AIAAIAAAAAAAAAAEAACAAAAAAAAIAUAAAAAAAAAAgAA=</HashCode>
       <FileName>Operations\Special\CollapsedSumOperation.cs</FileName>
     </TypeIdentifier>
   </Class>

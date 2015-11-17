@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Simplex.Math.Operands;
-using Simplex.Math.Core;
+using Simplex.Math.Irreducibles;
+using Simplex.Math;
 using Simplex.Math.Sets;
+using Simplex.Math.Functions;
 
 namespace Simplex.Math.Logic
 {
@@ -30,7 +31,7 @@ namespace Simplex.Math.Logic
         /// <summary>
         /// The pre-built sequence of rules that we will use to calculate sums.
         /// </summary>
-        public static readonly Rule[] Sum = new Rule[]
+        public static readonly RuleSet SumRules = new RuleSet(new Rule[]
         {   
             // This is not necessary because (Propositions.FirstZero -> Transforms.ReturnSecondExpression) does it for us.
             //new Rule(Propositions.BothZero, Transforms.ToZero),
@@ -52,14 +53,16 @@ namespace Simplex.Math.Logic
             new Rule(Propositions.EitherSumsOrDifferences, Transforms.AddViaCSOConversion),
             // -(x + 3) + (y - 2) = -x + y -5
             new Rule(Propositions.EitherNegationOfSumOrDifference, Transforms.AddViaCSOConversion),
+            // f(x) + g(x) = h(x)
+            
             // 3x^2 + 2x^2 = 5x^2
             //new Rule(Propositions.ArePolynomials, Transforms.PolynomialAdd)
-        };
+        });
 
         /// <summary>
         /// The pre-built sequence of rules that we will use to calculate differences.
         /// </summary>
-        public static readonly Rule[] Difference = new Rule[]
+        public static readonly RuleSet DifferenceRules = new RuleSet(new Rule[]
         {   
             // This is not necessary because (Propositions.FirstZero -> Transforms.ReturnSecondExpression) does it for us.
             new Rule(Propositions.BothZero, Transforms.ToZero),
@@ -83,12 +86,12 @@ namespace Simplex.Math.Logic
             new Rule(Propositions.EitherSumsOrDifferences, Transforms.SubtractViaCSOConversion),
             // -(x + 3) - (y - 2) = -x - y - 1
             new Rule(Propositions.EitherNegationOfSumOrDifference, Transforms.SubtractViaCSOConversion),
-        };
+        });
 
         /// <summary>
         /// The pre-built sequence of rules that we will use to calculate products.
         /// </summary>
-        public static readonly Rule[] Product = new Rule[]
+        public static readonly RuleSet ProductRules = new RuleSet(new Rule[]
         {   
             // 2 * 3 = 6
             new Rule(Propositions.AreValues, Transforms.ValueMultiply),
@@ -114,12 +117,12 @@ namespace Simplex.Math.Logic
             new Rule(Propositions.EitherProductOrQuotient, Transforms.MultiplyViaCPOConversion),
             // (x * 3)^-1 * (y * 2) = (2 / 3) * (x / y)
             new Rule(Propositions.EitherNegativeOneExponentiationOfProductOrQuotient, Transforms.MultiplyViaCPOConversion),
-        };
+        });
 
         /// <summary>
         /// The pre-built sequence of rules that we will use to calculate quotients.
         /// </summary>
-        public static readonly Rule[] Quotient = new Rule[]
+        public static readonly RuleSet QuotientRules = new RuleSet(new Rule[]
         {   
             // 1 / 0 = Inf      VERY IMPORTANT THAT THIS IS FIRST!
             new Rule(Propositions.SecondZero, Transforms.ToInfinity),
@@ -141,12 +144,12 @@ namespace Simplex.Math.Logic
             new Rule(Propositions.EitherProductOrQuotient, Transforms.DivideViaCPOConversion),
             // (x * 3)^-1 / (y * 2) = 
             new Rule(Propositions.EitherNegativeOneExponentiationOfProductOrQuotient, Transforms.DivideViaCPOConversion),
-        };
+        });
 
         /// <summary>
         /// The pre-built sequence of rules that we will use to calculate exponents.
         /// </summary>
-        public static readonly Rule[] Exponentiation = new Rule[]
+        public static readonly RuleSet ExponentiationRules = new RuleSet(new Rule[]
         {   
             // 2 ^ 3 = 8
             new Rule(Propositions.AreValues, Transforms.ValueExponentiate),
@@ -160,16 +163,68 @@ namespace Simplex.Math.Logic
             new Rule(Propositions.SecondZero, Transforms.ToZero),
             // x ^ Inf = 0
             new Rule(Propositions.SecondInfinity, Transforms.ToInfinity),
-        };
+        });
 
         /// <summary>
         /// The pre-built sequence of rules that we will use to calculate absolute values.
         /// </summary>
-        public static readonly Rule[] AbsoluteValue = new Rule[]
+        public static readonly RuleSet AbsoluteValueRules = new RuleSet(new Rule[]
         {   
             // |-x| = x
             new Rule(Propositions.IsNegation, Transforms.NegateExpression),
 
-        };
+        });
+
+        /// <summary>
+        /// The pre-built sequence of rules that we will use to calculate sines.
+        /// </summary>
+        public static readonly RuleSet SineRules = new RuleSet(new Rule[]
+        {   
+            // |-x| = x
+            new Rule(Propositions.IsNegation, Transforms.NegateExpression),
+
+        });
+
+        /// <summary>
+        /// The pre-built sequence of rules that we will use to simplify (normalize) expressions.
+        /// </summary>
+        /// <remarks>
+        /// To us, expressions are automatically simplified
+        /// This is as easy as applying any transformable operations in an expression
+        /// </remarks>
+        public static readonly RuleSet SimplificationRules = new RuleSet(new Rule[]
+        {
+            // x = x, 3 = 3
+            new Rule(Propositions.IsIntrinsicIrreducible, Transforms.ReturnExpression),
+            // 2 + 2 = 4,   x + x = 2x,     3(x + 2) = 3x + 6
+            new Rule(Propositions.IsTransformableOperation, Transforms.ApplyOperation),
+
+        });
+
+        /// <summary>
+        /// The pre-built sequence of rules that we will use to reduce expressions.
+        /// </summary>
+        /// <remarks>
+        /// To us, expressions are automatically reduced
+        /// This is as easy as applying any transformable operations in an expression
+        /// </remarks>
+        public static readonly RuleSet ReductionRules = new RuleSet(new Rule[]
+        {   
+            
+
+        });
+
+        /// <summary>
+        /// The pre-built sequence of rules that we will use to expand expressions.
+        /// </summary>
+        /// <remarks>
+        /// To us, expressions are automatically reduced, NOT expanded
+        /// </remarks>
+        public static readonly RuleSet ExpansionRules = new RuleSet(new Rule[]
+        {   
+            // 2 + 2 = 4,   2x = x + x,     3(x + 2) = x + x + x + 6
+            //new Rule(Propositions.IsIntegerMultipleOfExpression, Transforms.SeperateIntegerProduct),
+
+        });
     }
 }

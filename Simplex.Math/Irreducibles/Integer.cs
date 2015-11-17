@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Simplex.Math.Core;
+using Simplex.Math;
 
-namespace Simplex.Math.Operands
+namespace Simplex.Math.Irreducibles
 {
     /// <summary>
     /// A particular type of value that represents a whole number.

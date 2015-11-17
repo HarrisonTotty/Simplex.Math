@@ -1,4 +1,4 @@
-﻿using Simplex.Math.Core;
+﻿using Simplex.Math;
 using System;
 using System.Collections.Generic;
 using System.Linq;

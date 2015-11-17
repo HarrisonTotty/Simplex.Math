@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Simplex.Math.Core
+namespace Simplex.Math
 {
     /// <summary>
     /// Represents the types of rules and assumptions to apply to general form conversions.

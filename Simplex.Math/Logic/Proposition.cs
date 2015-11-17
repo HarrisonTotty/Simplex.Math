@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Simplex.Math.Core;
-using Simplex.Math.Operands;
+using Simplex.Math;
+using Simplex.Math.Irreducibles;
 
 namespace Simplex.Math.Logic
 {
@@ -91,7 +91,7 @@ namespace Simplex.Math.Logic
             if (Input.Length >= this.NumberParameters)
             {
                 //Evaluate the proposition with the necessary number of parameters
-                try
+                //try
                 {
                     //string DEBUGSTRING = this.ToString();
                     if (this.NumberParameters == 1) return (Condition_Compiled as ConditionDelegate1)(Input[0]);
@@ -100,9 +100,9 @@ namespace Simplex.Math.Logic
                     if (this.NumberParameters == 4) return (Condition_Compiled as ConditionDelegate4)(Input[0], Input[1], Input[2], Input[3]);
                     if (this.NumberParameters == 5) return (Condition_Compiled as ConditionDelegate5)(Input[0], Input[1], Input[2], Input[3], Input[4]);
                 }
-                catch (Exception)
+                //catch (Exception ex)
                 {
-                    throw new Exceptions.SimplexMathException("Unable to evalute proposition: {" + this.ToString() + "} ...");
+                    //throw new Exceptions.SimplexMathException("Unable to evalute proposition: {" + this.ToString() + "} (\"" + ex.Message + "\")...");
                 }
             }
 

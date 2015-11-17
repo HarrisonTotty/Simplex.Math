@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Simplex.Math.Core;
+using Simplex.Math;
+using Simplex.Math.Logic;
 
 namespace Simplex.Math.Operations
 {
@@ -15,13 +16,14 @@ namespace Simplex.Math.Operations
         /// <summary>
         /// Creates a new binary operation with a pair of operands.
         /// </summary>
+        /// <param name="Rules">The set of rules that govern the application of this operation</param>
         /// <param name="Operand1">The first (or "left") operand</param>
         /// <param name="Operand2">The second (or "right") operand</param>
         /// <param name="IsCommutative">Whether this operation is commutative</param>
         /// <param name="IsAnticommutative">Whether this operation is anticommutative</param>
         /// <param name="IsIdempotent">Whether this operation is idempotent</param>
         /// <param name="IsAssociative">Whether this operation is associative</param>
-        public BinaryOperation(Expression Operand1, Expression Operand2, bool IsCommutative, bool IsAnticommutative, bool IsIdempotent, bool IsAssociative) : base(2, IsIdempotent)
+        public BinaryOperation(RuleSet Rules, Expression Operand1, Expression Operand2, bool IsCommutative, bool IsAnticommutative, bool IsIdempotent, bool IsAssociative) : base(Rules, 2, IsIdempotent)
         {
             this.Operands[0] = Operand1;
             this.Operands[1] = Operand2;

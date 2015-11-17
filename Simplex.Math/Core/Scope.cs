@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Simplex.Math.Operands;
+using Simplex.Math.Irreducibles;
 using Simplex.Math.Logic;
 
-namespace Simplex.Math.Core
+namespace Simplex.Math
 {
     /// <summary>
     /// Represents a particular "mathematical universe" in which mathematical expressions and mappings reside (see remarks).
@@ -114,7 +114,7 @@ namespace Simplex.Math.Core
         /// <param name="MatchString">The string an operand's string must match to be selected</param>
         /// <param name="VF">The string format variables are converted to for comparison</param>
         /// <param name="CF">The string format constants are converted to for comparison</param>
-        public Operand Get(string MatchString, ExpressionStringVariableFormat VF, ExpressionStringConstantFormat CF)
+        public Irreducible Get(string MatchString, ExpressionStringVariableFormat VF, ExpressionStringConstantFormat CF)
         {
             //Firstly, lets check for the default variables and constants
             if (MatchString == "x") return Variable.x;
@@ -129,7 +129,7 @@ namespace Simplex.Math.Core
             if (MatchString == "i") return ImaginaryUnit.i;
 
             //Lets combine our variables and constants into one list
-            List<Operand> CheckList = new List<Operand>();
+            List<Irreducible> CheckList = new List<Irreducible>();
             if (this.Variables != null && this.Variables.Count > 0) CheckList.AddRange(this.Variables.Values);
             if (this.Constants != null && this.Constants.Count > 0) CheckList.AddRange(this.Constants.Values);
             CheckList.TrimExcess();
@@ -151,7 +151,7 @@ namespace Simplex.Math.Core
         /// Returns first match and null if no operand was found.
         /// </summary>
         /// <param name="MatchString">The string an operand's string must match to be selected</param>
-        public Operand Get(string MatchString)
+        public Irreducible Get(string MatchString)
         {
             return this.Get(MatchString, ExpressionStringVariableFormat.Default, ExpressionStringConstantFormat.Default);
         }
@@ -162,7 +162,7 @@ namespace Simplex.Math.Core
         /// Returns first match and null if no operand was found.
         /// </summary>
         /// <param name="MatchString">The string an operand's string must match to be selected</param>
-        public Operand this[string MatchString]
+        public Irreducible this[string MatchString]
         {
             get
             {

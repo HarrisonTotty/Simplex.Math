@@ -7,11 +7,11 @@ using Microsoft.CSharp;
 using System.CodeDom.Compiler;
 using System.Reflection;
 using Simplex.Math.Logic;
-using Simplex.Math.Operands;
+using Simplex.Math.Irreducibles;
 using Simplex.Math.Operations;
 using System.Text.RegularExpressions;
 
-namespace Simplex.Math.Core
+namespace Simplex.Math
 {
     /// <summary>
     /// Contains static methods for parsing expressions via reflection.
@@ -48,7 +48,7 @@ namespace Simplex.Math.Core
             }
 
             //Go through the expression string and replace common math definitions:
-            //Example: "Sin(" -> "Simplex.Math.Core.Math.Sin("
+            //Example: "Sin(" -> "Simplex.Math.Math.Sin("
             
 
             string CodeString = "";
@@ -67,7 +67,7 @@ namespace Simplex.Math.Core
             Assembly ScriptAssembly = Results.CompiledAssembly;
 
             //Obtain the object
-            Type ScriptType = ScriptAssembly.GetType("Simplex.Math.Core.BUILDEXPRESSION");
+            Type ScriptType = ScriptAssembly.GetType("Simplex.Math.BUILDEXPRESSION");
 
             //Create an instance of the script type and return it
             return ((ExpressionParser_Template)Activator.CreateInstance(ScriptType)).BuildExpression();

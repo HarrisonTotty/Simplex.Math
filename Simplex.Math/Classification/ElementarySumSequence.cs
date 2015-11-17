@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Simplex.Math.Core;
-using Simplex.Math.Operands;
+using Simplex.Math;
+using Simplex.Math.Irreducibles;
 using Simplex.Math.Operations.Elementary;
 
 namespace Simplex.Math.Classification
@@ -140,7 +140,7 @@ namespace Simplex.Math.Classification
         /// Creates a new elementary sum sequence from a sequence of expressions.
         /// </summary>
         /// <param name="Expressions">The sequence of expressions to sum together</param>
-        public static ElementarySumSequence Create(params Operand[] Expressions)
+        public static ElementarySumSequence Create(params Irreducible[] Expressions)
         {
             Expression UnderlyingExpression = Expressions[0];
 

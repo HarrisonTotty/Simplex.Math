@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Simplex.Math.Core;
+using Simplex.Math;
 using Simplex.Math.Operations.Elementary;
 
-namespace Simplex.Math.Operands
+namespace Simplex.Math.Irreducibles
 {
     /// <summary>
     /// Represents a particular type of value represented as a fraction or ratio between two integer values.

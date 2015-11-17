@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Simplex.Math.Core;
+using Simplex.Math;
 using Simplex.Math.Logic;
 using Simplex.Math.Operations.Elementary;
 
@@ -22,7 +22,7 @@ namespace Simplex.Math.Operations.Special
         /// Creates a new collapsed binary operation with a particular set of operands.
         /// </summary>
         /// <param name="Operands">The operands associated with this collapsed binary operation</param>
-        public CollapsedBinaryOperation(params Expression[] Operands) : base(Operands.Length, false)
+        public CollapsedBinaryOperation(params Expression[] Operands) : base(null, Operands.Length, false)
         {
             for (int i = 0; i < Operands.Length; i++)
             {

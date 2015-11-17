@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Simplex.Math.Core;
-using Simplex.Math.Operands;
+using Simplex.Math;
+using Simplex.Math.Irreducibles;
 using Simplex.Math.Logic;
 
 namespace Simplex.Math.Operations.Elementary
@@ -15,16 +15,11 @@ namespace Simplex.Math.Operations.Elementary
     public class Exponentiation : ElementaryOperation
     {
         /// <summary>
-        /// The rule set associated with exponentiation.
-        /// </summary>
-        public static RuleSet Rules = new RuleSet(Logic.Rules.Exponentiation);
-
-        /// <summary>
         /// Creates a new exponentiation expression from a given base and exponent.
         /// </summary>
         /// <param name="Base">The base of this exponentiation</param>
         /// <param name="Exponent">The exponent of this exponentiation</param>
-        public Exponentiation(Expression Base, Expression Exponent) : base(Base, Exponent, false, false, false)
+        public Exponentiation(Expression Base, Expression Exponent) : base(Logic.Rules.ExponentiationRules, Base, Exponent, false, false, false)
         {
             
         }
@@ -67,15 +62,9 @@ namespace Simplex.Math.Operations.Elementary
         /// <param name="Exponent">The exponent of the exponentiation</param>
         public static Expression Exponentiate(Expression Base, Expression Exponent)
         {
-            //If we qualify for transform via our ruleset:
-            if (Exponentiation.Rules.CanTransform(Base, Exponent))
-            {
-                //Apply our rules to the input
-                return Exponentiation.Rules.Apply(Base, Exponent);
-            }
-
-            //If we can't figure out what to do:
-            return new Exponentiation(Base, Exponent);
+            var O = new Exponentiation(Base, Exponent);
+            if (O.CanTransform()) return O.Apply(true);
+            else return O;
         }
 
         public bool IsIntegerExponent()
@@ -124,6 +113,11 @@ namespace Simplex.Math.Operations.Elementary
             {
                 throw new Exceptions.ExpressionParsingException("Unable to convert exponentiation to string - Invalid ExpressionStringFormat");
             }
+        }
+
+        public override Expression Copy()
+        {
+            return new Exponentiation(this.Base.Copy(), this.Exponent.Copy());
         }
     }
 }

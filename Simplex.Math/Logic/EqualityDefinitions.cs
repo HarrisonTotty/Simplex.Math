@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Simplex.Math.Operands;
+using Simplex.Math.Irreducibles;
 using Simplex.Math.Operations;
 using Simplex.Math.Operations.Elementary;
-using Simplex.Math.Core;
+using Simplex.Math;
 using Simplex.Math.Sets;
 using Simplex.Math.Classification;
 
@@ -33,13 +33,16 @@ namespace Simplex.Math.Logic
             if (E1.MapsTo(E2)) return true;
 
             //Fast tests amoungst operands
-            if ((E1 is Operand) && (E2 is Operand)) return TestEquality_FastTests_Operands(E1, E2);
+            if ((E1 is Irreducible) && (E2 is Irreducible)) return TestEquality_FastTests_Operands(E1, E2);
 
-            //Test for equality amoungst operands
-            if (((E1 is Operand) || (E1 is IntrinsicIrreducible)) && ((E2 is Operand) || (E2 is IntrinsicIrreducible))) return TestEquality(E1, E2, Operands);
+            //Test for equality amoungst operands - OLD
+            //if (((E1 is Irreducible) || (E1 is IntrinsicIrreducible)) && ((E2 is Irreducible) || (E2 is IntrinsicIrreducible))) return TestEquality(E1, E2, Operands);
 
             //Test for equality amoungst binary operations
-            if (((E1 is Operation) && (E1 as Operation).Arity == 2) && ((E2 is Operation) && (E2 as Operation).Arity == 2)) return TestEquality(E1, E2, BinaryOperations);
+            if (((E1 is Operation) && (E1 as Operation).Arity == 2) && ((E2 is Operation) && (E2 as Operation).Arity == 2)) if (TestEquality(E1, E2, BinaryOperations)) return true;
+
+            //Test for equality via grouping operations
+            //if (TestEquality(E1, E2, Groupings)) return true;
 
             //If we couldn't determine that they are equal:
             return false;
@@ -63,7 +66,7 @@ namespace Simplex.Math.Logic
             if (E1.MapsTo(E2)) return true;
 
             //Fast tests amoungst operands
-            if ((E1 is Operand) && (E2 is Operand)) return TestIdenticality_FastTests_Operands(E1, E2);
+            if ((E1 is Irreducible) && (E2 is Irreducible)) return TestIdenticality_FastTests_Operands(E1, E2);
 
             //Test for identicality amoungst binary operations
             if (((E1 is Operation) && (E1 as Operation).Arity == 2) && ((E2 is Operation) && (E2 as Operation).Arity == 2)) return TestEquality(E1, E2, BinaryOperations);
@@ -228,6 +231,21 @@ namespace Simplex.Math.Logic
             new EqualityDefinition(Propositions.QualifiesForCSO, Propositions.EqualityTestViaCSO),
             // Equates very complex product/quotient trees
             new EqualityDefinition(Propositions.QualifiesForCPO, Propositions.EqualityTestViaCPO),
+
+        }.ToList();
+
+
+        /// <summary>
+        /// A collection of equality definitions utilizing the application of grouping operations.
+        /// </summary>
+        public static readonly List<EqualityDefinition> Groupings = new EqualityDefinition[]
+        {
+            // 3(x + 2) = 3x + 6
+            new EqualityDefinition(Propositions.TRUE, Propositions.XSimplifiesToY),
+            // 3x = x + x + x
+            new EqualityDefinition(Propositions.TRUE, Propositions.XExpandsToY),
+            // 3x + 6 = 3(x + 2)
+            //new EqualityDefinition(Propositions.TRUE, Propositions.XContractsToY),
 
         }.ToList();
     }

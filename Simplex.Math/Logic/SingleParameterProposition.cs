@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Simplex.Math.Operands;
+using Simplex.Math.Irreducibles;
 
 namespace Simplex.Math.Logic
 {

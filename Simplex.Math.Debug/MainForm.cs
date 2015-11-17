@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Simplex.Math.Core;
-using Simplex.Math.Operands;
+using Simplex.Math;
+using Simplex.Math.Irreducibles;
 using Simplex.Math.Operations.Elementary;
 using Simplex.Math.Operations.Special;
+using Simplex.Math.Functions;
 
 namespace Simplex.Math.Debug
 {
@@ -111,7 +112,8 @@ namespace Simplex.Math.Debug
             }
             catch (Exception ex)
             {
-                PrintLine(ex.Message, Color.Red);
+                throw ex;
+                //PrintLine(ex.Message, Color.Red);
             }
             PrintLine();
         }
@@ -120,7 +122,7 @@ namespace Simplex.Math.Debug
         {
             PrintLine("P E R F O R M I N G   A D D I T I O N   T E S T S");
             PrintLine("-------------------------------------------------");
-            try
+            //try
             {
                 PrintLine("0 + 0 = " + ((Value)0 + 0).ToString(), Color.Blue);
                 PrintLine("2 + 2 = " + ((Value)2 + 2).ToString(), Color.Blue);
@@ -148,9 +150,9 @@ namespace Simplex.Math.Debug
                 PrintLine("-(3x + 4) + -(2x - 3) = " + (-((3* x) + 4) + -((2 * x) - 3)).ToString(), Color.Blue);
                 PrintLine("SUCCESS", Color.Green);
             }
-            catch (Exception ex)
+            //catch (Exception ex)
             {
-                PrintLine(ex.Message, Color.Red);
+                //PrintLine(ex.Message, Color.Red);
             }
             PrintLine();
         }
@@ -468,6 +470,75 @@ namespace Simplex.Math.Debug
             try
             {
                 PrintLine(Scope.Global.ToString(), Color.Blue);
+                PrintLine("SUCCESS", Color.Green);
+            }
+            catch (Exception ex)
+            {
+                PrintLine(ex.Message, Color.Red);
+            }
+            PrintLine();
+        }
+
+        private void functionInitializationTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PrintLine("P E R F O R M I N G   F U N C T I O N   I N I T I A L I Z A T I O N   T E S T S");
+            PrintLine("-------------------------------------------------------------------------------");
+            try
+            {
+                PrintLine("new Function(x)                 => " + new Function(x).ToString(), Color.Blue);
+                PrintLine("new Function(x, y)              => " + new Function(x, y).ToString(), Color.Blue);
+                PrintLine("new Function(x + y, x, y)       => " + new Function(x + y, x, y).ToString(), Color.Blue);
+                PrintLine("new Function(\"g\", x + y, x, y)  => " + new Function("g", x + y, x, y).ToString(), Color.Blue);
+                PrintLine("SUCCESS", Color.Green);
+            }
+            catch (Exception ex)
+            {
+                PrintLine(ex.Message, Color.Red);
+            }
+            PrintLine();
+        }
+
+        private void basicEvalutationTestsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PrintLine("P E R F O R M I N G   F U N C T I O N   E V A L U A T I O N   T E S T S");
+            PrintLine("-----------------------------------------------------------------------");
+            try
+            {
+                var f = new Function("f", x ^ 2, x);
+                var g = new Function("g", (2 * x) + 4, x);
+                var h = new Function("h", x + y, x, y);
+                PrintLine("f(x) = x^2", Color.Black);
+                PrintLine("g(x) = 2x + 4", Color.Black);
+                PrintLine("h(x, y) = x + y", Color.Black);
+                PrintLine("-----------------");
+                PrintLine("f(0) = " + f[0].ToString(), Color.Blue);
+                PrintLine("g(0) = " + g[0].ToString(), Color.Blue);
+                PrintLine("f(1) = " + f[1].ToString(), Color.Blue);
+                PrintLine("g(1) = " + g[1].ToString(), Color.Blue);
+                PrintLine("f(y) = " + f[y].ToString(), Color.Blue);
+                PrintLine("g(y) = " + g[y].ToString(), Color.Blue);
+                PrintLine("h(1, 2) = " + h[1, 2].ToString(), Color.Blue);
+                PrintLine("h(C, K) = " + h[C, K].ToString(), Color.Blue);
+                PrintLine("SUCCESS", Color.Green);
+            }
+            catch (Exception ex)
+            {
+                PrintLine(ex.Message, Color.Red);
+            }
+            PrintLine();
+        }
+
+        private void simplifyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PrintLine("P E R F O R M I N G   S I M P L I F I C A T I O N   T E S T S");
+            PrintLine("-------------------------------------------------------------");
+            try
+            {
+                var e1 = new Product(3, new Sum(x, y));
+                var e2 = new Sum(new Product(3, x), new Product(5, x));
+
+                PrintLine(e1.ToString() + " = " + Math.Simplify(e1).ToString(), Color.Blue);
+                PrintLine(e2.ToString() + " = " + Math.Simplify(e2).ToString(), Color.Blue);
                 PrintLine("SUCCESS", Color.Green);
             }
             catch (Exception ex)

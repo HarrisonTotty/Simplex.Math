@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Simplex.Math.Operands;
+using Simplex.Math.Irreducibles;
 using Simplex.Math.Operations;
 
-namespace Simplex.Math.Core
+namespace Simplex.Math
 {
     /// <summary>
     /// The interface definition for the reflection class that is constructed when parsing mathematical expressions.
@@ -27,14 +27,14 @@ namespace Simplex.Math.Core
 //using System.Linq;
 //using System.Text;
 //using System.Threading.Tasks;
-//using Simplex.Math.Operands;
+//using Simplex.Math.Irreducibles;
 //using Simplex.Math.Operations;
 
-//namespace Simplex.Math.Core
+//namespace Simplex.Math
 //{
 //    public class BUILDEXPRESSION : ExpressionParser_Template
 //    {
-//        public Simplex.Math.Core.Expression BuildExpression()
+//        public Simplex.Math.Expression BuildExpression()
 //        {
 //            return (EXPRESSIONHERE);
 //        }

@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Simplex.Math.Core;
+using Simplex.Math.Irreducibles;
 using Simplex.Math.Classification;
 
-namespace Simplex.Math.Operands
+namespace Simplex.Math
 {
     /// <summary>
     /// Represents a mathematical constant which may or may not hold a value.
     /// </summary>
-    public class Constant : Operand
+    public class Constant : Irreducible
     {
         /// <summary>
         /// Represents the mathematical constant associated with Euler's Number.
@@ -50,7 +50,7 @@ namespace Simplex.Math.Operands
         public Constant()
         {
             this.Symbol = "C";
-            this.ID = Core.Random.AlphaNumeric(100);
+            this.ID = Simplex.Math.Random.AlphaNumeric(100);
             this.Scope.Register(this);
         }
 
@@ -61,7 +61,7 @@ namespace Simplex.Math.Operands
         public Constant(string Symbol)
         {
             this.Symbol = Symbol;
-            this.ID = Core.Random.AlphaNumeric(100);
+            this.ID = Simplex.Math.Random.AlphaNumeric(100);
             this.Scope.Register(this);
         }
 
@@ -74,7 +74,7 @@ namespace Simplex.Math.Operands
         {
             this.Symbol = Symbol;
             this.Value = Value;
-            this.ID = Core.Random.AlphaNumeric(100);
+            this.ID = Simplex.Math.Random.AlphaNumeric(100);
             this.Scope.Register(this);
         }
 
@@ -87,7 +87,7 @@ namespace Simplex.Math.Operands
         {
             this.Symbol = Symbol;
             this.Name = Name;
-            this.ID = Core.Random.AlphaNumeric(100);
+            this.ID = Simplex.Math.Random.AlphaNumeric(100);
             this.Scope.Register(this);
         }
 
@@ -102,7 +102,7 @@ namespace Simplex.Math.Operands
             this.Symbol = Symbol;
             this.Name = Name;
             this.Value = Value;
-            this.ID = Core.Random.AlphaNumeric(100);
+            this.ID = Simplex.Math.Random.AlphaNumeric(100);
             this.Scope.Register(this);
         }
 
@@ -119,7 +119,7 @@ namespace Simplex.Math.Operands
             this.Name = Name;
             this.Description = Description;
             this.Subscript = Subscript;
-            this.ID = Core.Random.AlphaNumeric(100);
+            this.ID = Simplex.Math.Random.AlphaNumeric(100);
             this.Scope.Register(this);
         }
 
@@ -138,7 +138,28 @@ namespace Simplex.Math.Operands
             this.Description = Description;
             this.Subscript = Subscript;
             this.Value = Value;
-            this.ID = Core.Random.AlphaNumeric(100);
+            this.ID = Simplex.Math.Random.AlphaNumeric(100);
+            this.Scope.Register(this);
+        }
+
+        /// <summary>
+        /// Creates a new mathematical constant with a particular symbol, name, description, subscript and value.
+        /// </summary>
+        /// <param name="Scope">The scope this constant will be registered to</param>
+        /// <param name="ID">The ID assigned to this constant</param>
+        /// <param name="Symbol">The symbol to associate with the mathematical constant</param>
+        /// <param name="Name">The name to associate with the mathematical constant</param>
+        /// <param name="Description">The description to associate with the mathematical constant</param>
+        /// <param name="Subscript">The subscript to associate with the mathematical constant</param>
+        /// <param name="Value">The value to associate with the mathematical constant</param>
+        public Constant(Scope Scope, string ID, string Symbol, string Name, string Description, string Subscript, Value Value) : base(Scope)
+        {
+            this.Symbol = Symbol;
+            this.Name = Name;
+            this.Description = Description;
+            this.Subscript = Subscript;
+            this.Value = Value;
+            this.ID = ID;
             this.Scope.Register(this);
         }
 
@@ -187,6 +208,9 @@ namespace Simplex.Math.Operands
             set;
         }
 
+        /// <summary>
+        /// Returns whether this constant has a descrete value.
+        /// </summary>
         public bool HasDescreteValue
         {
             get
@@ -343,6 +367,23 @@ namespace Simplex.Math.Operands
             {
                 throw new Exceptions.ExpressionParsingException("Unable to convert constant to string - Invalid ExpressionStringConstantFormat");
             }
+        }
+
+        /// <summary>
+        /// Converts this constant into a variable with the same identifying information.
+        /// </summary>
+        public Variable ToVariable()
+        {
+            return new Variable(this.Scope, this.ID, this.Symbol, this.Subscript, this.Name, this.Description);
+        }
+
+        /// <summary>
+        /// Returns an identical copy of this constant.
+        /// </summary>
+        /// <returns></returns>
+        public override Expression Copy()
+        {
+            return new Constant(this.Scope, this.ID, this.Symbol, this.Name, this.Description, this.Subscript, this.Value);
         }
     }
 }

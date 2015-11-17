@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Simplex.Math.Constant">
+    <Position X="3.75" Y="2.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAggIIEEACAAAQAQkAAAAACAAAggIAACAg=</HashCode>
+      <FileName>Irreducibles\Constant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simplex.Math.Irreducibles.Value">
+    <Position X="7.25" Y="2.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAgAAEAgDAAgAABkAAAAAAAAEAAQAABQA=</HashCode>
+      <FileName>Irreducibles\Value.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simplex.Math.Variable">
+    <Position X="10.75" Y="2.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>QAAACAAAAAAggAAEAACAAAQAAkAAAAAAAABgAQAACAA=</HashCode>
+      <FileName>Irreducibles\Variable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simplex.Math.Irreducibles.ImaginaryUnit">
+    <Position X="14.25" Y="2.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAgAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Irreducibles\ImaginaryUnit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simplex.Math.Irreducibles.Integer">
+    <Position X="5.75" Y="8" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAACACEAAAAAAAAAAgBAAAAAAAAAAAAAAAEAAQAAAAA=</HashCode>
+      <FileName>Irreducibles\Integer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simplex.Math.Irreducibles.Fraction">
+    <Position X="8.75" Y="8" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAoAAAAUAABAAAAAAAAAAEAAIAAAAABAAAA=</HashCode>
+      <FileName>Irreducibles\Fraction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Simplex.Math.Irreducibles.Irreducible">
+    <Position X="8" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Irreducibles\Irreducible.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

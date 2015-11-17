@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Simplex.Math.Operands;
+using Simplex.Math.Irreducibles;
 using Simplex.Math.Operations;
 using Simplex.Math.Operations.Elementary;
 
-namespace Simplex.Math.Core
+namespace Simplex.Math
 {
     /// <summary>
     /// Represents a symbolic mathematical expression.
@@ -138,7 +138,7 @@ namespace Simplex.Math.Core
         /// <summary>
         /// Negates a mathematical operation (multiplies by -1).
         /// </summary>
-        public static Expression operator -(Expression I1) { return Product.Multiply(new Value(-1), I1); }
+        public static Expression operator -(Expression I1) { return Product.Multiply(-1, I1); }
         /// <summary>
         /// Computes the symbolic addition between two mathematical expressions.
         /// </summary>

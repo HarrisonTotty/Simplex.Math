@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Simplex.Math.Core;
-using Simplex.Math.Operands;
+using Simplex.Math;
+using Simplex.Math.Irreducibles;
 using Simplex.Math.Operations.Elementary;
 using Simplex.Math.Classification;
 using Simplex.Math.Operations;
@@ -149,6 +149,11 @@ namespace Simplex.Math.Logic
         /// Returns the inverse of a single input expression.
         /// </summary>
         public static readonly Transform InvertExpression = new Transform(x => 1 / x);
+
+        /// <summary>
+        /// Returns the application of an expression cast as an operation (skips transformability test).
+        /// </summary>
+        public static readonly Transform ApplyOperation = new Transform(x => (x as Operation).Apply(true));
 
         /// <summary>
         /// Returns the input expression raised to the 2nd power.
@@ -314,7 +319,7 @@ namespace Simplex.Math.Logic
             List<Expression> LeftExpressions = new List<Expression>(1) { 0 };
             List<Expression> RightExpressions = new List<Expression>(1) { 0 };
 
-            if (x is Operand) LeftExpressions = new List<Expression>(1) { x };
+            if (x is Irreducible) LeftExpressions = new List<Expression>(1) { x };
             else if (Propositions.QualifiesForCSO[x])
             {
                 CollapsedSumOperation CSO = CollapsedSumOperation.Create(x);
@@ -324,7 +329,7 @@ namespace Simplex.Math.Logic
             else if (x is Difference) LeftExpressions = new List<Expression>(2) { (x as Difference).LeftExpression, -(x as Difference).RightExpression };
             
 
-            if (y is Operand) RightExpressions = new List<Expression>(1) { y };
+            if (y is Irreducible) RightExpressions = new List<Expression>(1) { y };
             else if (Propositions.QualifiesForCSO[y])
             {
                 CollapsedSumOperation CSO = CollapsedSumOperation.Create(y);
@@ -412,6 +417,53 @@ namespace Simplex.Math.Logic
 
             //If the bases are not equal
             return new Quotient(x, y);
+        }
+
+        /// <summary>
+        /// Seperates a product between an integer value and another expression into sums of that expression. 
+        /// </summary>
+        public static readonly Transform SeperateIntegerProduct = new Transform(x => SeperateIntegerProduct_Body(x as Product));
+        private static Expression SeperateIntegerProduct_Body(Product x)
+        {
+            //Seperate the integer and expression:
+            Value I = 0;
+            Expression E = 0;
+            if (x.LeftExpression is Value)
+            {
+                I = x.LeftExpression as Value;
+                E = x.RightExpression;
+            }
+            else if (x.RightExpression is Value)
+            {
+                I = x.RightExpression as Value;
+                E = x.LeftExpression;
+            }
+            else throw new Exceptions.LogicException("Cannot transform expression - input expression is not a seperable integer product");
+
+            //If our integer product is negative, send it back through with the expression inverted
+            if (I < -1)
+            {
+                return SeperateIntegerProduct_Body(new Product(-I, new Negation(E)));
+            }
+
+            //If our integer product is -1
+            if (I == -1) return new Difference(0, E);
+
+            //If the integer value is 0, return 0
+            if (I == 0) return 0;
+
+            //If the integer value is 1, return the other expression by itself
+            if (I == 1) return E;
+
+            //If the integer value is greater than 1
+            Expression Result = new Sum(E, E);
+
+            for (int i = 2; i < I; i++)
+            {
+                Result = new Sum(Result, E);
+            }
+
+            return Result;
         }
     }
 }

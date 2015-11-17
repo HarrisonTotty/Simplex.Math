@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Simplex.Math.Core;
-using Simplex.Math.Operands;
+using Simplex.Math;
+using Simplex.Math.Irreducibles;
 using Simplex.Math.Logic;
 
 namespace Simplex.Math.Operations.Elementary
@@ -15,16 +15,11 @@ namespace Simplex.Math.Operations.Elementary
     public class Quotient : ArithmeticOperation
     {
         /// <summary>
-        /// The rule set associated with quotients.
-        /// </summary>
-        public static RuleSet Rules = new RuleSet(Logic.Rules.Quotient);
-
-        /// <summary>
         /// Creates a new quotient from a given numerator and denominator.
         /// </summary>
         /// <param name="Numerator">The expression associated with the numerator of the operation</param>
         /// <param name="Denominator">The expression associated with the denominator of the operation</param>
-        public Quotient(Expression Numerator, Expression Denominator) : base(Numerator, Denominator, false, false, false)
+        public Quotient(Expression Numerator, Expression Denominator) : base(Logic.Rules.QuotientRules, Numerator, Denominator, false, false, false)
         {
             
         }
@@ -68,15 +63,9 @@ namespace Simplex.Math.Operations.Elementary
         /// <param name="Denominator">The denominator expression</param>
         public static Expression Divide(Expression Numerator, Expression Denominator)
         {
-            //If we qualify for transform via our ruleset:
-            if (Quotient.Rules.CanTransform(Numerator, Denominator))
-            {
-                //Apply our rules to the input
-                //return Quotient.Rules.Apply(Numerator, Denominator);
-            }
-
-            //If we can't combine anything, just create a new object
-            return new Quotient(Numerator, Denominator);
+            var O = new Quotient(Numerator, Denominator);
+            if (O.CanTransform()) return O.Apply(true);
+            else return O;
         }
 
         /// <summary>

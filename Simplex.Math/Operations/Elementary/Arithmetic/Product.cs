@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Simplex.Math.Core;
+using Simplex.Math;
 using Simplex.Math.Logic;
-using Simplex.Math.Operands;
+using Simplex.Math.Irreducibles;
 
 namespace Simplex.Math.Operations.Elementary
 {
@@ -15,17 +15,11 @@ namespace Simplex.Math.Operations.Elementary
     public class Product : ArithmeticOperation
     {
         /// <summary>
-        /// The rule set associated with products.
-        /// </summary>
-        public static RuleSet Rules = new RuleSet(Logic.Rules.Product);
-
-
-        /// <summary>
         /// Creates a new product from a given left and right expression.
         /// </summary>
         /// <param name="LeftExpression">The expression associated with the left side of the operation</param>
         /// <param name="RightExpression">The expression associated with the right side of the operation</param>
-        public Product(Expression LeftExpression, Expression RightExpression) : base(LeftExpression, RightExpression, true, false, true)
+        public Product(Expression LeftExpression, Expression RightExpression) : base(Logic.Rules.ProductRules, LeftExpression, RightExpression, true, false, true)
         {
             
         }
@@ -69,15 +63,9 @@ namespace Simplex.Math.Operations.Elementary
         /// <param name="E2">The second expression</param>
         public static Expression Multiply(Expression E1, Expression E2)
         {
-            //If we qualify for transform via our ruleset:
-            if (Product.Rules.CanTransform(E1, E2))
-            {
-                //Apply our rules to the input
-                return Product.Rules.Apply(E1, E2);
-            }
-
-            //If we can't combine anything, just create a new object
-            return new Product(E1, E2);
+            var O = new Product(E1, E2);
+            if (O.CanTransform()) return O.Apply(true);
+            else return O;
         }
 
         /// <summary>
@@ -107,12 +95,16 @@ namespace Simplex.Math.Operations.Elementary
                 //Special Formats
                 if ((this.LeftExpression is Value) && (this.LeftExpression as Value).InnerValue == -1) return "-" + RS;
                 else if ((this.RightExpression is Value) && (this.RightExpression as Value).InnerValue == -1) return "-" + LS;
-                else if ((this.LeftExpression is Value) && (this.LeftExpression as Value).IsInteger() && !(this.RightExpression is Value)) return LS + RS;
-                else if ((this.RightExpression is Value) && (this.RightExpression as Value).IsInteger() && !(this.LeftExpression is Value)) return RS + LS;
                 else if ((this.LeftExpression is Value) && (this.LeftExpression as Value).IsInteger() && (this.RightExpression is Constant)) return LS + RS;
                 else if ((this.RightExpression is Value) && (this.RightExpression as Value).IsInteger() && (this.LeftExpression is Constant)) return RS + LS;
                 else if ((this.LeftExpression is Value) && (this.LeftExpression as Value).IsInteger() && (this.RightExpression is Exponentiation)) return LS + RS;
                 else if ((this.RightExpression is Value) && (this.RightExpression as Value).IsInteger() && (this.LeftExpression is Exponentiation)) return RS + LS;
+                else if ((this.LeftExpression is Value) && (this.LeftExpression as Value).IsInteger() && (this.RightExpression is Sum)) return LS + "(" + RS + ")";
+                else if ((this.RightExpression is Value) && (this.RightExpression as Value).IsInteger() && (this.LeftExpression is Sum)) return RS + "(" + LS + ")";
+                else if ((this.LeftExpression is Value) && (this.LeftExpression as Value).IsInteger() && (this.RightExpression is Difference)) return LS + "(" + RS + ")";
+                else if ((this.RightExpression is Value) && (this.RightExpression as Value).IsInteger() && (this.LeftExpression is Difference)) return RS + "(" + LS + ")";
+                else if ((this.LeftExpression is Value) && (this.LeftExpression as Value).IsInteger() && !(this.RightExpression is Value)) return LS + RS;
+                else if ((this.RightExpression is Value) && (this.RightExpression as Value).IsInteger() && !(this.LeftExpression is Value)) return RS + LS;
                 //else if (!(this.LeftExpression is Value) && !(this.RightExpression is Value)) return LS + RS;
 
                 //Otherwise, just return the default:

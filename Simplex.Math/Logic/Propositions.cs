@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Simplex.Math.Core;
-using Simplex.Math.Operands;
+using Simplex.Math;
+using Simplex.Math.Irreducibles;
 using Simplex.Math.Operations;
 using Simplex.Math.Operations.Special;
 using Simplex.Math.Operations.Elementary;
 using Simplex.Math.Classification;
 using Simplex.Math.Sets;
 using Simplex.Math.Arrays;
+using Simplex.Math.Functions;
 
 namespace Simplex.Math.Logic
 {
@@ -485,12 +486,12 @@ namespace Simplex.Math.Logic
         /// <summary>
         /// Whether this expression is an operand (intrinsic irreducible).
         /// </summary
-        public static readonly SingleParameterProposition IsIntrinsicIrreducible = new SingleParameterProposition(x => (x is Operand) || (x is IntrinsicIrreducible));
+        public static readonly SingleParameterProposition IsIntrinsicIrreducible = new SingleParameterProposition(x => (x is Irreducible) || (x is IntrinsicIrreducible));
 
         /// <summary>
         /// Whether a pair of expressions are intrinsic irreducibles (operands).
         /// </summary>
-        public static readonly DoubleParameterProposition AreIntrinsicIrreducibles = new DoubleParameterProposition((x, y) => ((x is Operand) || (x is IntrinsicIrreducible)) && ((y is Operand) || (y is IntrinsicIrreducible)));
+        public static readonly DoubleParameterProposition AreIntrinsicIrreducibles = new DoubleParameterProposition((x, y) => ((x is Irreducible) || (x is IntrinsicIrreducible)) && ((y is Irreducible) || (y is IntrinsicIrreducible)));
 
         /// <summary>
         /// Whether a pair of expressions are binary operations.
@@ -816,6 +817,16 @@ namespace Simplex.Math.Logic
         public static readonly SingleParameterProposition IsExponentiation = new SingleParameterProposition(x => x is Exponentiation);
 
         /// <summary>
+        /// Whether an input expression is a function.
+        /// </summary>
+        public static readonly SingleParameterProposition IsFunction = new SingleParameterProposition(x => x is Function);
+
+        /// <summary>
+        /// Whether both input expressions are functions.
+        /// </summary>
+        public static readonly DoubleParameterProposition AreFunctions = new DoubleParameterProposition((x, y) => x is Function && y is Function);
+
+        /// <summary>
         /// Whether two expressions are both exponentiations.
         /// </summary>
         public static readonly DoubleParameterProposition BothExponentiations = new DoubleParameterProposition((x, y) => (x is Exponentiation) && (y is Exponentiation));
@@ -846,5 +857,30 @@ namespace Simplex.Math.Logic
 
             return false;
         }
+
+        /// <summary>
+        /// Whether an input expression is a transformable operation.
+        /// </summary>
+        public static readonly SingleParameterProposition IsTransformableOperation = new SingleParameterProposition(x => x is Operation && (x as Operation).CanTransform());
+
+        /// <summary>
+        /// Whether a pair of input expressions are transformable operations
+        /// </summary>
+        public static readonly DoubleParameterProposition AreTransformableOperations = new DoubleParameterProposition((x, y) => (x is Operation && (x as Operation).CanTransform()) && (y is Operation && (y as Operation).CanTransform()));
+
+        /// <summary>
+        /// Whether the first input expression simplifies to the second input expression
+        /// </summary>
+        public static readonly DoubleParameterProposition XSimplifiesToY = new DoubleParameterProposition((x, y) => Math.Simplify(x).IsIdenticalTo(y));
+
+        /// <summary>
+        /// Whether the first input expression expands to the second input expression
+        /// </summary>
+        public static readonly DoubleParameterProposition XExpandsToY = new DoubleParameterProposition((x, y) => Math.Expand(x).IsIdenticalTo(y));
+
+        /// <summary>
+        /// Whether the first input expression contracts to the second input expression
+        /// </summary>
+        public static readonly DoubleParameterProposition XContractsToY = new DoubleParameterProposition((x, y) => Math.Contract(x).IsIdenticalTo(y));
     }
 }

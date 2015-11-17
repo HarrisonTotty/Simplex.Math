@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Simplex.Math.Core;
+using Simplex.Math.Irreducibles;
 using Simplex.Math.Classification;
 
-namespace Simplex.Math.Operands
+namespace Simplex.Math
 {
     /// <summary>
     /// Represents an unknown mathematical variable (such as "mass", "x", etc.)
     /// </summary>
-    public class Variable : Operand
+    public class Variable : Irreducible
     {
         /// <summary>
         /// The commonly used variable "x".
@@ -33,7 +33,7 @@ namespace Simplex.Math.Operands
         /// </summary>
         public Variable()
         {
-            this.ID = Core.Random.AlphaNumeric(100);
+            this.ID = Simplex.Math.Random.AlphaNumeric(100);
             this.Scope.Register(this);
         }
 
@@ -44,7 +44,7 @@ namespace Simplex.Math.Operands
         public Variable(string Symbol)
         {
             this.Symbol = Symbol;
-            this.ID = Core.Random.AlphaNumeric(100);
+            this.ID = Simplex.Math.Random.AlphaNumeric(100);
             this.Scope.Register(this);
         }
 
@@ -57,7 +57,7 @@ namespace Simplex.Math.Operands
         {
             this.Symbol = Symbol;
             this.Subscript = Subscript;
-            this.ID = Core.Random.AlphaNumeric(100);
+            this.ID = Simplex.Math.Random.AlphaNumeric(100);
             this.Scope.Register(this);
         }
 
@@ -74,7 +74,26 @@ namespace Simplex.Math.Operands
             this.Subscript = Subscript;
             this.Name = Name;
             this.Description = Description;
-            this.ID = Core.Random.AlphaNumeric(100);
+            this.ID = Simplex.Math.Random.AlphaNumeric(100);
+            this.Scope.Register(this);
+        }
+
+        /// <summary>
+        /// Creates a new variable with a particular symbol, subscript, name, and description.
+        /// </summary>
+        /// <param name="Scope">The scope associated with this particular variable</param>
+        /// <param name="ID">The ID to assign to this variable</param>
+        /// <param name="Symbol">The symbol to associate with this variable</param>
+        /// <param name="Subscript">The subscript to associate with this variable</param>
+        /// <param name="Name">The name to associate with this variable</param>
+        /// <param name="Description">The description to associate with this variable</param>
+        public Variable(Scope Scope, string ID, string Symbol, string Subscript, string Name, string Description) : base(Scope)
+        {
+            this.Symbol = Symbol;
+            this.Subscript = Subscript;
+            this.Name = Name;
+            this.Description = Description;
+            this.ID = ID;
             this.Scope.Register(this);
         }
 
@@ -382,6 +401,22 @@ namespace Simplex.Math.Operands
             {
                 throw new Exceptions.ExpressionParsingException("Unable to convert variable to string - Invalid ExpressionStringVariableFormat");
             }
+        }
+
+        /// <summary>
+        /// Converts this variable into a constant with all of the same identifying information.
+        /// </summary>
+        public Constant ToConstant()
+        {
+            return new Constant(this.Scope, this.ID, this.Symbol, this.Name, this.Description, this.Subscript, null);
+        }
+
+        /// <summary>
+        /// Returns an identical copy of this variable.
+        /// </summary>
+        public override Expression Copy()
+        {
+            return new Variable(this.Scope, this.ID, this.Symbol, this.Subscript, this.Name, this.Description);
         }
     }
 }

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Simplex.Math.Core;
+using Simplex.Math;
 using Simplex.Math.Logic;
-using Simplex.Math.Operands;
+using Simplex.Math.Irreducibles;
 
 namespace Simplex.Math.Sets
 {

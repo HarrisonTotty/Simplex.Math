@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Simplex.Math.Core;
+using Simplex.Math;
 using Simplex.Math.Sets;
 
 namespace Simplex.Math.Logic

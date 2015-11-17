@@ -29,9 +29,12 @@
         private void InitializeComponent()
         {
             this.MainMenu = new System.Windows.Forms.MenuStrip();
+            this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpGlobalScopeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.initializationTestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.operandInitializationTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.operationInitializationTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.functionInitializationTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stringFormatTestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generalStringFormatTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.equalityTestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,9 +46,14 @@
             this.subtractionTestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.multiplicationTestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.divisionTestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.functionTestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.basicEvalutationTestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TB = new System.Windows.Forms.RichTextBox();
-            this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dumpGlobalScopeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupingTestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.expandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reduceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.factorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.simplifyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,18 +64,36 @@
             this.initializationTestsToolStripMenuItem,
             this.stringFormatTestsToolStripMenuItem,
             this.equalityTestsToolStripMenuItem,
-            this.arithmeticTestsToolStripMenuItem});
+            this.arithmeticTestsToolStripMenuItem,
+            this.functionTestsToolStripMenuItem,
+            this.groupingTestsToolStripMenuItem});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
             this.MainMenu.Size = new System.Drawing.Size(863, 24);
             this.MainMenu.TabIndex = 0;
             this.MainMenu.Text = "MainMenu";
             // 
+            // debugToolStripMenuItem
+            // 
+            this.debugToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dumpGlobalScopeToolStripMenuItem});
+            this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
+            this.debugToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.debugToolStripMenuItem.Text = "Debug";
+            // 
+            // dumpGlobalScopeToolStripMenuItem
+            // 
+            this.dumpGlobalScopeToolStripMenuItem.Name = "dumpGlobalScopeToolStripMenuItem";
+            this.dumpGlobalScopeToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.dumpGlobalScopeToolStripMenuItem.Text = "Dump Global Scope";
+            this.dumpGlobalScopeToolStripMenuItem.Click += new System.EventHandler(this.dumpGlobalScopeToolStripMenuItem_Click);
+            // 
             // initializationTestsToolStripMenuItem
             // 
             this.initializationTestsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.operandInitializationTestToolStripMenuItem,
-            this.operationInitializationTestToolStripMenuItem});
+            this.operationInitializationTestToolStripMenuItem,
+            this.functionInitializationTestToolStripMenuItem});
             this.initializationTestsToolStripMenuItem.Name = "initializationTestsToolStripMenuItem";
             this.initializationTestsToolStripMenuItem.Size = new System.Drawing.Size(112, 20);
             this.initializationTestsToolStripMenuItem.Text = "Initialization Tests";
@@ -85,6 +111,13 @@
             this.operationInitializationTestToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
             this.operationInitializationTestToolStripMenuItem.Text = "Operation Initialization Test";
             this.operationInitializationTestToolStripMenuItem.Click += new System.EventHandler(this.operationInitializationTestToolStripMenuItem_Click);
+            // 
+            // functionInitializationTestToolStripMenuItem
+            // 
+            this.functionInitializationTestToolStripMenuItem.Name = "functionInitializationTestToolStripMenuItem";
+            this.functionInitializationTestToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
+            this.functionInitializationTestToolStripMenuItem.Text = "Function Initialization Test";
+            this.functionInitializationTestToolStripMenuItem.Click += new System.EventHandler(this.functionInitializationTestToolStripMenuItem_Click);
             // 
             // stringFormatTestsToolStripMenuItem
             // 
@@ -171,6 +204,21 @@
             this.divisionTestsToolStripMenuItem.Text = "Division Tests";
             this.divisionTestsToolStripMenuItem.Click += new System.EventHandler(this.divisionTestsToolStripMenuItem_Click);
             // 
+            // functionTestsToolStripMenuItem
+            // 
+            this.functionTestsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.basicEvalutationTestsToolStripMenuItem});
+            this.functionTestsToolStripMenuItem.Name = "functionTestsToolStripMenuItem";
+            this.functionTestsToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
+            this.functionTestsToolStripMenuItem.Text = "Function Tests";
+            // 
+            // basicEvalutationTestsToolStripMenuItem
+            // 
+            this.basicEvalutationTestsToolStripMenuItem.Name = "basicEvalutationTestsToolStripMenuItem";
+            this.basicEvalutationTestsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.basicEvalutationTestsToolStripMenuItem.Text = "Basic Evalutation Tests";
+            this.basicEvalutationTestsToolStripMenuItem.Click += new System.EventHandler(this.basicEvalutationTestsToolStripMenuItem_Click);
+            // 
             // TB
             // 
             this.TB.BackColor = System.Drawing.Color.White;
@@ -186,20 +234,41 @@
             this.TB.WordWrap = false;
             this.TB.TextChanged += new System.EventHandler(this.TB_TextChanged);
             // 
-            // debugToolStripMenuItem
+            // groupingTestsToolStripMenuItem
             // 
-            this.debugToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dumpGlobalScopeToolStripMenuItem});
-            this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
-            this.debugToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
-            this.debugToolStripMenuItem.Text = "Debug";
+            this.groupingTestsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.simplifyToolStripMenuItem,
+            this.reduceToolStripMenuItem,
+            this.expandToolStripMenuItem,
+            this.factorToolStripMenuItem});
+            this.groupingTestsToolStripMenuItem.Name = "groupingTestsToolStripMenuItem";
+            this.groupingTestsToolStripMenuItem.Size = new System.Drawing.Size(98, 20);
+            this.groupingTestsToolStripMenuItem.Text = "Grouping Tests";
             // 
-            // dumpGlobalScopeToolStripMenuItem
+            // expandToolStripMenuItem
             // 
-            this.dumpGlobalScopeToolStripMenuItem.Name = "dumpGlobalScopeToolStripMenuItem";
-            this.dumpGlobalScopeToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.dumpGlobalScopeToolStripMenuItem.Text = "Dump Global Scope";
-            this.dumpGlobalScopeToolStripMenuItem.Click += new System.EventHandler(this.dumpGlobalScopeToolStripMenuItem_Click);
+            this.expandToolStripMenuItem.Name = "expandToolStripMenuItem";
+            this.expandToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.expandToolStripMenuItem.Text = "Expand";
+            // 
+            // reduceToolStripMenuItem
+            // 
+            this.reduceToolStripMenuItem.Name = "reduceToolStripMenuItem";
+            this.reduceToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.reduceToolStripMenuItem.Text = "Reduce";
+            // 
+            // factorToolStripMenuItem
+            // 
+            this.factorToolStripMenuItem.Name = "factorToolStripMenuItem";
+            this.factorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.factorToolStripMenuItem.Text = "Factor";
+            // 
+            // simplifyToolStripMenuItem
+            // 
+            this.simplifyToolStripMenuItem.Name = "simplifyToolStripMenuItem";
+            this.simplifyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.simplifyToolStripMenuItem.Text = "Simplify";
+            this.simplifyToolStripMenuItem.Click += new System.EventHandler(this.simplifyToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -241,6 +310,14 @@
         private System.Windows.Forms.ToolStripMenuItem cSOEqualityTestToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dumpGlobalScopeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem functionInitializationTestToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem functionTestsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem basicEvalutationTestsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem groupingTestsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem expandToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reduceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem factorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem simplifyToolStripMenuItem;
     }
 }
 

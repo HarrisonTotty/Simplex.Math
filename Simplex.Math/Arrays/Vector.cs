@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Simplex.Math.Core;
-using Simplex.Math.Operands;
+using Simplex.Math;
+using Simplex.Math.Irreducibles;
 
 namespace Simplex.Math.Arrays
 {
@@ -54,7 +54,7 @@ namespace Simplex.Math.Arrays
         {
             get
             {
-                return Core.Math.Root(Core.Math.SquareSum(this.ChildExpressions.ToArray()));
+                return Simplex.Math.Math.Root(Simplex.Math.Math.SquareSum(this.ChildExpressions.ToArray()));
             }
 
             set
@@ -80,7 +80,7 @@ namespace Simplex.Math.Arrays
                 Vector DirectionVector = new Vector(this.Dimensionality);
 
                 //Get the magnitude
-                Expression MyMag = Core.Math.Root(Core.Math.SquareSum(this.ChildExpressions.ToArray()));
+                Expression MyMag = Simplex.Math.Math.Root(Simplex.Math.Math.SquareSum(this.ChildExpressions.ToArray()));
 
                 //Get the direction
                 for (int i = 0; i < this.Dimensionality; i++)

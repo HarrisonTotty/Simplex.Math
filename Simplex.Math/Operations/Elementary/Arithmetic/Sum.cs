@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Simplex.Math.Classification;
-using Simplex.Math.Core;
+using Simplex.Math;
 using Simplex.Math.Logic;
-using Simplex.Math.Operands;
+using Simplex.Math.Irreducibles;
 
 namespace Simplex.Math.Operations.Elementary
 {
@@ -16,16 +16,11 @@ namespace Simplex.Math.Operations.Elementary
     public class Sum : ArithmeticOperation
     {
         /// <summary>
-        /// The rule set associated with sums.
-        /// </summary>
-        public static RuleSet Rules = new RuleSet(Logic.Rules.Sum);
-
-        /// <summary>
         /// Creates a new sum from a given left and right expression.
         /// </summary>
         /// <param name="LeftExpression">The expression associated with the left side of the operation</param>
         /// <param name="RightExpression">The expression associated with the right side of the operation</param>
-        public Sum(Expression LeftExpression, Expression RightExpression) : base(LeftExpression, RightExpression, true, false, true)
+        public Sum(Expression LeftExpression, Expression RightExpression) : base(Logic.Rules.SumRules, LeftExpression, RightExpression, true, false, true)
         {
             
         }
@@ -69,15 +64,9 @@ namespace Simplex.Math.Operations.Elementary
         /// <param name="E2">The second expression</param>
         public static Expression Add(Expression E1, Expression E2)
         {
-            //If we qualify for transform via our ruleset:
-            if (Sum.Rules.CanTransform(E1, E2))
-            {
-                //Apply our rules to the input
-                return Sum.Rules.Apply(E1, E2);
-            }
-
-            //If we can't combine anything, just create a new object
-            return new Sum(E1, E2);
+            var O = new Sum(E1, E2);
+            if (O.CanTransform()) return O.Apply(true);
+            else return O;
         }
 
         /// <summary>

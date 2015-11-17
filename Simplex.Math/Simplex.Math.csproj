@@ -22,6 +22,7 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x64</PlatformTarget>
     <RunCodeAnalysis>false</RunCodeAnalysis>
+    <DocumentationFile>bin\Debug\Simplex.Math.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,6 +32,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x64</PlatformTarget>
+    <DocumentationFile>bin\Release\Simplex.Math.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -71,7 +73,14 @@
     <Compile Include="Exceptions\ExpressionParsingException.cs" />
     <Compile Include="Core\GeneralFormType.cs" />
     <Compile Include="Exceptions\LogicException.cs" />
-    <Compile Include="Operands\Fraction.cs" />
+    <Compile Include="Functions\Function.cs" />
+    <Compile Include="Irreducibles\Fraction.cs" />
+    <Compile Include="Operations\Grouping\Contraction.cs" />
+    <Compile Include="Operations\Grouping\Expansion.cs" />
+    <Compile Include="Operations\Grouping\Factorization.cs" />
+    <Compile Include="Operations\Grouping\GroupingOperation.cs" />
+    <Compile Include="Operations\Grouping\Reduction.cs" />
+    <Compile Include="Operations\Grouping\Simplification.cs" />
     <Compile Include="Operations\Sets\Complement.cs" />
     <Compile Include="Operations\Sets\Difference.cs" />
     <Compile Include="Operations\Sets\Intersection.cs" />
@@ -83,18 +92,18 @@
     <Compile Include="Logic\ExpressionForm.cs" />
     <Compile Include="Logic\SingleParameterProposition.cs" />
     <Compile Include="Operations\Elementary\Arithmetic\Negation.cs" />
-    <Compile Include="Operands\Integer.cs" />
+    <Compile Include="Irreducibles\Integer.cs" />
     <Compile Include="Logic\MapMatrix.cs" />
     <Compile Include="Logic\OneWayMapMatrix.cs" />
     <Compile Include="Logic\Rules.cs" />
     <Compile Include="Logic\Transforms.cs" />
-    <Compile Include="Operands\ImaginaryUnit.cs" />
+    <Compile Include="Irreducibles\ImaginaryUnit.cs" />
     <Compile Include="Logic\Proposition.cs" />
     <Compile Include="Classification\NonFactorialArithmeticExpression.cs" />
-    <Compile Include="Operands\Constant.cs" />
-    <Compile Include="Operands\Operand.cs" />
-    <Compile Include="Operands\Value.cs" />
-    <Compile Include="Operands\Variable.cs" />
+    <Compile Include="Irreducibles\Constant.cs" />
+    <Compile Include="Irreducibles\Irreducible.cs" />
+    <Compile Include="Irreducibles\Value.cs" />
+    <Compile Include="Irreducibles\Variable.cs" />
     <Compile Include="Operations\Hyperbolic\HyperbolicCosecant.cs" />
     <Compile Include="Operations\Hyperbolic\HyperbolicCosine.cs" />
     <Compile Include="Operations\Hyperbolic\HyperbolicCotangent.cs" />
@@ -168,12 +177,15 @@
   <ItemGroup>
     <None Include="Arrays\Arrays.cd" />
     <None Include="Classification\Classification.cd" />
-    <None Include="Core\Core.cd" />
+    <None Include="Core\Core.cd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Exceptions\Exceptions.cd" />
     <None Include="Functions\Functions.cd" />
     <None Include="Logic\Logic.cd" />
-    <None Include="Operands\Operands.cd" />
+    <None Include="Irreducibles\Irreducibles.cd" />
     <None Include="Operations\Elementary\ElementaryOperations.cd" />
+    <None Include="Operations\Grouping\Grouping.cd" />
     <None Include="Operations\Operations.cd" />
     <None Include="Operations\Special\Special.cd" />
     <None Include="Sets\Sets.cd" />
